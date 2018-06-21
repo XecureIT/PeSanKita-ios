@@ -7,7 +7,7 @@
 #import "AvatarViewHelper.h"
 #import "OWSNavigationController.h"
 #import "OWSProfileManager.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "SignalsNavigationController.h"
 #import "SignalsViewController.h"
 #import "UIColor+OWS.h"
@@ -119,7 +119,7 @@ NSString *const kProfileView_LastPresentedDate = @"kProfileView_LastPresentedDat
     UITextField *nameTextField = [UITextField new];
     _nameTextField = nameTextField;
     nameTextField.font = [UIFont ows_mediumFontWithSize:18.f];
-    nameTextField.textColor = [UIColor ows_materialBlueColor];
+    nameTextField.textColor = [UIColor ows_materialRedColor];
     nameTextField.placeholder = NSLocalizedString(
         @"PROFILE_VIEW_NAME_DEFAULT_TEXT", @"Default text for the profile name field of the profile view.");
     nameTextField.delegate = self;
@@ -192,7 +192,7 @@ NSString *const kProfileView_LastPresentedDate = @"kProfileView_LastPresentedDat
                                          attributes:@{
                                              NSUnderlineStyleAttributeName :
                                                  @(NSUnderlineStyleSingle | NSUnderlinePatternSolid),
-                                             NSForegroundColorAttributeName : [UIColor ows_materialBlueColor],
+                                             NSForegroundColorAttributeName : [UIColor ows_materialRedColor],
                                          }]];
     infoLabel.attributedText = text;
     infoLabel.numberOfLines = 0;
@@ -211,7 +211,7 @@ NSString *const kProfileView_LastPresentedDate = @"kProfileView_LastPresentedDat
 
         UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.saveButton = saveButton;
-        saveButton.backgroundColor = [UIColor ows_signalBrandBlueColor];
+        saveButton.backgroundColor = [UIColor ows_pesankitaBrandRedColor];
         [saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         saveButton.titleLabel.font = [UIFont ows_boldFontWithSize:fontSizePoints];
         [saveButton setTitle:NSLocalizedString(
@@ -345,11 +345,11 @@ NSString *const kProfileView_LastPresentedDate = @"kProfileView_LastPresentedDat
     // The save button is only used in "registration" and "upgrade or nag" modes.
     if (self.hasUnsavedChanges) {
         self.saveButton.enabled = YES;
-        self.saveButton.backgroundColor = [UIColor ows_signalBrandBlueColor];
+        self.saveButton.backgroundColor = [UIColor ows_pesankitaBrandRedColor];
     } else {
         self.saveButton.enabled = NO;
         self.saveButton.backgroundColor =
-            [[UIColor ows_signalBrandBlueColor] blendWithColor:[UIColor whiteColor] alpha:0.5f];
+            [[UIColor ows_pesankitaBrandRedColor] blendWithColor:[UIColor whiteColor] alpha:0.5f];
     }
 }
 

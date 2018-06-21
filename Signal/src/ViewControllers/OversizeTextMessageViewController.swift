@@ -112,7 +112,7 @@ class OversizeTextMessageViewController: OWSViewController {
         textView.autoPin(toTopLayoutGuideOf : self, withInset: 0)
 
         let footerBar = UIToolbar()
-        footerBar.barTintColor = UIColor.ows_signalBrandBlue()
+        footerBar.barTintColor = UIColor.ows_pesankitaBrandRed()
         footerBar.setItems([
             UIBarButtonItem(barButtonSystemItem:.flexibleSpace,
                             target:nil,

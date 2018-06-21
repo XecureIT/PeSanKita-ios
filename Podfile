@@ -1,7 +1,7 @@
 platform :ios, '8.0'
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'Signal' do
+target 'PeSankita' do
     pod 'ATAppUpdater'
     pod 'AxolotlKit',                 git: 'https://github.com/WhisperSystems/SignalProtocolKit.git'
     #pod 'AxolotlKit',                 path: '../SignalProtocolKit'
@@ -12,7 +12,7 @@ target 'Signal' do
     pod 'Reachability'
     pod 'SignalServiceKit',           path: '.'
     pod 'SocketRocket',               :git => 'https://github.com/facebook/SocketRocket.git'
-    target 'SignalTests' do
+    target 'PeSankitaTests' do
       inherit! :search_paths
     end
 

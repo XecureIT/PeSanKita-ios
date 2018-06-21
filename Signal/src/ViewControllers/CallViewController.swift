@@ -295,7 +295,7 @@ class CallViewController: OWSViewController, CallObserver, CallServiceObserver, 
         callSettingsButton.setTitleColor(UIColor.white, for:.normal)
         callSettingsButton.titleLabel!.font = buttonFont
         callSettingsButton.addTarget(self, action:#selector(didPressShowCallSettings), for:.touchUpInside)
-        callSettingsButton.backgroundColor = UIColor.ows_signalBrandBlue()
+        callSettingsButton.backgroundColor = UIColor.ows_pesankitaBrandRed()
         callSettingsButton.layer.cornerRadius = buttonCornerRadius
         callSettingsButton.clipsToBounds = true
         viewStack.addSubview(callSettingsButton)
@@ -309,7 +309,7 @@ class CallViewController: OWSViewController, CallObserver, CallServiceObserver, 
         notNowButton.setTitleColor(UIColor.white, for:.normal)
         notNowButton.titleLabel!.font = buttonFont
         notNowButton.addTarget(self, action:#selector(didPressDismissNag), for:.touchUpInside)
-        notNowButton.backgroundColor = UIColor.ows_signalBrandBlue()
+        notNowButton.backgroundColor = UIColor.ows_pesankitaBrandRed()
         notNowButton.layer.cornerRadius = buttonCornerRadius
         notNowButton.clipsToBounds = true
         viewStack.addSubview(notNowButton)

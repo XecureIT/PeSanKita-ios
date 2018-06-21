@@ -6,8 +6,8 @@
 
 @interface UIColor (OWS)
 
-+ (UIColor *)ows_signalBrandBlueColor;
-+ (UIColor *)ows_materialBlueColor;
++ (UIColor *)ows_pesankitaBrandRedColor;
++ (UIColor *)ows_materialRedColor;
 + (UIColor *)ows_destructiveRedColor;
 + (UIColor *)ows_fadedBlueColor;
 + (UIColor *)ows_darkBackgroundColor;

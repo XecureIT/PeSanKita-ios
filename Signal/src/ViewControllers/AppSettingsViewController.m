@@ -14,7 +14,7 @@
 #import "ProfileViewController.h"
 #import "PropertyListPreferences.h"
 #import "PushManager.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "UIUtil.h"
 #import <SignalServiceKit/TSAccountManager.h>
 #import <SignalServiceKit/TSSocketManager.h>
@@ -252,7 +252,7 @@
     } else {
         titleLabel.text = NSLocalizedString(
             @"APP_SETTINGS_EDIT_PROFILE_NAME_PROMPT", @"Text prompting user to edit their profile name.");
-        titleLabel.textColor = [UIColor ows_materialBlueColor];
+        titleLabel.textColor = [UIColor ows_materialRedColor];
         titleLabel.font = [UIFont ows_dynamicTypeHeadlineFont];
     }
     titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;

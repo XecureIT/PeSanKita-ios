@@ -35,7 +35,7 @@
 
     LockInteractionController *sharedController = [LockInteractionController sharedController];
     sharedController.alertController =
-        [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Upgrading Signal ...", nil)
+        [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Upgrading PeSankita ...", nil)
                                             message:nil
                                      preferredStyle:UIAlertControllerStyleAlert];
 

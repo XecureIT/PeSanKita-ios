@@ -4,7 +4,7 @@
 
 #import "InboxTableViewCell.h"
 #import "OWSAvatarBuilder.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "Util.h"
 #import "ViewControllerUtils.h"
 #import <SignalServiceKit/TSContactThread.h>
@@ -107,7 +107,7 @@ const NSUInteger kAvatarViewDiameter = 52;
     const int kunreadBadgeSize = 24;
     self.unreadBadge = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kunreadBadgeSize, kunreadBadgeSize)];
     self.unreadBadge.layer.cornerRadius = kunreadBadgeSize / 2;
-    self.unreadBadge.backgroundColor = [UIColor ows_materialBlueColor];
+    self.unreadBadge.backgroundColor = [UIColor ows_materialRedColor];
     [self.contentView addSubview:self.unreadBadge];
     [self.unreadBadge autoSetDimension:ALDimensionWidth toSize:kunreadBadgeSize];
     [self.unreadBadge autoSetDimension:ALDimensionHeight toSize:kunreadBadgeSize];
@@ -219,7 +219,7 @@ const NSUInteger kAvatarViewDiameter = 52;
 
     self.separatorInset = UIEdgeInsetsMake(0, self.avatarSize * 1.5f, 0, 0);
 
-    _timeLabel.textColor = thread.hasUnreadMessages ? [UIColor ows_materialBlueColor] : [UIColor ows_darkGrayColor];
+    _timeLabel.textColor = thread.hasUnreadMessages ? [UIColor ows_materialRedColor] : [UIColor ows_darkGrayColor];
 
     if (unreadCount > 0) {
         self.unreadBadge.hidden = NO;

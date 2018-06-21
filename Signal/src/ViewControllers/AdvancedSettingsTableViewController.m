@@ -10,7 +10,7 @@
 #import "Pastelog.h"
 #import "PropertyListPreferences.h"
 #import "PushManager.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "TSAccountManager.h"
 #import <PromiseKit/AnyPromise.h>
 #import <Reachability/Reachability.h>

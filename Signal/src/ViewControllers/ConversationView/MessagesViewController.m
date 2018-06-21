@@ -33,7 +33,7 @@
 #import "OWSSystemMessageCell.h"
 #import "OWSUnreadIndicatorCell.h"
 #import "PropertyListPreferences.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "SignalKeyingStorage.h"
 #import "TSAttachmentPointer.h"
 #import "TSCall.h"
@@ -642,7 +642,7 @@ typedef NS_ENUM(NSInteger, MessagesRangeSizeMode) {
     // override superclass translations since we support more translations than upstream.
     sendLabel.text = NSLocalizedString(@"SEND_BUTTON_TITLE", nil);
     sendLabel.font = [UIFont ows_regularFontWithSize:17.0f];
-    sendLabel.textColor = [UIColor ows_materialBlueColor];
+    sendLabel.textColor = [UIColor ows_materialRedColor];
     sendLabel.textAlignment = NSTextAlignmentCenter;
 }
 
@@ -1474,7 +1474,7 @@ typedef NS_ENUM(NSInteger, MessagesRangeSizeMode) {
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
     self.incomingBubbleImageData =
         [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
-    self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor ows_materialBlueColor]];
+    self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor ows_materialRedColor]];
     self.currentlyOutgoingBubbleImageData =
         [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor ows_fadedBlueColor]];
     self.outgoingMessageFailedImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor grayColor]];
@@ -3015,11 +3015,11 @@ typedef NS_ENUM(NSInteger, MessagesRangeSizeMode) {
         initWithString:@"\uf103"
             attributes:@{
                 NSFontAttributeName : [UIFont ows_fontAwesomeFont:kScrollDownButtonSize * 0.8f],
-                NSForegroundColorAttributeName : [UIColor ows_materialBlueColor],
+                NSForegroundColorAttributeName : [UIColor ows_materialRedColor],
                 NSBaselineOffsetAttributeName : @(-0.5f),
             }];
     [scrollDownButton setAttributedTitle:labelString forState:UIControlStateNormal];
-    [scrollDownButton setTitleColor:[UIColor ows_materialBlueColor] forState:UIControlStateNormal];
+    [scrollDownButton setTitleColor:[UIColor ows_materialRedColor] forState:UIControlStateNormal];
     scrollDownButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     scrollDownButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 

@@ -20,7 +20,7 @@
 #import "RegistrationViewController.h"
 #import "Release.h"
 #import "SendExternalFileViewController.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "SignalsNavigationController.h"
 #import "VersionMigrations.h"
 #import "ViewControllerUtils.h"
@@ -698,7 +698,7 @@ static NSString *const kURLHostVerifyPrefix             = @"verify";
     window.opaque = YES;
     window.userInteractionEnabled = NO;
     window.windowLevel = CGFLOAT_MAX;
-    window.backgroundColor = UIColor.ows_materialBlueColor;
+    window.backgroundColor = UIColor.ows_materialRedColor;
     window.rootViewController =
         [[UIStoryboard storyboardWithName:@"Launch Screen" bundle:nil] instantiateInitialViewController];
 

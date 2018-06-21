@@ -4,7 +4,7 @@
 
 #import "DebugUIDiskUsage.h"
 #import "OWSTableViewController.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import <SignalServiceKit/NSDate+OWS.h>
 #import <SignalServiceKit/OWSOrphanedDataCleaner.h>
 #import <SignalServiceKit/TSDatabaseView.h>

@@ -6,7 +6,7 @@
 #import "DebugUIContacts.h"
 #import "Environment.h"
 #import "OWSTableViewController.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "ThreadUtil.h"
 #import <25519/Randomness.h>
 #import <AFNetworking/AFNetworking.h>

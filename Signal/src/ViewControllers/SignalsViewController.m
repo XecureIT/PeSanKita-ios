@@ -14,7 +14,7 @@
 #import "ProfileViewController.h"
 #import "PropertyListPreferences.h"
 #import "PushManager.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "TSAccountManager.h"
 #import "TSDatabaseView.h"
 #import "TSGroupThread.h"

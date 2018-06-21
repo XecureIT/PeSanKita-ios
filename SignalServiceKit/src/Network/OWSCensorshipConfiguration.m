@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
     return [@"https://" stringByAppendingString:domain];
 }
 
+/*
 - (NSString *)signalServiceReflectorHost
 {
     return textSecureServiceReflectorHost;
@@ -40,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     return textSecureCDNReflectorHost;
 }
+*/
 
 - (NSDictionary<NSString *, NSString *> *)censoredCountryCodes
 {

@@ -10,7 +10,7 @@
 #import "NewNonContactConversationViewController.h"
 #import "OWSContactsSearcher.h"
 #import "OWSTableViewController.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "UIColor+OWS.h"
 #import "UIUtil.h"
 #import "UIView+OWS.h"
@@ -182,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
     [inviteContactsButton setTitle:NSLocalizedString(@"INVITE_FRIENDS_CONTACT_TABLE_BUTTON",
                                        "Label for the cell that presents the 'invite contacts' workflow.")
                           forState:UIControlStateNormal];
-    [inviteContactsButton setTitleColor:[UIColor ows_materialBlueColor] forState:UIControlStateNormal];
+    [inviteContactsButton setTitleColor:[UIColor ows_materialRedColor] forState:UIControlStateNormal];
     [inviteContactsButton.titleLabel setFont:[UIFont ows_regularFontWithSize:17.f]];
     [contents addSubview:inviteContactsButton];
     [inviteContactsButton autoHCenterInSuperview];
@@ -196,7 +196,7 @@ NS_ASSUME_NONNULL_BEGIN
     [searchByPhoneNumberButton setTitle:NSLocalizedString(@"NO_CONTACTS_SEARCH_BY_PHONE_NUMBER",
                                             @"Label for a button that lets users search for contacts by phone number")
                                forState:UIControlStateNormal];
-    [searchByPhoneNumberButton setTitleColor:[UIColor ows_materialBlueColor] forState:UIControlStateNormal];
+    [searchByPhoneNumberButton setTitleColor:[UIColor ows_materialRedColor] forState:UIControlStateNormal];
     [searchByPhoneNumberButton.titleLabel setFont:[UIFont ows_regularFontWithSize:17.f]];
     [contents addSubview:searchByPhoneNumberButton];
     [searchByPhoneNumberButton autoHCenterInSuperview];

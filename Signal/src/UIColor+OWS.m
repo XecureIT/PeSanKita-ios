@@ -8,15 +8,15 @@
 
 @implementation UIColor (OWS)
 
-+ (UIColor *)ows_signalBrandBlueColor
++ (UIColor *)ows_pesankitaBrandRedColor
 {
-    return [UIColor colorWithRed:0.1135657504 green:0.4787300229 blue:0.89595204589999999 alpha:1.];
+    return [UIColor colorWithRed:0.82745098039215681 green:0.18431372549019609 blue:0.18431372549019609 alpha:1.0];
 }
 
-+ (UIColor *)ows_materialBlueColor
++ (UIColor *)ows_materialRedColor
 {
-    // blue: #2090EA
-    return [UIColor colorWithRed:32.f / 255.f green:144.f / 255.f blue:234.f / 255.f alpha:1.f];
+    // red: #D32F2F
+    return [UIColor colorWithRed:0.82745098039215681 green:0.18431372549019609 blue:0.18431372549019609 alpha:1.0];
 }
 
 + (UIColor *)ows_blackColor

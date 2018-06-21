@@ -5,7 +5,7 @@
 #import "ViewControllerUtils.h"
 #import "Environment.h"
 #import "PhoneNumber.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "SignalsViewController.h"
 #import "StringUtil.h"
 #import <AVFoundation/AVFoundation.h>

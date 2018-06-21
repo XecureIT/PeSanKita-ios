@@ -7,7 +7,7 @@
 #import "FingerprintViewScanController.h"
 #import "OWSBezierPathView.h"
 #import "OWSContactsManager.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "UIColor+OWS.h"
 #import "UIFont+OWS.h"
 #import "UIUtil.h"
@@ -194,7 +194,7 @@ typedef void (^CustomLayoutBlock)();
     [verifyUnverifyButton autoPinToBottomLayoutGuideOfViewController:self withInset:0];
 
     UIView *verifyUnverifyPillbox = [UIView new];
-    verifyUnverifyPillbox.backgroundColor = [UIColor ows_materialBlueColor];
+    verifyUnverifyPillbox.backgroundColor = [UIColor ows_materialRedColor];
     verifyUnverifyPillbox.layer.cornerRadius = 3.f;
     verifyUnverifyPillbox.clipsToBounds = YES;
     [verifyUnverifyButton addSubview:verifyUnverifyPillbox];
@@ -228,7 +228,7 @@ typedef void (^CustomLayoutBlock)();
                 NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid),
             }];
     learnMoreLabel.font = [UIFont ows_regularFontWithSize:ScaleFromIPhone5To7Plus(13.f, 16.f)];
-    learnMoreLabel.textColor = [UIColor ows_materialBlueColor];
+    learnMoreLabel.textColor = [UIColor ows_materialRedColor];
     learnMoreLabel.textAlignment = NSTextAlignmentCenter;
     [learnMoreButton addSubview:learnMoreLabel];
     [learnMoreLabel autoPinWidthToSuperviewWithMargin:16.f];

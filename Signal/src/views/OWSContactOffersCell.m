@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor ows_materialBlueColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor ows_materialRedColor] forState:UIControlStateNormal];
     button.titleLabel.font = self.buttonFont;
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
     [button setBackgroundColor:[UIColor colorWithRGBHex:0xf5f5f5]];

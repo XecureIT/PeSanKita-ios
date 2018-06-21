@@ -8,7 +8,7 @@
 #import "Environment.h"
 #import "PhoneNumber.h"
 #import "PhoneNumberUtil.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "TSAccountManager.h"
 #import "UIView+OWS.h"
 #import "ViewControllerUtils.h"
@@ -60,13 +60,13 @@ NSString *const kKeychainKey_LastRegisteredPhoneNumber = @"kKeychainKey_LastRegi
 
 - (void)createViews
 {
-    self.view.backgroundColor = [UIColor ows_signalBrandBlueColor];
+    self.view.backgroundColor = [UIColor ows_pesankitaBrandRedColor];
     self.view.userInteractionEnabled = YES;
     [self.view
         addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)]];
 
     UIView *header = [UIView new];
-    header.backgroundColor = [UIColor ows_signalBrandBlueColor];
+    header.backgroundColor = [UIColor ows_pesankitaBrandRedColor];
     [self.view addSubview:header];
     [header autoPinToTopLayoutGuideOfViewController:self withInset:0];
     [header autoPinWidthToSuperview];
@@ -90,7 +90,7 @@ NSString *const kKeychainKey_LastRegisteredPhoneNumber = @"kKeychainKey_LastRegi
     } else {
         [header autoSetDimension:ALDimensionHeight toSize:220];
 
-        UIImage *logo = [UIImage imageNamed:@"logoSignal"];
+        UIImage *logo = [UIImage imageNamed:@"logoPeSankita"];
         OWSAssert(logo);
         UIImageView *logoView = [UIImageView new];
         logoView.image = logo;
@@ -134,7 +134,7 @@ NSString *const kKeychainKey_LastRegisteredPhoneNumber = @"kKeychainKey_LastRegi
 
     UILabel *countryCodeLabel = [UILabel new];
     self.countryCodeLabel = countryCodeLabel;
-    countryCodeLabel.textColor = [UIColor ows_materialBlueColor];
+    countryCodeLabel.textColor = [UIColor ows_materialRedColor];
     countryCodeLabel.font = [UIFont ows_mediumFontWithSize:fontSizePoints + 2.f];
     [countryRow addSubview:countryCodeLabel];
     [countryCodeLabel autoVCenterInSuperview];
@@ -170,7 +170,7 @@ NSString *const kKeychainKey_LastRegisteredPhoneNumber = @"kKeychainKey_LastRegi
     phoneNumberTextField.placeholder = NSLocalizedString(
         @"REGISTRATION_ENTERNUMBER_DEFAULT_TEXT", @"Placeholder text for the phone number textfield");
     self.phoneNumberTextField = phoneNumberTextField;
-    phoneNumberTextField.textColor = [UIColor ows_materialBlueColor];
+    phoneNumberTextField.textColor = [UIColor ows_materialRedColor];
     phoneNumberTextField.font = [UIFont ows_mediumFontWithSize:fontSizePoints + 2];
     [phoneNumberRow addSubview:phoneNumberTextField];
     [phoneNumberTextField autoVCenterInSuperview];
@@ -200,7 +200,7 @@ NSString *const kKeychainKey_LastRegisteredPhoneNumber = @"kKeychainKey_LastRegi
     // Activate Button
     UIButton *activateButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.activateButton = activateButton;
-    activateButton.backgroundColor = [UIColor ows_signalBrandBlueColor];
+    activateButton.backgroundColor = [UIColor ows_pesankitaBrandRedColor];
     [activateButton setTitle:NSLocalizedString(@"REGISTRATION_VERIFY_DEVICE", @"") forState:UIControlStateNormal];
     [activateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     activateButton.titleLabel.font = [UIFont ows_boldFontWithSize:fontSizePoints];
@@ -229,7 +229,7 @@ NSString *const kKeychainKey_LastRegisteredPhoneNumber = @"kKeychainKey_LastRegi
     UIButton *existingAccountButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [existingAccountButton setTitle:NSLocalizedString(@"ALREADY_HAVE_ACCOUNT_BUTTON", @"registration button text")
                            forState:UIControlStateNormal];
-    [existingAccountButton setTitleColor:[UIColor ows_materialBlueColor] forState:UIControlStateNormal];
+    [existingAccountButton setTitleColor:[UIColor ows_materialRedColor] forState:UIControlStateNormal];
     existingAccountButton.titleLabel.font = [UIFont ows_mediumFontWithSize:fontSizePoints - 2.f];
     [existingAccountButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [existingAccountButton setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];

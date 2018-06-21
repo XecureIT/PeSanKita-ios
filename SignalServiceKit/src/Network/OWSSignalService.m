@@ -212,6 +212,7 @@ NSString *const kNSNotificationName_IsCensorshipCircumventionActiveDidChange =
     return sessionManager;
 }
 
+/*
 #pragma mark - Profile Uploading
 
 - (AFHTTPSessionManager *)CDNSessionManager
@@ -240,6 +241,7 @@ NSString *const kNSNotificationName_IsCensorshipCircumventionActiveDidChange =
 
     return sessionManager;
 }
+*/
 
 - (AFHTTPSessionManager *)reflectorCDNSessionManager
 {

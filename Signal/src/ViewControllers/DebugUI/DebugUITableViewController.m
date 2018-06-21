@@ -8,7 +8,7 @@
 #import "DebugUIMessages.h"
 #import "DebugUIMisc.h"
 #import "DebugUISessionState.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import <SignalServiceKit/TSContactThread.h>
 #import <SignalServiceKit/TSThread.h>
 

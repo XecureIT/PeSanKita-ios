@@ -4,7 +4,7 @@
 
 #import "CodeVerificationViewController.h"
 #import "ProfileViewController.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "StringUtil.h"
 #import "UIViewController+OWS.h"
 #import <PromiseKit/AnyPromise.h>
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
     self.view.backgroundColor = [UIColor whiteColor];
     self.view.opaque = YES;
 
-    UIColor *signalBlueColor = [UIColor ows_signalBrandBlueColor];
+    UIColor *signalBlueColor = [UIColor ows_pesankitaBrandRedColor];
 
     UIView *header = [UIView new];
     header.backgroundColor = signalBlueColor;

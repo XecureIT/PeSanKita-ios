@@ -305,7 +305,7 @@ class AttachmentApprovalViewController: OWSViewController, OWSAudioAttachmentPla
 
         let label = UILabel()
         label.text = filename
-        label.textColor = UIColor.ows_materialBlue()
+        label.textColor = UIColor.ows_materialRed()
         label.font = labelFont()
         label.textAlignment = .center
         label.lineBreakMode = .byTruncatingMiddle
@@ -319,7 +319,7 @@ class AttachmentApprovalViewController: OWSViewController, OWSAudioAttachmentPla
                                                      comment: "Format string for file size label in call interstitial view. Embeds: {{file size as 'N mb' or 'N kb'}}."),
                             ViewControllerUtils.formatFileSize(UInt(fileSize)))
 
-        label.textColor = UIColor.ows_materialBlue()
+        label.textColor = UIColor.ows_materialRed()
         label.font = labelFont()
         label.textAlignment = .center
 
@@ -328,7 +328,7 @@ class AttachmentApprovalViewController: OWSViewController, OWSAudioAttachmentPla
 
     private func createAudioStatusLabel() -> UILabel {
         let label = UILabel()
-        label.textColor = UIColor.ows_materialBlue()
+        label.textColor = UIColor.ows_materialRed()
         label.font = labelFont()
         label.textAlignment = .center
 
@@ -459,13 +459,13 @@ class AttachmentApprovalViewController: OWSViewController, OWSAudioAttachmentPla
         let image = UIImage(named:"audio_play_black_large")?.withRenderingMode(.alwaysTemplate)
         assert(image != nil)
         audioPlayButton?.setImage(image, for:.normal)
-        audioPlayButton?.imageView?.tintColor = UIColor.ows_materialBlue()
+        audioPlayButton?.imageView?.tintColor = UIColor.ows_materialRed()
     }
 
     public func setAudioIconToPause() {
         let image = UIImage(named:"audio_pause_black_large")?.withRenderingMode(.alwaysTemplate)
         assert(image != nil)
         audioPlayButton?.setImage(image, for:.normal)
-        audioPlayButton?.imageView?.tintColor = UIColor.ows_materialBlue()
+        audioPlayButton?.imageView?.tintColor = UIColor.ows_materialRed()
     }
 }

@@ -4,7 +4,7 @@
 
 #import "DebugUIContacts.h"
 #import "OWSTableViewController.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import <Contacts/Contacts.h>
 
 NS_ASSUME_NONNULL_BEGIN

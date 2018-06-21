@@ -5,7 +5,7 @@
 #import "BlockListUIUtils.h"
 #import "OWSContactsManager.h"
 #import "PhoneNumber.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import <SignalServiceKit/Contact.h>
 #import <SignalServiceKit/OWSBlockingManager.h>
 #import <SignalServiceKit/SignalAccount.h>

@@ -4,7 +4,7 @@
 
 #import "SendExternalFileViewController.h"
 #import "Environment.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "ThreadUtil.h"
 #import "UIColor+OWS.h"
 #import "UIFont+OWS.h"
@@ -159,7 +159,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     UILabel *label = [UILabel new];
     label.text = [self formattedFileName];
-    label.textColor = [UIColor ows_materialBlueColor];
+    label.textColor = [UIColor ows_materialRedColor];
     label.font = [UIFont ows_regularFontWithSize:ScaleFromIPhone5To7Plus(16.f, 20.f)];
     return label;
 }

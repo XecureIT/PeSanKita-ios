@@ -12,7 +12,7 @@
 #import "OWSContactsManager.h"
 #import "OWSNavigationController.h"
 #import "OWSTableViewController.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "SignalKeyingStorage.h"
 #import "TSOutgoingMessage.h"
 #import "UIUtil.h"

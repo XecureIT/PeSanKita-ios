@@ -6,7 +6,7 @@
 #import "Environment.h"
 #import "OWSContactAvatarBuilder.h"
 #import "OWSContactsManager.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "UIFont+OWS.h"
 #import "UIUtil.h"
 #import "UIView+OWS.h"

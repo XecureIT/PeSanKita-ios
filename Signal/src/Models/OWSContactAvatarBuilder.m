@@ -4,7 +4,7 @@
 
 #import "OWSContactAvatarBuilder.h"
 #import "OWSContactsManager.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "TSContactThread.h"
 #import "TSGroupThread.h"
 #import "TSThread.h"

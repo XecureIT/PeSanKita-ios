@@ -38,13 +38,13 @@
 "ALERT_SAVE" = "Save";
 
 /* A message for the alert shown while validating a signal account */
-"ALERT_VALIDATE_RECIPIENT_MESSAGE" = "Checking that this is a valid Signal account.";
+"ALERT_VALIDATE_RECIPIENT_MESSAGE" = "Checking that this is a valid PeSankita account.";
 
 /* A title for the alert shown while validating a signal account */
 "ALERT_VALIDATE_RECIPIENT_TITLE" = "Validating";
 
 /* registration button text */
-"ALREADY_HAVE_ACCOUNT_BUTTON" = "Already have a Signal account?";
+"ALREADY_HAVE_ACCOUNT_BUTTON" = "Already have a PeSankita account?";
 
 /* No comment provided by engineer. */
 "ANSWER_CALL_BUTTON_TITLE" = "Answer";
@@ -68,13 +68,13 @@
 "APP_UPDATE_NAG_ALERT_MESSAGE_FORMAT" = "Version %@ is now available in the App Store.";
 
 /* Title for the 'new app version available' alert. */
-"APP_UPDATE_NAG_ALERT_TITLE" = "A New Version of Signal is Available";
+"APP_UPDATE_NAG_ALERT_TITLE" = "A New Version of PeSankita is Available";
 
 /* Label for the 'update' button in the 'new app version available' alert. */
 "APP_UPDATE_NAG_ALERT_UPDATE_BUTTON" = "Update";
 
 /* Name of application */
-"APPLICATION_NAME" = "Signal";
+"APPLICATION_NAME" = "PeSankita";
 
 /* Pressing this button moves a thread from the inbox to the archive */
 "ARCHIVE_ACTION" = "Archive";
@@ -140,7 +140,7 @@
 "ATTACHMENT_PICKER_DOCUMENTS_FAILED_ALERT_TITLE" = "Failed to choose document.";
 
 /* Alert body when picking a document fails because user picked a directory/bundle */
-"ATTACHMENT_PICKER_DOCUMENTS_PICKED_DIRECTORY_FAILED_ALERT_BODY" = "Signal can't handle that file as is. Try zipping it before sending.";
+"ATTACHMENT_PICKER_DOCUMENTS_PICKED_DIRECTORY_FAILED_ALERT_BODY" = "PeSankita can't handle that file as is. Try zipping it before sending.";
 
 /* Alert title when picking a document fails because user picked a directory/bundle */
 "ATTACHMENT_PICKER_DOCUMENTS_PICKED_DIRECTORY_FAILED_ALERT_TITLE" = "Unsupported File";
@@ -209,7 +209,7 @@
 "BUTTON_DONE" = "Done";
 
 /* Alert message when calling and permissions for microphone are missing */
-"CALL_AUDIO_PERMISSION_MESSAGE" = "Signal requires access to your microphone to make calls and record voice messages. You can grant this permission in the Settings app.";
+"CALL_AUDIO_PERMISSION_MESSAGE" = "PeSankita requires access to your microphone to make calls and record voice messages. You can grant this permission in the Settings app.";
 
 /* Alert title when calling and permissions for microphone are missing */
 "CALL_AUDIO_PERMISSION_TITLE" = "Microphone Access Required";
@@ -221,7 +221,7 @@
 "CALL_SCREEN_STATUS_NO_ANSWER" = "No Answer.";
 
 /* embeds {{Call Status}} in call screen label. For ongoing calls, {{Call Status}} is a seconds timer like 01:23, otherwise {{Call Status}} is a short text like 'Ringing', 'Busy', or 'Failed Call' */
-"CALL_STATUS_FORMAT" = "Signal %@";
+"CALL_STATUS_FORMAT" = "PeSankita %@";
 
 /* Label for call button for alert offering to call a user. */
 "CALL_USER_ALERT_CALL_BUTTON" = "Call";
@@ -248,7 +248,7 @@
 "CALLBACK_BUTTON_TITLE" = "Call Back";
 
 /* The generic name used for calls if CallKit privacy is enabled */
-"CALLKIT_ANONYMOUS_CONTACT_NAME" = "Signal User";
+"CALLKIT_ANONYMOUS_CONTACT_NAME" = "PeSankita User";
 
 /* Message for alert explaining that a user cannot be verified. */
 "CANT_VERIFY_IDENTITY_ALERT_MESSAGE" = "This user can't be verified until you've exchanged messages with them.";
@@ -263,7 +263,7 @@
 "COMPARE_SAFETY_NUMBER_ACTION" = "Compare with Clipboard";
 
 /* Multiline label explaining why compose-screen contact picker is empty. */
-"COMPOSE_SCREEN_MISSING_CONTACTS_PERMISSION" = "To see which of your contacts are Signal users, allow contacts access in your system settings.";
+"COMPOSE_SCREEN_MISSING_CONTACTS_PERMISSION" = "To see which of your contacts are PeSankita users, allow contacts access in your system settings.";
 
 /* No comment provided by engineer. */
 "CONFIRM_ACCOUNT_DESTRUCTION_TEXT" = "This will reset the application by deleting your messages and unregister you with the server. The app will close after deletion of data.";
@@ -397,7 +397,7 @@
 /* Title shown while the app is updating its database. */
 "DATABASE_VIEW_OVERLAY_TITLE" = "Updating Database";
 
-/* {{Short Date}} when device last communicated with Signal Server. */
+/* {{Short Date}} when device last communicated with PeSankita Server. */
 "DEVICE_LAST_ACTIVE_AT_LABEL" = "Last active: %@";
 
 /* {{Short Date}} when device was linked. */
@@ -424,11 +424,11 @@
 /* Section title for the 'domain fronting country' view. */
 "DOMAIN_FRONTING_COUNTRY_VIEW_SECTION_HEADER" = "Censorship Circumvention Location";
 
-/* Alert body for when the user has just tried to edit a contacts after declining to give Signal contacts permissions */
+/* Alert body for when the user has just tried to edit a contacts after declining to give PeSankita contacts permissions */
 "EDIT_CONTACT_WITHOUT_CONTACTS_PERMISSION_ALERT_BODY" = "You can give access in the Settings app.";
 
-/* Alert title for when the user has just tried to edit a contacts after declining to give Signal contacts permissions */
-"EDIT_CONTACT_WITHOUT_CONTACTS_PERMISSION_ALERT_TITLE" = "Signal Needs Contact Access to Edit Contact Information";
+/* Alert title for when the user has just tried to edit a contacts after declining to give PeSankita contacts permissions */
+"EDIT_CONTACT_WITHOUT_CONTACTS_PERMISSION_ALERT_TITLE" = "PeSankita Needs Contact Access to Edit Contact Information";
 
 /* table cell label in conversation settings */
 "EDIT_GROUP_ACTION" = "Edit Group";
@@ -469,17 +469,17 @@
 /* No comment provided by engineer. */
 "EDIT_TXT" = "Edit";
 
-/* body of email sent to contacts when inviting to install Signal. Embeds {{link to install Signal}} and {{link to WhisperSystems home page}} */
-"EMAIL_INVITE_BODY" = "Hey,\n\nLately I've been using Signal to keep the conversations on my iPhone private. I'd like you to install it too, so we can be confident that only you and I can read our messages or hear our calls.\n\nSignal is available for iPhones and Android. Get it here: %@\n\nSignal works like your existing messaging app. We can send pictures and video, make calls, and start group chats. The best part is, no one else can see any of it, not even the people who make Signal!\n\nYou can read more about Open Whisper Systems, the people who make Signal, here: %@";
+/* body of email sent to contacts when inviting to install PeSankita. Embeds {{link to install PeSankita}} and {{link to WhisperSystems home page}} */
+"EMAIL_INVITE_BODY" = "Hey,\n\nLately I've been using PeSankita to keep the conversations on my iPhone private. I'd like you to install it too, so we can be confident that only you and I can read our messages or hear our calls.\n\nPeSankita is available for iPhones and Android. Get it here: %@\n\nPeSankita works like your existing messaging app. We can send pictures and video, make calls, and start group chats. The best part is, no one else can see any of it, not even the people who make PeSankita!\n\nYou can read more about Open Whisper Systems, the people who make PeSankita, here: %@";
 
-/* subject of email sent to contacts when inviting to install Signal */
-"EMAIL_INVITE_SUBJECT" = "Let's switch to Signal";
+/* subject of email sent to contacts when inviting to install PeSankita */
+"EMAIL_INVITE_SUBJECT" = "Let's switch to PeSankita";
 
 /* No comment provided by engineer. */
 "EMPTY_ARCHIVE_FIRST_TEXT" = "Tap on the compose button.";
 
 /* No comment provided by engineer. */
-"EMPTY_ARCHIVE_FIRST_TITLE" = "Start your first Signal conversation!";
+"EMPTY_ARCHIVE_FIRST_TITLE" = "Start your first PeSankita conversation!";
 
 /* No comment provided by engineer. */
 "EMPTY_ARCHIVE_TEXT" = "You can archive inactive conversations for later from your Inbox.";
@@ -488,7 +488,7 @@
 "EMPTY_ARCHIVE_TITLE" = "Clean Up Your Conversations.";
 
 /* Full width label displayed when attempting to compose message */
-"EMPTY_CONTACTS_LABEL_LINE1" = "None of your contacts have Signal.";
+"EMPTY_CONTACTS_LABEL_LINE1" = "None of your contacts have PeSankita.";
 
 /* Full width label displayed when attempting to compose message */
 "EMPTY_CONTACTS_LABEL_LINE2" = "Why don't you invite someone?";
@@ -520,14 +520,14 @@
 /* Error mesage indicating that message send failed due to block list */
 "ERROR_DESCRIPTION_MESSAGE_SEND_FAILED_DUE_TO_BLOCK_LIST" = "Failed to message user because you blocked them.";
 
-/* Generic error used whenver Signal can't contact the server */
-"ERROR_DESCRIPTION_NO_INTERNET" = "Signal was unable to connect to the internet. Please try from another WiFi network or use mobile data.";
+/* Generic error used whenver PeSankita can't contact the server */
+"ERROR_DESCRIPTION_NO_INTERNET" = "PeSankita was unable to connect to the internet. Please try from another WiFi network or use mobile data.";
 
 /* Error indicating that an outgoing message had no valid recipients. */
 "ERROR_DESCRIPTION_NO_VALID_RECIPIENTS" = "Message send failed due to a lack of valid recipients.";
 
 /* Error message when attempting to send message */
-"ERROR_DESCRIPTION_SENDING_UNAUTHORIZED" = "Your device is no longer registered for your phone number. You must remove and reinstall Signal.";
+"ERROR_DESCRIPTION_SENDING_UNAUTHORIZED" = "Your device is no longer registered for your phone number. You must remove and reinstall PeSankita.";
 
 /* Generic server error */
 "ERROR_DESCRIPTION_SERVER_FAILURE" = "Server Error. Please try again later.";
@@ -536,7 +536,7 @@
 "ERROR_DESCRIPTION_UNKNOWN_ERROR" = "An unknown error occurred.";
 
 /* Error message when attempting to send message */
-"ERROR_DESCRIPTION_UNREGISTERED_RECIPIENT" = "Contact is not a Signal user.";
+"ERROR_DESCRIPTION_UNREGISTERED_RECIPIENT" = "Contact is not a PeSankita user.";
 
 /* No comment provided by engineer. */
 "ERROR_MESSAGE_DUPLICATE_MESSAGE" = "Received a duplicated message.";
@@ -566,10 +566,10 @@
 "ERROR_MESSAGE_WRONG_TRUSTED_IDENTITY_KEY" = "Safety number changed. Tap to verify.";
 
 /* during registration */
-"EXISTING_USER_REGISTRATION_ALERT_BODY" = "At this time Signal can only be active on one mobile device per phone number.";
+"EXISTING_USER_REGISTRATION_ALERT_BODY" = "At this time PeSankita can only be active on one mobile device per phone number.";
 
 /* during registration, embeds {{device type}}, e.g. \"iPhone\" or \"iPad\" */
-"EXISTING_USER_REGISTRATION_ALERT_TITLE" = "Activating this %@ will disable Signal on any other device currently associated with this phone number.";
+"EXISTING_USER_REGISTRATION_ALERT_TITLE" = "Activating this %@ will disable PeSankita on any other device currently associated with this phone number.";
 
 /* Message for the alert indicating the 'export with signal' file had an invalid filename. */
 "EXPORT_WITH_SIGNAL_ERROR_MESSAGE_INVALID_FILENAME" = "Invalid filename.";
@@ -710,13 +710,13 @@
 "INVALID_AUDIO_FILE_ALERT_ERROR_MESSAGE" = "Invalid audio file.";
 
 /* Alert body when contacts disabled while trying to invite contacts to signal */
-"INVITE_FLOW_REQUIRES_CONTACT_ACCESS_BODY" = "To invite your contacts, you need to allow Signal access to your contacts in the Settings app.";
+"INVITE_FLOW_REQUIRES_CONTACT_ACCESS_BODY" = "To invite your contacts, you need to allow PeSankita access to your contacts in the Settings app.";
 
 /* Alert title when contacts disabled while trying to invite contacts to signal */
 "INVITE_FLOW_REQUIRES_CONTACT_ACCESS_TITLE" = "Allow Contact Access";
 
 /* Label for the cell that presents the 'invite contacts' workflow. */
-"INVITE_FRIENDS_CONTACT_TABLE_BUTTON" = "Invite Friends to Signal";
+"INVITE_FRIENDS_CONTACT_TABLE_BUTTON" = "Invite Friends to PeSankita";
 
 /* Search */
 "INVITE_FRIENDS_PICKER_SEARCHBAR_PLACEHOLDER" = "Search";
@@ -849,11 +849,11 @@
 
 /* Alert body
    Alert body when camera is not authorized */
-"MISSING_CAMERA_PERMISSION_MESSAGE" = "Signal needs access to your camera for video calls. You can grant this permission in the Settings app >> Privacy >> Camera >> Signal";
+"MISSING_CAMERA_PERMISSION_MESSAGE" = "PeSankita needs access to your camera for video calls. You can grant this permission in the Settings app >> Privacy >> Camera >> PeSankita";
 
 /* Alert title
    Alert title when camera is not authorized */
-"MISSING_CAMERA_PERMISSION_TITLE" = "Signal needs to access your camera.";
+"MISSING_CAMERA_PERMISSION_TITLE" = "PeSankita needs to access your camera.";
 
 /* No comment provided by engineer. */
 "MSGVIEW_MISSED_CALL_BECAUSE_OF_CHANGED_IDENTITY" = "Missed call because their safety number has changed.";
@@ -1058,19 +1058,19 @@
 "PRIVACY_VERIFICATION_FAILED_MISMATCHED_SAFETY_NUMBERS_IN_CLIPBOARD" = "The number in your clipboard doesn't look like the correct safety number for this conversation.";
 
 /* Alert body for user error */
-"PRIVACY_VERIFICATION_FAILED_NO_SAFETY_NUMBERS_IN_CLIPBOARD" = "Signal couldn't find any safety number in your clipboard. Have you copied it correctly?";
+"PRIVACY_VERIFICATION_FAILED_NO_SAFETY_NUMBERS_IN_CLIPBOARD" = "PeSankita couldn't find any safety number in your clipboard. Have you copied it correctly?";
 
 /* Alert body when verifying with {{contact name}} */
-"PRIVACY_VERIFICATION_FAILED_THEY_HAVE_WRONG_KEY_FOR_ME" = "Every pair of Signal users shares a distinct safety number. Double-check that %@ is displaying *your* distinct safety number.";
+"PRIVACY_VERIFICATION_FAILED_THEY_HAVE_WRONG_KEY_FOR_ME" = "Every pair of PeSankita users shares a distinct safety number. Double-check that %@ is displaying *your* distinct safety number.";
 
 /* alert body */
-"PRIVACY_VERIFICATION_FAILED_WITH_OLD_LOCAL_VERSION" = "You're running an old version of Signal. You need to update before you can verify.";
+"PRIVACY_VERIFICATION_FAILED_WITH_OLD_LOCAL_VERSION" = "You're running an old version of PeSankita. You need to update before you can verify.";
 
 /* alert body */
-"PRIVACY_VERIFICATION_FAILED_WITH_OLD_REMOTE_VERSION" = "Your partner is running an old version of Signal. They need to update before you can verify.";
+"PRIVACY_VERIFICATION_FAILED_WITH_OLD_REMOTE_VERSION" = "Your partner is running an old version of PeSankita. They need to update before you can verify.";
 
 /* alert body */
-"PRIVACY_VERIFICATION_FAILURE_INVALID_QRCODE" = "The scanned code doesn't look like a safety number code. Are you both on an up-to-date version of Signal?";
+"PRIVACY_VERIFICATION_FAILURE_INVALID_QRCODE" = "The scanned code doesn't look like a safety number code. Are you both on an up-to-date version of PeSankita?";
 
 /* Paragraph(s) shown alongside the safety number when verifying privacy with {{contact name}} */
 "PRIVACY_VERIFICATION_INSTRUCTIONS" = "If you wish to verify the security of your end-to-end encryption with %@, compare the numbers above with the numbers on their device.\n\nAlternatively, you can scan the code on their phone, or ask them to scan your code.";
@@ -1109,7 +1109,7 @@
 "PROFILE_VIEW_PROFILE_AVATAR_FIELD" = "Avatar";
 
 /* Description of the user profile. */
-"PROFILE_VIEW_PROFILE_DESCRIPTION" = "Your Signal Profile will be visible to your contacts, when you initiate new conversations, and when you share it with other users and groups.";
+"PROFILE_VIEW_PROFILE_DESCRIPTION" = "Your PeSankita Profile will be visible to your contacts, when you initiate new conversations, and when you share it with other users and groups.";
 
 /* Link to more information about the user profile. */
 "PROFILE_VIEW_PROFILE_DESCRIPTION_LINK" = "Tap here to learn more.";
@@ -1142,13 +1142,13 @@
 "QUESTIONMARK_PUNCTUATION" = "?";
 
 /* No comment provided by engineer. */
-"RATING_MSG" = "If you enjoy using Signal to have private conversations, you can support our project by rating it. It won't take more than a minute, and will help others find some privacy.";
+"RATING_MSG" = "If you enjoy using PeSankita to have private conversations, you can support our project by rating it. It won't take more than a minute, and will help others find some privacy.";
 
 /* No comment provided by engineer. */
-"RATING_RATE" = "Rate Signal";
+"RATING_RATE" = "Rate PeSankita";
 
 /* No comment provided by engineer. */
-"RATING_TITLE" = "Support Signal!";
+"RATING_TITLE" = "Support PeSankita!";
 
 /* No comment provided by engineer. */
 "REGISTER_CC_ERR_ALERT_VIEW_MESSAGE" = "Please enter a valid country code";
@@ -1235,7 +1235,7 @@
 "SAFETY_NUMBER_CHANGED_CONFIRM_SEND_ACTION" = "Send Anyway";
 
 /* Snippet to share {{safety number}} with a friend. sent e.g. via SMS */
-"SAFETY_NUMBER_SHARE_FORMAT" = "Our Signal Safety Number:\n%@";
+"SAFETY_NUMBER_SHARE_FORMAT" = "Our PeSankita Safety Number:\n%@";
 
 /* Action sheet heading */
 "SAFETY_NUMBERS_ACTIONSHEET_TITLE" = "Your safety number with %@ has changed. You may wish to verify it.";
@@ -1268,16 +1268,16 @@
 "SEND_INVITE_FAILURE" = "Sending invite failed, please try again later.";
 
 /* Alert body after invite succeeded */
-"SEND_INVITE_SUCCESS" = "You've invited your friend to use Signal!";
+"SEND_INVITE_SUCCESS" = "You've invited your friend to use PeSankita!";
 
-/* Text for button to send a Signal invite via SMS. %@ is placeholder for the receipient's phone number. */
+/* Text for button to send a PeSankita invite via SMS. %@ is placeholder for the receipient's phone number. */
 "SEND_INVITE_VIA_SMS_BUTTON_FORMAT" = "Invite via SMS: %@";
 
 /* No comment provided by engineer. */
 "SEND_SMS_CONFIRM_TITLE" = "Invite a friend via insecure SMS?";
 
 /* No comment provided by engineer. */
-"SEND_SMS_INVITE_TITLE" = "Would you like to invite the following number to Signal: ";
+"SEND_SMS_INVITE_TITLE" = "Would you like to invite the following number to PeSankita: ";
 
 /* Navbar title */
 "SETTINGS_ABOUT" = "About";
@@ -1298,7 +1298,7 @@
 "SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_COUNTRY_FORMAT" = "Location: %@";
 
 /* Table footer for the 'censorship circumvention' section when censorship circumvention can be manually enabled. */
-"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER" = "If enabled, Signal will attempt to circumvent censorship. Do not enable this feature unless you are in a location where Signal is censored.";
+"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER" = "If enabled, PeSankita will attempt to circumvent censorship. Do not enable this feature unless you are in a location where PeSankita is censored.";
 
 /* Table footer for the 'censorship circumvention' section shown when censorship circumvention has been auto-enabled based on local phone number. */
 "SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER_AUTO_ENABLED" = "Censorship circumvention has been activated based on your account's phone number.";
@@ -1306,8 +1306,8 @@
 /* Table footer for the 'censorship circumvention' section shown when the app is not connected to the internet. */
 "SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER_NO_CONNECTION" = "Censorship circumvention can only be activated when connected to the internet.";
 
-/* Table footer for the 'censorship circumvention' section shown when the app is connected to the Signal service. */
-"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER_WEBSOCKET_CONNECTED" = "Censorship circumvention is not necessary; you are already connected to the Signal service.";
+/* Table footer for the 'censorship circumvention' section shown when the app is connected to the PeSankita service. */
+"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER_WEBSOCKET_CONNECTED" = "Censorship circumvention is not necessary; you are already connected to the PeSankita service.";
 
 /* Table header for the 'censorship circumvention' section. */
 "SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_HEADER" = "Censorship Circumvention";
@@ -1324,8 +1324,8 @@
 /* A label for the 'add phone number' button in the block list table. */
 "SETTINGS_BLOCK_LIST_ADD_BUTTON" = "Add…";
 
-/* A label that indicates the user has no Signal contacts. */
-"SETTINGS_BLOCK_LIST_NO_CONTACTS" = "You have no contacts on Signal.";
+/* A label that indicates the user has no PeSankita contacts. */
+"SETTINGS_BLOCK_LIST_NO_CONTACTS" = "You have no contacts on PeSankita.";
 
 /* A label that indicates the user's search has no matching results. */
 "SETTINGS_BLOCK_LIST_NO_SEARCH_RESULTS" = "No Search Results";
@@ -1340,7 +1340,7 @@
 "SETTINGS_CALLING_HIDES_IP_ADDRESS_PREFERENCE_TITLE" = "Always Relay Calls";
 
 /* User settings section footer, a detailed explanation */
-"SETTINGS_CALLING_HIDES_IP_ADDRESS_PREFERENCE_TITLE_DETAIL" = "Relay all calls through the Signal server to avoid revealing your IP address to your contact. Enabling will reduce call quality.";
+"SETTINGS_CALLING_HIDES_IP_ADDRESS_PREFERENCE_TITLE_DETAIL" = "Relay all calls through the PeSankita server to avoid revealing your IP address to your contact. Enabling will reduce call quality.";
 
 /* No comment provided by engineer. */
 "SETTINGS_CLEAR_HISTORY" = "Clear History Logs";
@@ -1370,7 +1370,7 @@
 "SETTINGS_INVITE_TITLE" = "Invite Your Friends";
 
 /* content of tweet when inviting via twitter */
-"SETTINGS_INVITE_TWITTER_TEXT" = "You can reach me using Signal by @WhisperSystems, get it now.";
+"SETTINGS_INVITE_TWITTER_TEXT" = "You can reach me using PeSankita by @WhisperSystems, get it now.";
 
 /* Title for settings activity */
 "SETTINGS_NAV_BAR_TITLE" = "Settings";
@@ -1391,10 +1391,10 @@
 "SETTINGS_SCREEN_SECURITY" = "Enable Screen Security";
 
 /* No comment provided by engineer. */
-"SETTINGS_SCREEN_SECURITY_DETAIL" = "Prevent Signal previews from appearing in the app switcher.";
+"SETTINGS_SCREEN_SECURITY_DETAIL" = "Prevent PeSankita previews from appearing in the app switcher.";
 
 /* Settings table section footer. */
-"SETTINGS_SECTION_CALL_KIT_DESCRIPTION" = "iOS Call Integration shows Signal calls on your lock screen and in the system's call history. You may optionally show your contact's name and number. If iCloud is enabled, this call history will be shared with Apple.";
+"SETTINGS_SECTION_CALL_KIT_DESCRIPTION" = "iOS Call Integration shows PeSankita calls on your lock screen and in the system's call history. You may optionally show your contact's name and number. If iCloud is enabled, this call history will be shared with Apple.";
 
 /* settings topic header for table section */
 "SETTINGS_SECTION_TITLE_CALLING" = "Calling";
@@ -1423,8 +1423,8 @@
 /* notification action */
 "SHOW_THREAD_BUTTON_TITLE" = "Show Conversation";
 
-/* body sent to contacts when inviting to Install Signal */
-"SMS_INVITE_BODY" = "I'm inviting you to install Signal! Here is the link:";
+/* body sent to contacts when inviting to Install PeSankita */
+"SMS_INVITE_BODY" = "I'm inviting you to install PeSankita! Here is the link:";
 
 /* Alert body after verifying privacy with {{other user's name}} */
 "SUCCESSFUL_VERIFICATION_DESCRIPTION" = "Your safety number with %@ matches. You can mark this contact as verified.";
@@ -1487,13 +1487,13 @@
 "UNLINK_CONFIRMATION_ALERT_TITLE" = "Unlink \"%@\"?";
 
 /* Alert title when unlinking device fails */
-"UNLINKING_FAILED_ALERT_TITLE" = "Signal was unable to unlink your device.";
+"UNLINKING_FAILED_ALERT_TITLE" = "PeSankita was unable to unlink your device.";
 
 /* Label text in device manager for a device with no name */
 "UNNAMED_DEVICE" = "Unnamed Device";
 
 /* No comment provided by engineer. */
-"UNREGISTER_SIGNAL_FAIL" = "Failed to unregister from Signal.";
+"UNREGISTER_SIGNAL_FAIL" = "Failed to unregister from PeSankita.";
 
 /* No comment provided by engineer. */
 "UNSUPPORTED_ATTACHMENT" = "Received unsupported attachment type.";
@@ -1520,25 +1520,25 @@
 "UPGRADE_EXPERIENCE_INTRODUCING_PROFILES_BUTTON" = "Set up Your Profile";
 
 /* Description of new profile feature for upgrading (existing) users */
-"UPGRADE_EXPERIENCE_INTRODUCING_PROFILES_DESCRIPTION" = "You can now share a profile photo and name with your friends on Signal.";
+"UPGRADE_EXPERIENCE_INTRODUCING_PROFILES_DESCRIPTION" = "You can now share a profile photo and name with your friends on PeSankita.";
 
 /* Header for upgrade experience */
 "UPGRADE_EXPERIENCE_INTRODUCING_PROFILES_TITLE" = "Ready for Your Closeup?";
 
 /* Description of video calling to upgrading (existing) users */
-"UPGRADE_EXPERIENCE_VIDEO_DESCRIPTION" = "Signal now supports secure video calling. Just start a call like normal, tap the camera button, and wave hello.";
+"UPGRADE_EXPERIENCE_VIDEO_DESCRIPTION" = "PeSankita now supports secure video calling. Just start a call like normal, tap the camera button, and wave hello.";
 
 /* Header for upgrade experience */
 "UPGRADE_EXPERIENCE_VIDEO_TITLE" = "Hello Secure Video Calls!";
 
 /* Message for the alert indicating that user should upgrade iOS. */
-"UPGRADE_IOS_ALERT_MESSAGE" = "Signal will soon require iOS 9 or later. Please upgrade in Settings app >> General >> Software Update.";
+"UPGRADE_IOS_ALERT_MESSAGE" = "PeSankita will soon require iOS 9 or later. Please upgrade in Settings app >> General >> Software Update.";
 
 /* Title for the alert indicating that user should upgrade iOS. */
 "UPGRADE_IOS_ALERT_TITLE" = "Upgrade iOS";
 
 /* No comment provided by engineer. */
-"Upgrading Signal ..." = "Upgrading Signal ...";
+"Upgrading PeSankita ..." = "Upgrading PeSankita ...";
 
 /* button text for back button on verification view */
 "VERIFICATION_BACK_BUTTON" = "Back";
@@ -1592,7 +1592,7 @@
 "VOICE_MESSAGE_TOO_SHORT_ALERT_TITLE" = "Voice Message";
 
 /* Activity indicator title, shown upon returning to the device manager, until you complete the provisioning process on desktop */
-"WAITING_TO_COMPLETE_DEVICE_LINK_TEXT" = "Complete setup on Signal Desktop.";
+"WAITING_TO_COMPLETE_DEVICE_LINK_TEXT" = "Complete setup on PeSankita Desktop.";
 
 /* No comment provided by engineer. */
 "WHISPER_NAV_BAR_TITLE" = "Inbox";

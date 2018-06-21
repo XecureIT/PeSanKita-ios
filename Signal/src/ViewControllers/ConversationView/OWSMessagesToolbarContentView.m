@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setImage:[icon imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                 forState:UIControlStateNormal];
-        button.imageView.tintColor = [UIColor ows_materialBlueColor];
+        button.imageView.tintColor = [UIColor ows_materialRedColor];
 
         // We want to be permissive about the voice message gesture, so we:
         //

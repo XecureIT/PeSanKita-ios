@@ -6,7 +6,7 @@
 #import "BlockListViewController.h"
 #import "Environment.h"
 #import "PropertyListPreferences.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -137,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
     [self.contentView autoPinToTopLayoutGuideOfViewController:self withInset:0];
     
     self.footerBar = [UIToolbar new];
-    _footerBar.barTintColor = [UIColor ows_signalBrandBlueColor];
+    _footerBar.barTintColor = [UIColor ows_pesankitaBrandRedColor];
     [self.footerBar setItems:@[
                                [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                                [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction

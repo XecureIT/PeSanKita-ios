@@ -6,7 +6,7 @@
 #import "Environment.h"
 #import "OWSContactsManager.h"
 #import "OWSQRCodeScanningViewController.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "UIColor+OWS.h"
 #import "UIFont+OWS.h"
 #import "UIUtil.h"

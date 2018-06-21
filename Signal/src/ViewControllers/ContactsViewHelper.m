@@ -6,7 +6,7 @@
 #import "ContactTableViewCell.h"
 #import "Environment.h"
 #import "OWSProfileManager.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import <SignalServiceKit/Contact.h>
 #import <SignalServiceKit/OWSBlockingManager.h>
 #import <SignalServiceKit/PhoneNumber.h>

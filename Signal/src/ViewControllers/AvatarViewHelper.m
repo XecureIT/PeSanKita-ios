@@ -5,7 +5,7 @@
 #import "AvatarViewHelper.h"
 #import "OWSContactsManager.h"
 #import "OWSNavigationController.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "UIUtil.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <SignalServiceKit/PhoneNumber.h>

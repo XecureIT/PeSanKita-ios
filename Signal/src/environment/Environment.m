@@ -6,7 +6,7 @@
 #import "DebugLogger.h"
 #import "FunctionalUtil.h"
 #import "MessagesViewController.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import "SignalKeyingStorage.h"
 #import "SignalsViewController.h"
 #import "TSContactThread.h"

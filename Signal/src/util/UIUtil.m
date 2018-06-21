@@ -43,13 +43,13 @@
 + (void)applySignalAppearence
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor ows_materialBlueColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor ows_materialRedColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
-    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTintColor:[UIColor ows_materialBlueColor]];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTintColor:[UIColor ows_materialRedColor]];
 
-    [[UISwitch appearance] setOnTintColor:[UIColor ows_materialBlueColor]];
-    [[UIToolbar appearance] setTintColor:[UIColor ows_materialBlueColor]];
+    [[UISwitch appearance] setOnTintColor:[UIColor ows_materialRedColor]];
+    [[UIToolbar appearance] setTintColor:[UIColor ows_materialRedColor]];
     [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
 
     // If we set NSShadowAttributeName, the NSForegroundColorAttributeName value is ignored.

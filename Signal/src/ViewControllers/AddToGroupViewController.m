@@ -6,7 +6,7 @@
 #import "BlockListUIUtils.h"
 #import "ContactsViewHelper.h"
 #import "OWSContactsManager.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import <SignalServiceKit/SignalAccount.h>
 
 NS_ASSUME_NONNULL_BEGIN

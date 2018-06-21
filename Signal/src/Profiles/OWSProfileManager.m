@@ -5,7 +5,7 @@
 #import "OWSProfileManager.h"
 #import "Environment.h"
 #import "NSString+OWS.h"
-#import "Signal-Swift.h"
+#import "PeSankita-Swift.h"
 #import <SignalServiceKit/Cryptography.h>
 #import <SignalServiceKit/NSData+Image.h>
 #import <SignalServiceKit/NSData+hexString.h>
