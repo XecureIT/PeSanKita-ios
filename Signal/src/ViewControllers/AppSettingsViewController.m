@@ -97,7 +97,7 @@
     OWSTableSection *section = [OWSTableSection new];
 
     __weak AppSettingsViewController *weakSelf = self;
-
+/*
     [section addItem:[OWSTableItem itemWithCustomCellBlock:^{
         return [weakSelf profileHeaderCell];
     }
@@ -105,7 +105,7 @@
                          actionBlock:^{
                              [weakSelf showProfile];
                          }]];
-
+*/
     if (OWSSignalService.sharedInstance.isCensorshipCircumventionActive) {
         [section
             addItem:[OWSTableItem disclosureItemWithText:
@@ -311,12 +311,12 @@
         [[UIStoryboard main] instantiateViewControllerWithIdentifier:@"OWSLinkedDevicesTableViewController"];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
+/*
 - (void)showProfile
 {
     [ProfileViewController presentForAppSettings:self.navigationController];
 }
-
+*/
 - (void)showAdvanced
 {
     AdvancedSettingsTableViewController *vc = [[AdvancedSettingsTableViewController alloc] init];

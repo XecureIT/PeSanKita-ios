@@ -11,7 +11,7 @@
 #import "NSDate+millisecondTimeStamp.h"
 #import "OWSContactsManager.h"
 #import "OWSNavigationController.h"
-#import "ProfileViewController.h"
+//#import "ProfileViewController.h"
 #import "PropertyListPreferences.h"
 #import "PushManager.h"
 #import "PeSankita-Swift.h"
@@ -535,7 +535,7 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
                              [self markAllUpgradeExperiencesAsSeen];
                          }];
     } else if (!self.hasBeenPresented && [ProfileViewController shouldDisplayProfileViewOnLaunch]) {
-        [ProfileViewController presentForUpgradeOrNag:self];
+        //[ProfileViewController presentForUpgradeOrNag:self];
     }
 
     self.hasBeenPresented = YES;

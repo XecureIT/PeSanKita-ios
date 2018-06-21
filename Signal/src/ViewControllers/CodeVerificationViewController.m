@@ -3,8 +3,10 @@
 //
 
 #import "CodeVerificationViewController.h"
-#import "ProfileViewController.h"
+#import "AppDelegate.h"
+//#import "ProfileViewController.h"
 #import "PeSankita-Swift.h"
+#import "SignalsNavigationController.h"
 #import "StringUtil.h"
 #import "UIViewController+OWS.h"
 #import <PromiseKit/AnyPromise.h>
@@ -283,7 +285,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)vericationWasCompleted
 {
-    [ProfileViewController presentForRegistration:self.navigationController];
+    //[ProfileViewController presentForRegistration:self.navigationController];
+    [self showHomeView];
+}
+
+- (void)showHomeView
+{
+    SignalsViewController *homeView = [SignalsViewController new];
+    homeView.newlyRegisteredUser = YES;
+    SignalsNavigationController *navigationController =
+    [[SignalsNavigationController alloc] initWithRootViewController:homeView];
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.window.rootViewController = navigationController;
+    OWSAssert([navigationController.topViewController isKindOfClass:[SignalsViewController class]]);
 }
 
 - (void)presentAlertWithVerificationError:(NSError *)error
