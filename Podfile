@@ -12,6 +12,7 @@ target 'PeSankita' do
     pod 'Reachability'
     pod 'SignalServiceKit',           path: '.'
     pod 'SocketRocket',               :git => 'https://github.com/facebook/SocketRocket.git'
+    pod 'ZXingObjC'
     target 'PeSankitaTests' do
       inherit! :search_paths
     end
