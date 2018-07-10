@@ -37,6 +37,8 @@
 #import "UIUtil.h"
 #import "UIView+OWS.h"
 #import "ViewControllerUtils.h"
+#import "SignalsViewController.h"
+#import "SignalsNavigationController.h"
 #import <AxolotlKit/NSData+keyVersionByte.h>
 #import <JSQMessagesViewController/JSQMediaItem.h>
 #import <JSQMessagesViewController/JSQMessagesMediaViewBubbleImageMasker.h>
