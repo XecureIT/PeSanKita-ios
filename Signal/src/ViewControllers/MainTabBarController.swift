@@ -14,10 +14,12 @@ public final class MainTabBarController: UITabBarController {
         let homeViewController: SignalsViewController = SignalsViewController()
         let inboxNavigationController: SignalsNavigationController = SignalsNavigationController(rootViewController: homeViewController)
         inboxNavigationController.tabBarItem.title = "Inbox"
+        inboxNavigationController.tabBarItem.image = UIImage(named: "ic_chat")!
 
         let settingViewController: AppSettingsViewController = AppSettingsViewController()
         let settingNavigationController: OWSNavigationController = OWSNavigationController(rootViewController: settingViewController)
         settingNavigationController.tabBarItem.title = "Setting"
+        settingNavigationController.tabBarItem.image = UIImage(named: "ic_setting")!
         
         self.setViewControllers([inboxNavigationController, settingNavigationController], animated: true)
     }
