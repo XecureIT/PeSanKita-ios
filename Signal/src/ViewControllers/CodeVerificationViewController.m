@@ -291,13 +291,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showHomeView
 {
+    MainTabBarController *tabbarController = [MainTabBarController new];
+    
+    
     SignalsViewController *homeView = [SignalsViewController new];
     homeView.newlyRegisteredUser = YES;
     SignalsNavigationController *navigationController =
     [[SignalsNavigationController alloc] initWithRootViewController:homeView];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    appDelegate.window.rootViewController = navigationController;
-    OWSAssert([navigationController.topViewController isKindOfClass:[SignalsViewController class]]);
+    appDelegate.window.rootViewController = tabbarController;
+    OWSAssert([navigationController.topViewController isKindOfClass:[MainTabBarController class]]);
 }
 
 - (void)presentAlertWithVerificationError:(NSError *)error
