@@ -80,7 +80,7 @@
     if (!self) {
         return self;
     }
-    self.viewingThreadsIn = kInboxState;
+    _viewingThreadsIn = kInboxState;
     [self commonInit];
 
     return self;
@@ -91,7 +91,7 @@
     if (!self) {
         return self;
     }
-    self.viewingThreadsIn = cellState;
+    _viewingThreadsIn = cellState;
     [self commonInit];
     return self;
 }
