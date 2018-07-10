@@ -522,7 +522,6 @@ static NSString *const kURLHostVerifyPrefix             = @"verify";
                     // If app has not re-entered active, show screen protection if necessary.
                     [self showScreenProtection];
                 }
-                [[[Environment getCurrent] signalsViewController] updateInboxCountLabel];
                 [application endBackgroundTask:bgTask];
             });
         }

@@ -9,7 +9,6 @@
 #import "MessagesViewController.h"
 #import "NSDate+millisecondTimeStamp.h"
 #import "OWSContactsManager.h"
-//#import "ProfileViewController.h"
 #import "PropertyListPreferences.h"
 #import "PushManager.h"
 #import "PeSankita-Swift.h"
@@ -40,7 +39,6 @@
 @property (nonatomic) YapDatabaseViewMappings *threadMappings;
 @property (nonatomic) CellState viewingThreadsIn;
 @property (nonatomic) long inboxCount;
-@property (nonatomic) UISegmentedControl *segmentedControl;
 @property (nonatomic) id previewingContext;
 @property (nonatomic) NSSet<NSString *> *blockedPhoneNumberSet;
 @property (nonatomic) BOOL viewHasEverAppeared;
@@ -258,20 +256,6 @@
     [self tableViewSetUp];
 
     self.title = NSLocalizedString(@"WHISPER_NAV_BAR_TITLE", nil);
-    
-    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[
-        NSLocalizedString(@"WHISPER_NAV_BAR_TITLE", nil),
-        NSLocalizedString(@"ARCHIVE_NAV_BAR_TITLE", nil)
-    ]];
-
-//    [self.segmentedControl addTarget:self
-//                              action:@selector(swappedSegmentedControl)
-//                    forControlEvents:UIControlEventValueChanged];
-//    UINavigationItem *navigationItem = self.navigationItem;
-//    navigationItem.titleView = self.segmentedControl;
-//    [self.segmentedControl setSelectedSegmentIndex:0];
-//    navigationItem.leftBarButtonItem.accessibilityLabel = NSLocalizedString(
-//        @"SETTINGS_BUTTON_ACCESSIBILITY", @"Accessibility hint for the settings button");
 
     if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)] &&
         (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable)) {
@@ -326,7 +310,7 @@
 }
 
 - (void)swappedSegmentedControl {
-    if (self.segmentedControl.selectedSegmentIndex == 0) {
+    if (self.viewingThreadsIn == kInboxState) {
         [self showInboxGrouping];
     } else {
         [self showArchiveGrouping];
@@ -343,7 +327,6 @@
         }];
     }
 
-    [self updateInboxCountLabel];
 
     self.isViewVisible = YES;
 
@@ -426,7 +409,6 @@
 
     [[self tableView] reloadData];
     [self checkIfEmptyView];
-    [self updateInboxCountLabel];
 
     // If the user hasn't already granted contact access
     // we don't want to request until they receive a message.
@@ -668,21 +650,6 @@
     [self checkIfEmptyView];
 }
 
-- (void)updateInboxCountLabel
-{
-    NSUInteger numberOfItems = [self.messagesManager unreadMessagesCount];
-    NSString *unreadString   = NSLocalizedString(@"WHISPER_NAV_BAR_TITLE", nil);
-
-    if (numberOfItems > 0) {
-        unreadString =
-            [unreadString stringByAppendingFormat:@" (%@)", [ViewControllerUtils formatInt:(int)numberOfItems]];
-    }
-
-    [_segmentedControl setTitle:unreadString forSegmentAtIndex:0];
-    [_segmentedControl.superview setNeedsLayout];
-    [_segmentedControl reloadInputViews];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TSThread *thread = [self threadForIndexPath:indexPath];
     [self presentThread:thread keyboardOnViewAppearing:NO callOnViewAppearing:NO];
@@ -798,7 +765,6 @@
 {
     BOOL didChange = _viewingThreadsIn != viewingThreadsIn;
     _viewingThreadsIn = viewingThreadsIn;
-    self.segmentedControl.selectedSegmentIndex = (viewingThreadsIn == kInboxState ? 0 : 1);
     if (didChange || !self.threadMappings) {
         [self updateMappings];
     } else {
@@ -869,7 +835,6 @@
 
     // We want this regardless of if we're currently viewing the archive.
     // So we run it before the early return
-    [self updateInboxCountLabel];
     [self checkIfEmptyView];
 
     if ([sectionChanges count] == 0 && [rowChanges count] == 0) {
