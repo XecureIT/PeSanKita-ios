@@ -13,7 +13,7 @@ public final class MainTabBarController: UITabBarController {
     public var newlyRegisteredUser: Bool = false
     
     public override func viewDidLoad() {
-        let inboxViewController: SignalsViewController = SignalsViewController(cellType: .archiveState)
+        let inboxViewController: SignalsViewController = SignalsViewController(cellType: .inboxState)
         inboxViewController.newlyRegisteredUser = newlyRegisteredUser
         
         let inboxNavigationController: SignalsNavigationController = SignalsNavigationController(rootViewController: inboxViewController)

@@ -249,7 +249,7 @@
     // Create the database connection.
     [self uiDatabaseConnection];
 
-    [self showInboxGrouping];
+    [self updateMappings];
 
     // because this uses the table data source, `tableViewSetup` must happen
     // after mappings have been set up in `showInboxGrouping`

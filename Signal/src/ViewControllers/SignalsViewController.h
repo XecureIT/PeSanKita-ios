@@ -19,8 +19,6 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
     keyboardOnViewAppearing:(BOOL)keyboardOnViewAppearing
         callOnViewAppearing:(BOOL)callOnViewAppearing;
 
-- (void)updateInboxCountLabel;
-
 - (void)composeNew;
 
 - (void)presentTopLevelModalViewController:(UIViewController *)viewController
