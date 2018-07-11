@@ -519,7 +519,7 @@ const NSUInteger kNewGroupViewControllerAvatarWidth = 68;
     NSMutableArray<NSString *> *recipientIds = [self.memberRecipientIds.allObjects mutableCopy];
     [recipientIds addObject:[self.contactsViewHelper localNumber]];
     NSData *groupId = [SecurityUtils generateRandomBytes:16];
-    return [[TSGroupModel alloc] initWithTitle:groupName memberIds:recipientIds image:self.groupAvatar groupId:groupId];
+    return [[TSGroupModel alloc] initWithTitle:groupName memberIds:recipientIds image:self.groupAvatar groupId:groupId ownerId:[self.contactsViewHelper localNumber] adminIds:nil];
 }
 
 #pragma mark - Group Avatar

@@ -528,7 +528,7 @@ NS_ASSUME_NONNULL_BEGIN
         __block BOOL unknownGroup = NO;
         [self.dbConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
             TSGroupModel *emptyModelToFillOutId =
-                [[TSGroupModel alloc] initWithTitle:nil memberIds:nil image:nil groupId:dataMessage.group.id];
+                [[TSGroupModel alloc] initWithTitle:nil memberIds:nil image:nil groupId:dataMessage.group.id ownerId:nil adminIds:nil];
             TSGroupThread *gThread = [TSGroupThread threadWithGroupModel:emptyModelToFillOutId transaction:transaction];
             if (gThread == nil && dataMessage.group.type != OWSSignalServiceProtosGroupContextTypeUpdate) {
                 unknownGroup = YES;
@@ -915,7 +915,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     [self.dbConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
         TSGroupModel *emptyModelToFillOutId =
-            [[TSGroupModel alloc] initWithTitle:nil memberIds:nil image:nil groupId:dataMessage.group.id];
+            [[TSGroupModel alloc] initWithTitle:nil memberIds:nil image:nil groupId:dataMessage.group.id ownerId:nil adminIds:nil];
         TSGroupThread *gThread = [TSGroupThread threadWithGroupModel:emptyModelToFillOutId transaction:transaction];
         if (!gThread) {
             DDLogWarn(@"%@ Unknown group: %@", self.tag, groupId);
@@ -968,10 +968,14 @@ NS_ASSUME_NONNULL_BEGIN
     [self.dbConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
       if (groupId) {
           NSMutableArray *uniqueMemberIds = [[[NSSet setWithArray:dataMessage.group.members] allObjects] mutableCopy];
+          NSMutableArray *uniqueAdminIds = [[[NSSet setWithArray:dataMessage.group.admins] allObjects] mutableCopy];
+          
           TSGroupModel *model = [[TSGroupModel alloc] initWithTitle:dataMessage.group.name
                                                           memberIds:uniqueMemberIds
                                                               image:nil
-                                                            groupId:dataMessage.group.id];
+                                                            groupId:dataMessage.group.id
+                                                            ownerId:dataMessage.group.owner
+                                                           adminIds:uniqueAdminIds];
           TSGroupThread *gThread = [TSGroupThread getOrCreateThreadWithGroupModel:model transaction:transaction];
           [gThread saveWithTransaction:transaction];
 

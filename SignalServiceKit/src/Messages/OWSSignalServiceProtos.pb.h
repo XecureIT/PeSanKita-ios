@@ -1613,28 +1613,37 @@ NSString *NSStringFromOWSSignalServiceProtosGroupContextType(OWSSignalServicePro
 #define GroupContext_name @"name"
 #define GroupContext_members @"members"
 #define GroupContext_avatar @"avatar"
+#define GroupContext_owner @"owner"
+#define GroupContext_admins @"admins"
 @interface OWSSignalServiceProtosGroupContext : PBGeneratedMessage<GeneratedMessageProtocol> {
 @private
   BOOL hasName_:1;
+  BOOL hasOwner_:1;
   BOOL hasAvatar_:1;
   BOOL hasId_:1;
   BOOL hasType_:1;
   NSString* name;
+  NSString* owner;
   OWSSignalServiceProtosAttachmentPointer* avatar;
   NSData* id;
   OWSSignalServiceProtosGroupContextType type;
   NSMutableArray * membersArray;
+  NSMutableArray * adminsArray;
 }
 - (BOOL) hasId;
 - (BOOL) hasType;
 - (BOOL) hasName;
 - (BOOL) hasAvatar;
+- (BOOL) hasOwner;
 @property (readonly, strong) NSData* id;
 @property (readonly) OWSSignalServiceProtosGroupContextType type;
 @property (readonly, strong) NSString* name;
 @property (readonly, strong) NSArray * members;
 @property (readonly, strong) OWSSignalServiceProtosAttachmentPointer* avatar;
+@property (readonly, strong) NSString* owner;
+@property (readonly, strong) NSArray * admins;
 - (NSString*)membersAtIndex:(NSUInteger)index;
+- (NSString*)adminsAtIndex:(NSUInteger)index;
 
 + (instancetype) defaultInstance;
 - (instancetype) defaultInstance;
@@ -1698,6 +1707,17 @@ NSString *NSStringFromOWSSignalServiceProtosGroupContextType(OWSSignalServicePro
 - (OWSSignalServiceProtosGroupContextBuilder*) setAvatarBuilder:(OWSSignalServiceProtosAttachmentPointerBuilder*) builderForValue;
 - (OWSSignalServiceProtosGroupContextBuilder*) mergeAvatar:(OWSSignalServiceProtosAttachmentPointer*) value;
 - (OWSSignalServiceProtosGroupContextBuilder*) clearAvatar;
+
+- (BOOL) hasOwner;
+- (NSString*) owner;
+- (OWSSignalServiceProtosGroupContextBuilder*) setOwner:(NSString*) value;
+- (OWSSignalServiceProtosGroupContextBuilder*) clearOwner;
+
+- (NSMutableArray *)admins;
+- (NSString*)adminsAtIndex:(NSUInteger)index;
+- (OWSSignalServiceProtosGroupContextBuilder *)addAdmins:(NSString*)value;
+- (OWSSignalServiceProtosGroupContextBuilder *)setAdminsArray:(NSArray *)array;
+- (OWSSignalServiceProtosGroupContextBuilder *)clearAdmins;
 @end
 
 #define ContactDetails_number @"number"
@@ -1869,28 +1889,37 @@ NSString *NSStringFromOWSSignalServiceProtosGroupContextType(OWSSignalServicePro
 #define GroupDetails_members @"members"
 #define GroupDetails_avatar @"avatar"
 #define GroupDetails_active @"active"
+#define GroupDetails_owner @"owner"
+#define GroupDetails_admins @"admins"
 @interface OWSSignalServiceProtosGroupDetails : PBGeneratedMessage<GeneratedMessageProtocol> {
 @private
   BOOL hasActive_:1;
   BOOL hasName_:1;
+  BOOL hasOwner_:1;
   BOOL hasAvatar_:1;
   BOOL hasId_:1;
   BOOL active_:1;
   NSString* name;
+  NSString* owner;
   OWSSignalServiceProtosGroupDetailsAvatar* avatar;
   NSData* id;
   NSMutableArray * membersArray;
+  NSMutableArray * adminsArray;
 }
 - (BOOL) hasId;
 - (BOOL) hasName;
 - (BOOL) hasAvatar;
 - (BOOL) hasActive;
+- (BOOL) hasOwner;
 @property (readonly, strong) NSData* id;
 @property (readonly, strong) NSString* name;
 @property (readonly, strong) NSArray * members;
 @property (readonly, strong) OWSSignalServiceProtosGroupDetailsAvatar* avatar;
 - (BOOL) active;
+@property (readonly, strong) NSString* owner;
+@property (readonly, strong) NSArray * admins;
 - (NSString*)membersAtIndex:(NSUInteger)index;
+- (NSString*)adminsAtIndex:(NSUInteger)index;
 
 + (instancetype) defaultInstance;
 - (instancetype) defaultInstance;
@@ -2014,6 +2043,17 @@ NSString *NSStringFromOWSSignalServiceProtosGroupContextType(OWSSignalServicePro
 - (BOOL) active;
 - (OWSSignalServiceProtosGroupDetailsBuilder*) setActive:(BOOL) value;
 - (OWSSignalServiceProtosGroupDetailsBuilder*) clearActive;
+
+- (BOOL) hasOwner;
+- (NSString*) owner;
+- (OWSSignalServiceProtosGroupDetailsBuilder*) setOwner:(NSString*) value;
+- (OWSSignalServiceProtosGroupDetailsBuilder*) clearOwner;
+
+- (NSMutableArray *)admins;
+- (NSString*)adminsAtIndex:(NSUInteger)index;
+- (OWSSignalServiceProtosGroupDetailsBuilder *)addAdmins:(NSString*)value;
+- (OWSSignalServiceProtosGroupDetailsBuilder *)setAdminsArray:(NSArray *)array;
+- (OWSSignalServiceProtosGroupDetailsBuilder *)clearAdmins;
 @end
 
 

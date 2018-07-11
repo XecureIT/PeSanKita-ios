@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ShowGroupMembersViewController () <ContactsViewHelperDelegate, ContactEditingDelegate>
 
+@property (nonatomic, readonly) OWSContactsManager *contactsManager;
+@property (nonatomic) YapDatabaseConnection *editingDatabaseConnection;
+@property (nonatomic, readonly) TSStorageManager *storageManager;
+@property (nonatomic, readonly) OWSMessageSender *messageSender;
+
 @property (nonatomic, readonly) TSGroupThread *thread;
 @property (nonatomic, readonly) ContactsViewHelper *contactsViewHelper;
 
@@ -63,6 +68,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)commonInit
 {
     _contactsViewHelper = [[ContactsViewHelper alloc] initWithDelegate:self];
+    _storageManager = [TSStorageManager sharedManager];
+    _contactsManager = [Environment getCurrent].contactsManager;
+    _messageSender = [Environment getCurrent].messageSender;
 
     [self observeNotifications];
 }
@@ -88,6 +96,8 @@ NS_ASSUME_NONNULL_BEGIN
     OWSAssert(self.thread);
     OWSAssert(self.thread.groupModel);
     OWSAssert(self.thread.groupModel.groupMemberIds);
+    
+    DDLogDebug(@"Group owner id %@.", self.thread.groupModel.groupOwnerId);
 
     self.memberRecipientIds = [NSSet setWithArray:self.thread.groupModel.groupMemberIds];
 }
@@ -178,12 +188,21 @@ NS_ASSUME_NONNULL_BEGIN
             BOOL isVerified = verificationState == OWSVerificationStateVerified;
             BOOL isNoLongerVerified = verificationState == OWSVerificationStateNoLongerVerified;
             BOOL isBlocked = [helper isRecipientIdBlocked:recipientId];
+            BOOL isOwner   = [self isGroupOwner:recipientId];
+            BOOL isAdmin   = [self isGroupAdmin:recipientId];
+            
             if (isNoLongerVerified) {
                 cell.accessoryMessage = NSLocalizedString(
                     @"CONTACT_CELL_IS_NO_LONGER_VERIFIED", @"An indicator that a contact is no longer verified.");
             } else if (isBlocked) {
                 cell.accessoryMessage
                     = NSLocalizedString(@"CONTACT_CELL_IS_BLOCKED", @"An indicator that a contact has been blocked.");
+            } else if (isOwner) {
+                cell.accessoryMessage
+                = NSLocalizedString(@"NEW_GROUP_MEMBER_IS_GROUP_OWNER", @"An indicator that a contact is owner of the current group.");
+            } else if (isAdmin) {
+                cell.accessoryMessage
+                = NSLocalizedString(@"NEW_GROUP_MEMBER_IS_GROUP_ADMIN", @"An indicator that a contact is admin of the current group.");
             }
 
             if (signalAccount) {
@@ -209,6 +228,26 @@ NS_ASSUME_NONNULL_BEGIN
                                  }
                              }]];
     }
+}
+
+- (BOOL)isGroupOwner:(NSString *)recipientId
+{
+    return [self.thread.groupModel.groupOwnerId isEqualToString:recipientId];
+}
+
+- (BOOL)isGroupAdmin:(NSString *)recipientId
+{
+    BOOL isAdmin   = FALSE;
+
+    NSMutableArray *groupAdminIdsToSearch = [NSMutableArray arrayWithArray:self.thread.groupModel.groupAdminIds];
+    for (NSString *compare in groupAdminIdsToSearch) {
+        if ([compare isEqualToString:recipientId]) {
+            isAdmin = TRUE;
+            break;
+        }
+    }
+
+    return isAdmin;
 }
 
 - (void)offerResetAllNoLongerVerified
@@ -371,13 +410,13 @@ NS_ASSUME_NONNULL_BEGIN
                                              handler:^(UIAlertAction *_Nonnull action) {
                                                  [self showConversationViewForRecipientId:recipientId];
                                              }]];
-        [actionSheetController
+        /*[actionSheetController
             addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"GROUP_MEMBERS_CALL",
                                                          @"Button label for the 'call group member' button")
                                                style:UIAlertActionStyleDefault
                                              handler:^(UIAlertAction *_Nonnull action) {
                                                  [self callMember:recipientId];
-                                             }]];
+                                             }]];*/
         [actionSheetController
             addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"VERIFY_PRIVACY",
                                                          @"Label for button or row which allows users to verify the "
@@ -386,6 +425,25 @@ NS_ASSUME_NONNULL_BEGIN
                                              handler:^(UIAlertAction *_Nonnull action) {
                                                  [self showSafetyNumberView:recipientId];
                                              }]];
+        if ([self isGroupOwner:[helper localNumber]]) {
+            if ([self isGroupAdmin:recipientId]) {
+                [actionSheetController
+                 addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"REVOKE_AS_GROUP_ADMIN",
+                                                                            @"Button label for the 'revoke as group admin' button")
+                                                    style:UIAlertActionStyleDefault
+                                                  handler:^(UIAlertAction *_Nonnull action) {
+                                                      [self revokeAsGroupAdminWithId:recipientId];
+                                                  }]];
+            } else {
+                [actionSheetController
+                 addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"SET_AS_GROUP_ADMIN",
+                                                                            @"Button label for the 'set as group admin' button")
+                                                    style:UIAlertActionStyleDefault
+                                                  handler:^(UIAlertAction *_Nonnull action) {
+                                                      [self setAsGroupAdminWithId:recipientId];
+                                                  }]];
+            }
+        }
     }
 
     [actionSheetController addAction:[OWSAlerts cancelAction]];
@@ -409,16 +467,109 @@ NS_ASSUME_NONNULL_BEGIN
     [Environment messageIdentifier:recipientId withCompose:YES];
 }
 
-- (void)callMember:(NSString *)recipientId
+/*- (void)callMember:(NSString *)recipientId
 {
     [Environment callUserWithIdentifier:recipientId];
-}
+}*/
 
 - (void)showSafetyNumberView:(NSString *)recipientId
 {
     OWSAssert(recipientId.length > 0);
 
     [FingerprintViewController presentFromViewController:self recipientId:recipientId];
+}
+
+- (void)setAsGroupAdminWithId:(NSString *)recipientId
+{
+    //TODO Abe
+    if (![self isGroupAdmin:recipientId]) {
+        NSMutableArray *adm = [[[NSSet setWithArray:_thread.groupModel.groupAdminIds] allObjects] mutableCopy];
+        [adm addObject:recipientId];
+        _thread.groupModel.groupAdminIds = [[[NSSet setWithArray:adm] allObjects] mutableCopy];
+    }
+    
+    [self updateGroup];
+    [self updateTableContents];
+}
+
+- (void)revokeAsGroupAdminWithId:(NSString *)recipientId
+{
+    //TODO Abe
+    if ([self isGroupAdmin:recipientId]) {
+        NSMutableArray *adm = [[[NSSet setWithArray:_thread.groupModel.groupAdminIds] allObjects] mutableCopy];
+        [adm removeObject:recipientId];
+        _thread.groupModel.groupAdminIds = [[[NSSet setWithArray:adm] allObjects] mutableCopy];
+    }
+    
+    [self updateGroup];
+    [self updateTableContents];
+}
+
+- (void)updateGroup
+{
+    TSGroupModel *groupModel = [[TSGroupModel alloc] initWithTitle:_thread.groupModel.groupName
+                                                         memberIds:_thread.groupModel.groupMemberIds
+                                                             image:_thread.groupModel.groupImage
+                                                           groupId:_thread.groupModel.groupId
+                                                           ownerId:_thread.groupModel.groupOwnerId
+                                                          adminIds:_thread.groupModel.groupAdminIds];
+    
+    [self updateGroupModelTo:groupModel successCompletion:nil];
+}
+
+- (YapDatabaseConnection *)editingDatabaseConnection
+{
+    if (!_editingDatabaseConnection) {
+        _editingDatabaseConnection = [self.storageManager newDatabaseConnection];
+    }
+    return _editingDatabaseConnection;
+}
+
+- (void)updateGroupModelTo:(TSGroupModel *)newGroupModel successCompletion:(void (^_Nullable)())successCompletion
+{
+    __block TSGroupThread *groupThread;
+    __block TSOutgoingMessage *message;
+    
+    [self.editingDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+        groupThread = [TSGroupThread getOrCreateThreadWithGroupModel:newGroupModel transaction:transaction];
+        
+        NSString *updateGroupInfo =
+        [groupThread.groupModel getInfoStringAboutUpdateTo:newGroupModel contactsManager:self.contactsManager];
+        
+        groupThread.groupModel = newGroupModel;
+        [groupThread saveWithTransaction:transaction];
+        message = [[TSOutgoingMessage alloc] initWithTimestamp:[NSDate ows_millisecondTimeStamp]
+                                                      inThread:groupThread
+                                              groupMetaMessage:TSGroupMessageUpdate];
+        [message updateWithCustomMessage:updateGroupInfo transaction:transaction];
+    }];
+    
+    if (newGroupModel.groupImage) {
+        [self.messageSender sendAttachmentData:UIImagePNGRepresentation(newGroupModel.groupImage)
+                                   contentType:OWSMimeTypeImagePng
+                                sourceFilename:nil
+                                     inMessage:message
+                                       success:^{
+                                           DDLogDebug(@"%@ Successfully sent group update with avatar", self.tag);
+                                           if (successCompletion) {
+                                               successCompletion();
+                                           }
+                                       }
+                                       failure:^(NSError *_Nonnull error) {
+                                           DDLogError(@"%@ Failed to send group avatar update with error: %@", self.tag, error);
+                                       }];
+    } else {
+        [self.messageSender sendMessage:message
+                                success:^{
+                                    DDLogDebug(@"%@ Successfully sent group update", self.tag);
+                                    if (successCompletion) {
+                                        successCompletion();
+                                    }
+                                }
+                                failure:^(NSError *_Nonnull error) {
+                                    DDLogError(@"%@ Failed to send group update with error: %@", self.tag, error);
+                                }];
+    }
 }
 
 #pragma mark - ContactsViewHelperDelegate

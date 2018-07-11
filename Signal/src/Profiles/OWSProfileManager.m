@@ -270,6 +270,13 @@ const NSUInteger kOWSProfileManager_MaxAvatarDiameter = 640;
     }
 }
 
+- (void)ensureLocalProfileCached
+{
+    // Since localUserProfile can create a transaction, we want to make sure it's not called for the first
+    // time unexpectedly (e.g. in a nested transaction.)
+    __unused UserProfile *profile = [self localUserProfile];
+}
+
 #pragma mark - Local Profile
 
 - (UserProfile *)localUserProfile

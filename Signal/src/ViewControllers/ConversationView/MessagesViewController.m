@@ -1543,8 +1543,9 @@ typedef NS_ENUM(NSInteger, MessagesRangeSizeMode) {
 
 - (BOOL)canCall
 {
-    return !(self.isGroupConversation ||
-        [((TSContactThread *)self.thread).contactIdentifier isEqualToString:[TSAccountManager localNumber]]);
+//    return !(self.isGroupConversation ||
+//        [((TSContactThread *)self.thread).contactIdentifier isEqualToString:[TSAccountManager localNumber]]);
+    return FALSE;
 }
 
 #pragma mark - JSQMessagesViewController method overrides
