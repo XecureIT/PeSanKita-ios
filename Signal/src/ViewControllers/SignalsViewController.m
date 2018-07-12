@@ -185,7 +185,7 @@
         @"INBOX_VIEW_ARCHIVE_MODE_REMINDER", @"Label reminding the user that they are in archive mode.");
     __weak SignalsViewController *weakSelf = self;
     archiveReminderView.tapAction = ^{
-        [weakSelf showInboxGrouping];
+        [NSNotificationCenter.defaultCenter postNotificationName:@"showInbox" object:nil];
     };
     [self.view addSubview:archiveReminderView];
     [archiveReminderView autoPinWidthToSuperview];
@@ -307,14 +307,6 @@
             [[OWSNavigationController alloc] initWithRootViewController:viewController];
         [self presentTopLevelModalViewController:navigationController animateDismissal:YES animatePresentation:YES];
     }];
-}
-
-- (void)swappedSegmentedControl {
-    if (self.viewingThreadsIn == kInboxState) {
-        [self showInboxGrouping];
-    } else {
-        [self showArchiveGrouping];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -749,16 +741,6 @@
 {
     OWSAssert(_threadMappings != nil);
     return _threadMappings;
-}
-
-- (void)showInboxGrouping
-{
-    self.viewingThreadsIn = kInboxState;
-}
-
-- (void)showArchiveGrouping
-{
-    self.viewingThreadsIn = kArchiveState;
 }
 
 - (void)setViewingThreadsIn:(CellState)viewingThreadsIn
