@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nullable) UIImage *groupAvatar;
 @property (nonatomic, nullable) NSSet<NSString *> *previousMemberRecipientIds;
 @property (nonatomic) NSMutableSet<NSString *> *memberRecipientIds;
+@property (nonatomic) NSMutableSet<NSString *> *revokedRecipientIds;
 
 @property (nonatomic) BOOL hasUnsavedChanges;
 
@@ -89,6 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
     _avatarViewHelper.delegate = self;
 
     self.memberRecipientIds = [NSMutableSet new];
+    self.revokedRecipientIds = [NSMutableSet new];
 }
 
 #pragma mark - View Lifecycle
@@ -270,13 +272,19 @@ NS_ASSUME_NONNULL_BEGIN
                 ContactTableViewCell *cell = [ContactTableViewCell new];
                 SignalAccount *signalAccount = [contactsViewHelper signalAccountForRecipientId:recipientId];
                 BOOL isPreviousMember = [strongSelf.previousMemberRecipientIds containsObject:recipientId];
+                BOOL isRevokedMember = [strongSelf.revokedRecipientIds containsObject:recipientId];
                 BOOL isBlocked = [contactsViewHelper isRecipientIdBlocked:recipientId];
                 if (isPreviousMember) {
                     if (isBlocked) {
                         cell.accessoryMessage = NSLocalizedString(
                             @"CONTACT_CELL_IS_BLOCKED", @"An indicator that a contact has been blocked.");
                     } else {
-                        cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+                        if (isRevokedMember) {
+                            cell.accessoryMessage = NSLocalizedString(
+                            @"EDIT_GROUP_REVOKED_MEMBER_LABEL", @"An indicator that a contact will be removed from group.");
+                        } else {
+                            cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+                        }
                     }
                 } else {
                     // In the "members" section, we label "new" members as such when editing an existing group.
@@ -299,6 +307,7 @@ NS_ASSUME_NONNULL_BEGIN
                         actionBlock:^{
                             SignalAccount *signalAccount = [contactsViewHelper signalAccountForRecipientId:recipientId];
                             BOOL isPreviousMember = [weakSelf.previousMemberRecipientIds containsObject:recipientId];
+                            BOOL isRevokedMember = [weakSelf.revokedRecipientIds containsObject:recipientId];
                             BOOL isBlocked = [contactsViewHelper isRecipientIdBlocked:recipientId];
                             if (isPreviousMember) {
                                 if (isBlocked) {
@@ -308,14 +317,19 @@ NS_ASSUME_NONNULL_BEGIN
                                         [weakSelf showUnblockAlertForRecipientId:recipientId];
                                     }
                                 } else {
-                                    [OWSAlerts
+                                    /*[OWSAlerts
                                         showAlertWithTitle:
                                             NSLocalizedString(@"UPDATE_GROUP_CANT_REMOVE_MEMBERS_ALERT_TITLE",
                                                 @"Title for alert indicating that group members can't be removed.")
                                                    message:NSLocalizedString(
                                                                @"UPDATE_GROUP_CANT_REMOVE_MEMBERS_ALERT_MESSAGE",
                                                                @"Title for alert indicating that group members can't "
-                                                               @"be removed.")];
+                                                               @"be removed.")];*/
+                                    if (isRevokedMember) {
+                                        [weakSelf unrevokeRecipientId:recipientId];
+                                    } else {
+                                        [weakSelf revokeRecipientId:recipientId];
+                                    }
                                 }
                             } else {
                                 [weakSelf removeRecipientId:recipientId];
@@ -367,6 +381,23 @@ NS_ASSUME_NONNULL_BEGIN
     [self updateTableContents];
 }
 
+- (void)revokeRecipientId:(NSString *)recipientId
+{
+    OWSAssert(recipientId.length > 0);
+    
+    self.hasUnsavedChanges = TRUE;
+    [_revokedRecipientIds addObject:recipientId];
+    [self updateTableContents];
+}
+
+- (void)unrevokeRecipientId:(NSString *)recipientId
+{
+    OWSAssert(recipientId.length > 0);
+    
+    [_revokedRecipientIds removeObject:recipientId];
+    [self updateTableContents];
+}
+
 #pragma mark - Methods
 
 - (void)updateGroup
@@ -381,7 +412,12 @@ NS_ASSUME_NONNULL_BEGIN
                                                            groupId:self.thread.groupModel.groupId
                                                            ownerId:self.thread.groupModel.groupOwnerId
                                                           adminIds:self.thread.groupModel.groupAdminIds];
-    [self.conversationSettingsViewDelegate groupWasUpdated:groupModel];
+    
+    if ([_revokedRecipientIds count] > 0) {
+        [self.conversationSettingsViewDelegate groupWasUpdated:groupModel withRevoked:[[_revokedRecipientIds allObjects] mutableCopy]];
+    } else {
+        [self.conversationSettingsViewDelegate groupWasUpdated:groupModel];
+    }
 }
 
 #pragma mark - Group Avatar

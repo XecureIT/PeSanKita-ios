@@ -481,7 +481,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setAsGroupAdminWithId:(NSString *)recipientId
 {
-    //TODO Abe
     if (![self isGroupAdmin:recipientId]) {
         NSMutableArray *adm = [[[NSSet setWithArray:_thread.groupModel.groupAdminIds] allObjects] mutableCopy];
         [adm addObject:recipientId];
@@ -494,7 +493,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)revokeAsGroupAdminWithId:(NSString *)recipientId
 {
-    //TODO Abe
     if ([self isGroupAdmin:recipientId]) {
         NSMutableArray *adm = [[[NSSet setWithArray:_thread.groupModel.groupAdminIds] allObjects] mutableCopy];
         [adm removeObject:recipientId];

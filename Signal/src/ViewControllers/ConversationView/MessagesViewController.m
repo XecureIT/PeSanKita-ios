@@ -4010,7 +4010,7 @@ typedef NS_ENUM(NSInteger, MessagesRangeSizeMode) {
     }];
 }
 
-- (void)updateGroupModelTo:(TSGroupModel *)newGroupModel successCompletion:(void (^_Nullable)())successCompletion
+- (void)updateGroupModelTo:(TSGroupModel *)newGroupModel  recipients:(NSMutableArray *)customRecipients successCompletion:(void (^_Nullable)())successCompletion
 {
     __block TSGroupThread *groupThread;
     __block TSOutgoingMessage *message;
@@ -4022,6 +4022,7 @@ typedef NS_ENUM(NSInteger, MessagesRangeSizeMode) {
             [groupThread.groupModel getInfoStringAboutUpdateTo:newGroupModel contactsManager:self.contactsManager];
 
         groupThread.groupModel = newGroupModel;
+        groupThread.customRecipients = customRecipients ? [customRecipients mutableCopy] : nil;
         [groupThread saveWithTransaction:transaction];
         message = [[TSOutgoingMessage alloc] initWithTimestamp:[NSDate ows_millisecondTimeStamp]
                                                       inThread:groupThread
@@ -4388,6 +4389,7 @@ typedef NS_ENUM(NSInteger, MessagesRangeSizeMode) {
     TSGroupThread *groupThread = (TSGroupThread *)self.thread;
     TSGroupModel *groupModel = groupThread.groupModel;
     [self updateGroupModelTo:groupModel
+                  recipients:nil
            successCompletion:^{
                DDLogInfo(@"Group updated, removing group creation error.");
 
@@ -4402,7 +4404,28 @@ typedef NS_ENUM(NSInteger, MessagesRangeSizeMode) {
     NSMutableSet *groupMemberIds = [NSMutableSet setWithArray:groupModel.groupMemberIds];
     [groupMemberIds addObject:[TSAccountManager localNumber]];
     groupModel.groupMemberIds = [NSMutableArray arrayWithArray:[groupMemberIds allObjects]];
-    [self updateGroupModelTo:groupModel successCompletion:nil];
+    [self updateGroupModelTo:groupModel recipients:nil successCompletion:nil];
+    [self resetContentAndLayout];
+}
+
+- (void)groupWasUpdated:(TSGroupModel *)groupModel withRevoked:(NSMutableArray<NSString *> *)revokedIds
+{
+    OWSAssert(groupModel);
+    
+    NSMutableSet *groupMemberIds = [NSMutableSet setWithArray:groupModel.groupMemberIds];
+    [groupMemberIds addObject:[TSAccountManager localNumber]];
+    NSMutableArray *customRecipients = [NSMutableArray arrayWithArray:[groupMemberIds allObjects]];
+    [customRecipients addObjectsFromArray:revokedIds];
+    NSMutableSet *adminIds = [NSMutableSet setWithArray:groupModel.groupAdminIds];
+    for (NSString *revokedMemberId in revokedIds) {
+        [groupMemberIds removeObject:revokedMemberId];
+        if ([adminIds containsObject:revokedMemberId]) {
+            [adminIds removeObject:revokedMemberId];
+        }
+    }
+    groupModel.groupMemberIds = [NSMutableArray arrayWithArray:[groupMemberIds allObjects]];
+    groupModel.groupAdminIds = [NSMutableArray arrayWithArray:[adminIds allObjects]];
+    [self updateGroupModelTo:groupModel recipients:customRecipients successCompletion:nil];
     [self resetContentAndLayout];
 }
 

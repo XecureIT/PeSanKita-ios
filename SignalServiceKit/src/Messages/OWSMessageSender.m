@@ -592,7 +592,8 @@ NSString *const OWSMessageSenderRateLimitedException = @"RateLimitedException";
             TSGroupThread *gThread = (TSGroupThread *)thread;
 
             NSError *error;
-            NSArray<SignalRecipient *> *recipients =
+            NSArray<SignalRecipient *> *recipients = gThread.customRecipients ?
+            [self getRecipients:gThread.customRecipients error:&error] :
                 [self getRecipients:gThread.groupModel.groupMemberIds error:&error];
 
             if (recipients.count == 0) {

@@ -427,6 +427,9 @@
 /* An indicator that a user is a new member of the group. */
 "EDIT_GROUP_NEW_MEMBER_LABEL" = "Added";
 
+/* An indicator that a user is removed from the group. */
+"EDIT_GROUP_REVOKED_MEMBER_LABEL" = "removed";
+
 /* The title for the 'update group' button. */
 "EDIT_GROUP_UPDATE_BUTTON" = "Update";
 
