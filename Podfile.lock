@@ -56,8 +56,8 @@ PODS:
     - TwistedOakCollapsingFutures
     - YapDatabase/SQLCipher (~> 2.9.3)
   - SocketRocket (0.5.1)
-  - SQLCipher/common (3.4.1)
-  - SQLCipher/fts (3.4.1):
+  - SQLCipher/common (3.4.2)
+  - SQLCipher/fts (3.4.2):
     - SQLCipher/common
   - TwistedOakCollapsingFutures (1.0.0):
     - UnionFind (~> 1.0)
@@ -190,7 +190,7 @@ SPEC CHECKSUMS:
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   SignalServiceKit: 97483ef208b742a64bea4e581ed5b06149954b67
   SocketRocket: dbb1554b8fc288ef8ef370d6285aeca7361be31e
-  SQLCipher: 43d12c0eb9c57fb438749618fc3ce0065509a559
+  SQLCipher: f9fcf29b2e59ced7defc2a2bdd0ebe79b40d4990
   TwistedOakCollapsingFutures: f359b90f203e9ab13dfb92c9ff41842a7fe1cd0c
   UnionFind: c33be5adb12983981d6e827ea94fc7f9e370f52d
   YapDatabase: cd911121580ff16675f65ad742a9eb0ab4d9e266

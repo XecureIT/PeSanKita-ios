@@ -172,9 +172,6 @@
 
     self.view.backgroundColor = [UIColor whiteColor];
 
-    // TODO: Remove this.
-    [[Environment getCurrent] setSignalsViewController:self];
-
     self.navigationItem.rightBarButtonItem =
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                       target:self
@@ -255,7 +252,12 @@
     // after mappings have been set up in `showInboxGrouping`
     [self tableViewSetUp];
 
-    self.title = NSLocalizedString(@"WHISPER_NAV_BAR_TITLE", nil);
+    if (_viewingThreadsIn == kInboxState) {
+        self.title = NSLocalizedString(@"WHISPER_NAV_BAR_TITLE", nil);
+    }
+    else {
+        self.title = NSLocalizedString(@"ARCHIVE_NAV_BAR_TITLE", nil);
+    }
 
     if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)] &&
         (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable)) {
@@ -422,6 +424,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    // TODO: Remove this.
+    [[Environment getCurrent] setSignalsViewController:self];
 
     if (self.newlyRegisteredUser) {
         [self.editingDbConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
@@ -677,8 +682,9 @@
     OWSAssert([NSThread isMainThread]);
     OWSAssert(viewController);
 
+    __weak typeof(self) weakSelf = self;
     [self presentViewControllerWithBlock:^{
-        [self presentViewController:viewController animated:animatePresentation completion:nil];
+        [weakSelf presentViewController:viewController animated:animatePresentation completion:nil];
     }
                         animateDismissal:animateDismissal];
 }
