@@ -485,7 +485,7 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+    /*
     if (self.newlyRegisteredUser) {
         [self.editingDbConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
             [self.experienceUpgradeFinder markAllAsSeenWithTransaction:transaction];
@@ -497,7 +497,7 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
     } else if (!self.viewHasEverAppeared) {
         [self displayAnyUnseenUpgradeExperience];
     }
-
+    */
     self.viewHasEverAppeared = YES;
 }
 

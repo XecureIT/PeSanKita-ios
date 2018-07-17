@@ -49,11 +49,11 @@
         return;
     }
 
-    if ([self isVersion:previousVersion atLeast:@"1.0.2" andLessThan:@"2.0"]) {
+    if ([self isVersion:previousVersion atLeast:@"1.0.1" andLessThan:@"1.0.2"]) {
         DDLogError(@"Migrating from RedPhone no longer supported. Quitting.");
         // Not translating these as so few are affected.
         UIAlertController *alertController = [UIAlertController
-            alertControllerWithTitle:@"You must reinstall Signal"
+            alertControllerWithTitle:@"You must reinstall PeSankita"
                              message:
                                  @"Sorry, your installation is too old for us to update. You'll have to start fresh."
                       preferredStyle:UIAlertControllerStyleAlert];
@@ -71,12 +71,12 @@
                                                                                    completion:nil];
     }
 
-    if ([self isVersion:previousVersion atLeast:@"2.0.0" andLessThan:@"2.1.70"] && [TSAccountManager isRegistered]) {
+    if ([self isVersion:previousVersion atLeast:@"1.0.2" andLessThan:@"1.3.4"] && [TSAccountManager isRegistered]) {
         [self clearVideoCache];
         [self blockingAttributesUpdate];
     }
 
-    if ([self isVersion:previousVersion atLeast:@"2.0.0" andLessThan:@"2.3.0"] && [TSAccountManager isRegistered]) {
+    if ([self isVersion:previousVersion atLeast:@"1.0.2" andLessThan:@"1.3.4"] && [TSAccountManager isRegistered]) {
         [self clearBloomFilterCache];
     }
 
@@ -175,7 +175,7 @@
                                 usesNetwork:YES];
 }
 
-#pragma mark Upgrading to 2.3.0
+#pragma mark Upgrading to 1.3.4
 
 // We removed bloom filter contact discovery. Clean up any local bloom filter data.
 + (void)clearBloomFilterCache {
