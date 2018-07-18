@@ -185,6 +185,8 @@ message GroupContext {
   optional string            name    = 3;
   repeated string            members = 4;
   optional AttachmentPointer avatar  = 5;
+  optional string	     owner   = 6;
+  repeated string	     admins  = 7;
 }
 
 message ContactDetails {
@@ -212,4 +214,6 @@ message GroupDetails {
   repeated string members  = 3;
   optional Avatar avatar   = 4;
   optional bool   active   = 5 [default = true];
+  optional string owner	   = 6;
+  repeated string admins   = 7;
 }

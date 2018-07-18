@@ -12,11 +12,15 @@
                     memberIds:(NSMutableArray<NSString *> *)memberIds
                         image:(UIImage *)image
                       groupId:(NSData *)groupId
+                      ownerId:(NSString *)ownerId
+                     adminIds:(NSMutableArray *)adminIds
 {
     _groupName              = title;
     _groupMemberIds         = [memberIds copy];
     _groupImage = image; // image is stored in DB
     _groupId                = groupId;
+    _groupOwnerId           = ownerId;
+    _groupAdminIds          = [adminIds copy];
 
     return self;
 }
@@ -49,6 +53,14 @@
     if ([compareMyGroupMemberIds count] > 0) {
         return NO;
     }
+    if (![_groupOwnerId isEqual:other.groupOwnerId]) {
+        return NO;
+    }
+    NSMutableArray *compareMyGroupAdminIds = [NSMutableArray arrayWithArray:_groupAdminIds];
+    [compareMyGroupAdminIds removeObjectsInArray:other.groupAdminIds];
+    if ([compareMyGroupAdminIds count] > 0) {
+        return NO;
+    }
     return YES;
 }
 
@@ -70,34 +82,34 @@
     if ([updatedGroupInfoString length] == 0) {
         updatedGroupInfoString = NSLocalizedString(@"GROUP_UPDATED", @"");
     }
-    NSSet *oldMembers = [NSSet setWithArray:_groupMemberIds];
-    NSSet *newMembers = [NSSet setWithArray:newModel.groupMemberIds];
-
-    NSMutableSet *membersWhoJoined = [NSMutableSet setWithSet:newMembers];
-    [membersWhoJoined minusSet:oldMembers];
-
-    NSMutableSet *membersWhoLeft = [NSMutableSet setWithSet:oldMembers];
-    [membersWhoLeft minusSet:newMembers];
-
-
-    if ([membersWhoLeft count] > 0) {
-        NSArray *oldMembersNames = [[membersWhoLeft allObjects] map:^NSString*(NSString* item) {
-            return [contactsManager displayNameForPhoneIdentifier:item];
-        }];
-        updatedGroupInfoString = [updatedGroupInfoString
-                                  stringByAppendingString:[NSString
-                                                           stringWithFormat:NSLocalizedString(@"GROUP_MEMBER_LEFT", @""),
-                                                           [oldMembersNames componentsJoinedByString:@", "]]];
-    }
-    
-    if ([membersWhoJoined count] > 0) {
-        NSArray *newMembersNames = [[membersWhoJoined allObjects] map:^NSString*(NSString* item) {
-            return [contactsManager displayNameForPhoneIdentifier:item];
-        }];
-        updatedGroupInfoString = [updatedGroupInfoString
-                                  stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"GROUP_MEMBER_JOINED", @""),
-                                                           [newMembersNames componentsJoinedByString:@", "]]];
-    }
+//    NSSet *oldMembers = [NSSet setWithArray:_groupMemberIds];
+//    NSSet *newMembers = [NSSet setWithArray:newModel.groupMemberIds];
+//
+//    NSMutableSet *membersWhoJoined = [NSMutableSet setWithSet:newMembers];
+//    [membersWhoJoined minusSet:oldMembers];
+//
+//    NSMutableSet *membersWhoLeft = [NSMutableSet setWithSet:oldMembers];
+//    [membersWhoLeft minusSet:newMembers];
+//
+//
+//    if ([membersWhoLeft count] > 0) {
+//        NSArray *oldMembersNames = [[membersWhoLeft allObjects] map:^NSString*(NSString* item) {
+//            return [contactsManager displayNameForPhoneIdentifier:item];
+//        }];
+//        updatedGroupInfoString = [updatedGroupInfoString
+//                                  stringByAppendingString:[NSString
+//                                                           stringWithFormat:NSLocalizedString(@"GROUP_MEMBER_LEFT", @""),
+//                                                           [oldMembersNames componentsJoinedByString:@", "]]];
+//    }
+//
+//    if ([membersWhoJoined count] > 0) {
+//        NSArray *newMembersNames = [[membersWhoJoined allObjects] map:^NSString*(NSString* item) {
+//            return [contactsManager displayNameForPhoneIdentifier:item];
+//        }];
+//        updatedGroupInfoString = [updatedGroupInfoString
+//                                  stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"GROUP_MEMBER_JOINED", @""),
+//                                                           [newMembersNames componentsJoinedByString:@", "]]];
+//    }
 
     return updatedGroupInfoString;
 }

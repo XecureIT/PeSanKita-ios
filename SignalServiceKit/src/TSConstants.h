@@ -25,8 +25,8 @@ typedef enum { kSMSVerification, kPhoneNumberVerification } VerificationTranspor
 //#ifndef DEBUG
 
 // Production
-#define textSecureWebSocketAPI @"wss://pesan.kita.id:8443/v1/websocket/"
-#define textSecureServerURL @"https://pesan.kita.id:8443/"
+#define textSecureWebSocketAPI @"wss://pesan.kita.id/v1/websocket/"
+#define textSecureServerURL @"https://pesan.kita.id/"
 //#define textSecureCDNServerURL @"https://cdn.signal.org"
 //#define textSecureServiceReflectorHost @"signal-reflector-meek.appspot.com"
 //#define textSecureCDNReflectorHost @"signal-cdn-reflector.appspot.com"

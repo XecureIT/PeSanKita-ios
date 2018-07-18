@@ -10,6 +10,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)groupWasUpdated:(TSGroupModel *)groupModel;
 
+- (void)groupWasUpdated:(TSGroupModel *)groupModel withRevoked:(NSMutableArray<NSString *> *)revokedIds;
+
 - (void)popAllConversationSettingsViews;
 
 @end

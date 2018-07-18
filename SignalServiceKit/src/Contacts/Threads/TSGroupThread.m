@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     OWSAssert(groupId.length > 0);
 
-    TSGroupModel *groupModel = [[TSGroupModel alloc] initWithTitle:nil memberIds:nil image:nil groupId:groupId];
+    TSGroupModel *groupModel = [[TSGroupModel alloc] initWithTitle:nil memberIds:nil image:nil groupId:groupId ownerId:nil adminIds:nil];
 
     self = [self initWithGroupModel:groupModel];
     if (!self) {

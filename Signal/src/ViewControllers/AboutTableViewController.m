@@ -38,7 +38,7 @@
         addItem:[OWSTableItem disclosureItemWithText:NSLocalizedString(@"SETTINGS_SUPPORT", @"")
                                          actionBlock:^{
                                              [[UIApplication sharedApplication]
-                                                 openURL:[NSURL URLWithString:@"http://support.whispersystems.org"]];
+                                                 openURL:[NSURL URLWithString:@"https://pesan.kita.id"]];
                                          }]];
     [contents addSection:helpSection];
 

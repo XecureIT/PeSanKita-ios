@@ -434,6 +434,8 @@ NSString *const kTSOutgoingMessageSentRecipientAll = @"kTSOutgoingMessageSentRec
                 [groupBuilder setMembersArray:gThread.groupModel.groupMemberIds];
                 [groupBuilder setName:gThread.groupModel.groupName];
                 [groupBuilder setType:OWSSignalServiceProtosGroupContextTypeUpdate];
+                [groupBuilder setOwner:gThread.groupModel.groupOwnerId];
+                [groupBuilder setAdminsArray:gThread.groupModel.groupAdminIds];
                 break;
             }
             default:

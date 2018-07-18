@@ -1007,7 +1007,7 @@ NS_ASSUME_NONNULL_BEGIN
     ] mutableCopy];
     NSData *groupId = [SecurityUtils generateRandomBytes:16];
     TSGroupModel *groupModel =
-        [[TSGroupModel alloc] initWithTitle:groupName memberIds:recipientIds image:nil groupId:groupId];
+        [[TSGroupModel alloc] initWithTitle:groupName memberIds:recipientIds image:nil groupId:groupId ownerId:[TSAccountManager localNumber] adminIds:nil];
 
     __block TSGroupThread *thread;
     [[TSStorageManager sharedManager].dbReadWriteConnection

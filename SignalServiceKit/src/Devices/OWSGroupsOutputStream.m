@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
     [groupBuilder setId:group.groupId];
     [groupBuilder setName:group.groupName];
     [groupBuilder setMembersArray:group.groupMemberIds];
+    [groupBuilder setOwner:group.groupOwnerId];
+    [groupBuilder setAdminsArray:group.groupAdminIds];
 
     NSData *avatarPng;
     if (group.groupImage) {

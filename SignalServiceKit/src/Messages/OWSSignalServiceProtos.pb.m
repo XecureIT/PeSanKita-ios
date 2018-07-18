@@ -6822,6 +6822,8 @@ NSString *NSStringFromOWSSignalServiceProtosAttachmentPointerFlags(OWSSignalServ
 @property (strong) NSString* name;
 @property (strong) NSMutableArray * membersArray;
 @property (strong) OWSSignalServiceProtosAttachmentPointer* avatar;
+@property (strong) NSString* owner;
+@property (strong) NSMutableArray * adminsArray;
 @end
 
 @implementation OWSSignalServiceProtosGroupContext
@@ -6856,12 +6858,22 @@ NSString *NSStringFromOWSSignalServiceProtosAttachmentPointerFlags(OWSSignalServ
   hasAvatar_ = !!_value_;
 }
 @synthesize avatar;
+- (BOOL) hasOwner {
+  return !!hasOwner_;
+}
+- (void) setHasOwner:(BOOL) _value_ {
+  hasOwner_ = !!_value_;
+}
+@synthesize owner;
+@synthesize adminsArray;
+@dynamic admins;
 - (instancetype) init {
   if ((self = [super init])) {
     self.id = [NSData data];
     self.type = OWSSignalServiceProtosGroupContextTypeUnknown;
     self.name = @"";
     self.avatar = [OWSSignalServiceProtosAttachmentPointer defaultInstance];
+    self.owner = @"";
   }
   return self;
 }
@@ -6883,6 +6895,12 @@ static OWSSignalServiceProtosGroupContext* defaultOWSSignalServiceProtosGroupCon
 - (NSString*)membersAtIndex:(NSUInteger)index {
   return [membersArray objectAtIndex:index];
 }
+- (NSArray *)admins {
+  return adminsArray;
+}
+- (NSString*)adminsAtIndex:(NSUInteger)index {
+  return [adminsArray objectAtIndex:index];
+}
 - (BOOL) isInitialized {
   return YES;
 }
@@ -6902,6 +6920,12 @@ static OWSSignalServiceProtosGroupContext* defaultOWSSignalServiceProtosGroupCon
   if (self.hasAvatar) {
     [output writeMessage:5 value:self.avatar];
   }
+  if (self.hasOwner) {
+    [output writeString:6 value:self.owner];
+  }
+  [self.adminsArray enumerateObjectsUsingBlock:^(NSString *element, NSUInteger idx, BOOL *stop) {
+    [output writeString:7 value:element];
+  }];
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (SInt32) serializedSize {
@@ -6931,6 +6955,18 @@ static OWSSignalServiceProtosGroupContext* defaultOWSSignalServiceProtosGroupCon
   }
   if (self.hasAvatar) {
     size_ += computeMessageSize(5, self.avatar);
+  }
+  if (self.hasOwner) {
+    size_ += computeStringSize(6, self.owner);
+  }
+  {
+    __block SInt32 dataSize = 0;
+    const NSUInteger count = self.adminsArray.count;
+    [self.adminsArray enumerateObjectsUsingBlock:^(NSString *element, NSUInteger idx, BOOL *stop) {
+      dataSize += computeStringSizeNoTag(element);
+    }];
+    size_ += dataSize;
+    size_ += (SInt32)(1 * count);
   }
   size_ += self.unknownFields.serializedSize;
   memoizedSerializedSize = size_;
@@ -6985,6 +7021,12 @@ static OWSSignalServiceProtosGroupContext* defaultOWSSignalServiceProtosGroupCon
                          withIndent:[NSString stringWithFormat:@"%@  ", indent]];
     [output appendFormat:@"%@}\n", indent];
   }
+  if (self.hasOwner) {
+    [output appendFormat:@"%@%@: %@\n", indent, @"owner", self.owner];
+  }
+  [self.adminsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [output appendFormat:@"%@%@: %@\n", indent, @"admins", obj];
+  }];
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
 }
 - (void) storeInDictionary:(NSMutableDictionary *)dictionary {
@@ -7003,6 +7045,10 @@ static OWSSignalServiceProtosGroupContext* defaultOWSSignalServiceProtosGroupCon
    [self.avatar storeInDictionary:messageDictionary];
    [dictionary setObject:[NSDictionary dictionaryWithDictionary:messageDictionary] forKey:@"avatar"];
   }
+  if (self.hasOwner) {
+    [dictionary setObject: self.owner forKey: @"owner"];
+  }
+  [dictionary setObject:self.admins forKey: @"admins"];
   [self.unknownFields storeInDictionary:dictionary];
 }
 - (BOOL) isEqual:(id)other {
@@ -7023,6 +7069,9 @@ static OWSSignalServiceProtosGroupContext* defaultOWSSignalServiceProtosGroupCon
       [self.membersArray isEqualToArray:otherMessage.membersArray] &&
       self.hasAvatar == otherMessage.hasAvatar &&
       (!self.hasAvatar || [self.avatar isEqual:otherMessage.avatar]) &&
+      self.hasOwner == otherMessage.hasOwner &&
+      (!self.hasOwner || [self.owner isEqual:otherMessage.owner]) &&
+      [self.adminsArray isEqualToArray:otherMessage.adminsArray] &&
       (self.unknownFields == otherMessage.unknownFields || (self.unknownFields != nil && [self.unknownFields isEqual:otherMessage.unknownFields]));
 }
 - (NSUInteger) hash {
@@ -7042,6 +7091,12 @@ static OWSSignalServiceProtosGroupContext* defaultOWSSignalServiceProtosGroupCon
   if (self.hasAvatar) {
     hashCode = hashCode * 31 + [self.avatar hash];
   }
+  if (self.hasOwner) {
+    hashCode = hashCode * 31 + [self.owner hash];
+  }
+  [self.adminsArray enumerateObjectsUsingBlock:^(NSString *element, NSUInteger idx, BOOL *stop) {
+    hashCode = hashCode * 31 + [element hash];
+  }];
   hashCode = hashCode * 31 + [self.unknownFields hash];
   return hashCode;
 }
@@ -7133,6 +7188,16 @@ NSString *NSStringFromOWSSignalServiceProtosGroupContextType(OWSSignalServicePro
   if (other.hasAvatar) {
     [self mergeAvatar:other.avatar];
   }
+  if (other.hasOwner) {
+    [self setOwner:other.owner];
+  }
+  if (other.adminsArray.count > 0) {
+    if (resultGroupContext.adminsArray == nil) {
+      resultGroupContext.adminsArray = [[NSMutableArray alloc] initWithArray:other.adminsArray];
+    } else {
+      [resultGroupContext.adminsArray addObjectsFromArray:other.adminsArray];
+    }
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -7182,6 +7247,14 @@ NSString *NSStringFromOWSSignalServiceProtosGroupContextType(OWSSignalServicePro
         }
         [input readMessage:subBuilder extensionRegistry:extensionRegistry];
         [self setAvatar:[subBuilder buildPartial]];
+        break;
+      }
+      case 50: {
+        [self setOwner:[input readString]];
+        break;
+      }
+      case 58: {
+        [self addAdmins:[input readString]];
         break;
       }
     }
@@ -7284,6 +7357,43 @@ NSString *NSStringFromOWSSignalServiceProtosGroupContextType(OWSSignalServicePro
 - (OWSSignalServiceProtosGroupContextBuilder*) clearAvatar {
   resultGroupContext.hasAvatar = NO;
   resultGroupContext.avatar = [OWSSignalServiceProtosAttachmentPointer defaultInstance];
+  return self;
+}
+- (BOOL) hasOwner {
+  return resultGroupContext.hasOwner;
+}
+- (NSString*) owner {
+  return resultGroupContext.owner;
+}
+- (OWSSignalServiceProtosGroupContextBuilder*) setOwner:(NSString*) value {
+  resultGroupContext.hasOwner = YES;
+  resultGroupContext.owner = value;
+  return self;
+}
+- (OWSSignalServiceProtosGroupContextBuilder*) clearOwner {
+  resultGroupContext.hasOwner = NO;
+  resultGroupContext.owner = @"";
+  return self;
+}
+- (NSMutableArray *)admins {
+  return resultGroupContext.adminsArray;
+}
+- (NSString*)adminsAtIndex:(NSUInteger)index {
+  return [resultGroupContext adminsAtIndex:index];
+}
+- (OWSSignalServiceProtosGroupContextBuilder *)addAdmins:(NSString*)value {
+  if (resultGroupContext.adminsArray == nil) {
+    resultGroupContext.adminsArray = [[NSMutableArray alloc]init];
+  }
+  [resultGroupContext.adminsArray addObject:value];
+  return self;
+}
+- (OWSSignalServiceProtosGroupContextBuilder *)setAdminsArray:(NSArray *)array {
+  resultGroupContext.adminsArray = [[NSMutableArray alloc] initWithArray:array];
+  return self;
+}
+- (OWSSignalServiceProtosGroupContextBuilder *)clearAdmins {
+  resultGroupContext.adminsArray = nil;
   return self;
 }
 @end
@@ -8048,6 +8158,8 @@ static OWSSignalServiceProtosContactDetailsAvatar* defaultOWSSignalServiceProtos
 @property (strong) NSMutableArray * membersArray;
 @property (strong) OWSSignalServiceProtosGroupDetailsAvatar* avatar;
 @property BOOL active;
+@property (strong) NSString* owner;
+@property (strong) NSMutableArray * adminsArray;
 @end
 
 @implementation OWSSignalServiceProtosGroupDetails
@@ -8087,12 +8199,22 @@ static OWSSignalServiceProtosContactDetailsAvatar* defaultOWSSignalServiceProtos
 - (void) setActive:(BOOL) _value_ {
   active_ = !!_value_;
 }
+- (BOOL) hasOwner {
+  return !!hasOwner_;
+}
+- (void) setHasOwner:(BOOL) _value_ {
+  hasOwner_ = !!_value_;
+}
+@synthesize owner;
+@synthesize adminsArray;
+@dynamic admins;
 - (instancetype) init {
   if ((self = [super init])) {
     self.id = [NSData data];
     self.name = @"";
     self.avatar = [OWSSignalServiceProtosGroupDetailsAvatar defaultInstance];
     self.active = YES;
+    self.owner = @"";
   }
   return self;
 }
@@ -8114,6 +8236,12 @@ static OWSSignalServiceProtosGroupDetails* defaultOWSSignalServiceProtosGroupDet
 - (NSString*)membersAtIndex:(NSUInteger)index {
   return [membersArray objectAtIndex:index];
 }
+- (NSArray *)admins {
+  return adminsArray;
+}
+- (NSString*)adminsAtIndex:(NSUInteger)index {
+  return [adminsArray objectAtIndex:index];
+}
 - (BOOL) isInitialized {
   return YES;
 }
@@ -8133,6 +8261,12 @@ static OWSSignalServiceProtosGroupDetails* defaultOWSSignalServiceProtosGroupDet
   if (self.hasActive) {
     [output writeBool:5 value:self.active];
   }
+  if (self.hasOwner) {
+    [output writeString:6 value:self.owner];
+  }
+  [self.adminsArray enumerateObjectsUsingBlock:^(NSString *element, NSUInteger idx, BOOL *stop) {
+    [output writeString:7 value:element];
+  }];
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (SInt32) serializedSize {
@@ -8162,6 +8296,18 @@ static OWSSignalServiceProtosGroupDetails* defaultOWSSignalServiceProtosGroupDet
   }
   if (self.hasActive) {
     size_ += computeBoolSize(5, self.active);
+  }
+  if (self.hasOwner) {
+    size_ += computeStringSize(6, self.owner);
+  }
+  {
+    __block SInt32 dataSize = 0;
+    const NSUInteger count = self.adminsArray.count;
+    [self.adminsArray enumerateObjectsUsingBlock:^(NSString *element, NSUInteger idx, BOOL *stop) {
+      dataSize += computeStringSizeNoTag(element);
+    }];
+    size_ += dataSize;
+    size_ += (SInt32)(1 * count);
   }
   size_ += self.unknownFields.serializedSize;
   memoizedSerializedSize = size_;
@@ -8216,6 +8362,12 @@ static OWSSignalServiceProtosGroupDetails* defaultOWSSignalServiceProtosGroupDet
   if (self.hasActive) {
     [output appendFormat:@"%@%@: %@\n", indent, @"active", [NSNumber numberWithBool:self.active]];
   }
+  if (self.hasOwner) {
+    [output appendFormat:@"%@%@: %@\n", indent, @"owner", self.owner];
+  }
+  [self.adminsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [output appendFormat:@"%@%@: %@\n", indent, @"admins", obj];
+  }];
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
 }
 - (void) storeInDictionary:(NSMutableDictionary *)dictionary {
@@ -8234,6 +8386,10 @@ static OWSSignalServiceProtosGroupDetails* defaultOWSSignalServiceProtosGroupDet
   if (self.hasActive) {
     [dictionary setObject: [NSNumber numberWithBool:self.active] forKey: @"active"];
   }
+  if (self.hasOwner) {
+    [dictionary setObject: self.owner forKey: @"owner"];
+  }
+  [dictionary setObject:self.admins forKey: @"admins"];
   [self.unknownFields storeInDictionary:dictionary];
 }
 - (BOOL) isEqual:(id)other {
@@ -8254,6 +8410,9 @@ static OWSSignalServiceProtosGroupDetails* defaultOWSSignalServiceProtosGroupDet
       (!self.hasAvatar || [self.avatar isEqual:otherMessage.avatar]) &&
       self.hasActive == otherMessage.hasActive &&
       (!self.hasActive || self.active == otherMessage.active) &&
+      self.hasOwner == otherMessage.hasOwner &&
+      (!self.hasOwner || [self.owner isEqual:otherMessage.owner]) &&
+      [self.adminsArray isEqualToArray:otherMessage.adminsArray] &&
       (self.unknownFields == otherMessage.unknownFields || (self.unknownFields != nil && [self.unknownFields isEqual:otherMessage.unknownFields]));
 }
 - (NSUInteger) hash {
@@ -8273,6 +8432,12 @@ static OWSSignalServiceProtosGroupDetails* defaultOWSSignalServiceProtosGroupDet
   if (self.hasActive) {
     hashCode = hashCode * 31 + [[NSNumber numberWithBool:self.active] hash];
   }
+  if (self.hasOwner) {
+    hashCode = hashCode * 31 + [self.owner hash];
+  }
+  [self.adminsArray enumerateObjectsUsingBlock:^(NSString *element, NSUInteger idx, BOOL *stop) {
+    hashCode = hashCode * 31 + [element hash];
+  }];
   hashCode = hashCode * 31 + [self.unknownFields hash];
   return hashCode;
 }
@@ -8590,6 +8755,16 @@ static OWSSignalServiceProtosGroupDetailsAvatar* defaultOWSSignalServiceProtosGr
   if (other.hasActive) {
     [self setActive:other.active];
   }
+  if (other.hasOwner) {
+    [self setOwner:other.owner];
+  }
+  if (other.adminsArray.count > 0) {
+    if (resultGroupDetails.adminsArray == nil) {
+      resultGroupDetails.adminsArray = [[NSMutableArray alloc] initWithArray:other.adminsArray];
+    } else {
+      [resultGroupDetails.adminsArray addObjectsFromArray:other.adminsArray];
+    }
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -8634,6 +8809,14 @@ static OWSSignalServiceProtosGroupDetailsAvatar* defaultOWSSignalServiceProtosGr
       }
       case 40: {
         [self setActive:[input readBool]];
+        break;
+      }
+      case 50: {
+        [self setOwner:[input readString]];
+        break;
+      }
+      case 58: {
+        [self addAdmins:[input readString]];
         break;
       }
     }
@@ -8736,6 +8919,43 @@ static OWSSignalServiceProtosGroupDetailsAvatar* defaultOWSSignalServiceProtosGr
 - (OWSSignalServiceProtosGroupDetailsBuilder*) clearActive {
   resultGroupDetails.hasActive = NO;
   resultGroupDetails.active = YES;
+  return self;
+}
+- (BOOL) hasOwner {
+  return resultGroupDetails.hasOwner;
+}
+- (NSString*) owner {
+  return resultGroupDetails.owner;
+}
+- (OWSSignalServiceProtosGroupDetailsBuilder*) setOwner:(NSString*) value {
+  resultGroupDetails.hasOwner = YES;
+  resultGroupDetails.owner = value;
+  return self;
+}
+- (OWSSignalServiceProtosGroupDetailsBuilder*) clearOwner {
+  resultGroupDetails.hasOwner = NO;
+  resultGroupDetails.owner = @"";
+  return self;
+}
+- (NSMutableArray *)admins {
+  return resultGroupDetails.adminsArray;
+}
+- (NSString*)adminsAtIndex:(NSUInteger)index {
+  return [resultGroupDetails adminsAtIndex:index];
+}
+- (OWSSignalServiceProtosGroupDetailsBuilder *)addAdmins:(NSString*)value {
+  if (resultGroupDetails.adminsArray == nil) {
+    resultGroupDetails.adminsArray = [[NSMutableArray alloc]init];
+  }
+  [resultGroupDetails.adminsArray addObject:value];
+  return self;
+}
+- (OWSSignalServiceProtosGroupDetailsBuilder *)setAdminsArray:(NSArray *)array {
+  resultGroupDetails.adminsArray = [[NSMutableArray alloc] initWithArray:array];
+  return self;
+}
+- (OWSSignalServiceProtosGroupDetailsBuilder *)clearAdmins {
+  resultGroupDetails.adminsArray = nil;
   return self;
 }
 @end

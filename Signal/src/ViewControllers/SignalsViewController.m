@@ -11,6 +11,7 @@
 #import "NSDate+millisecondTimeStamp.h"
 #import "OWSContactsManager.h"
 #import "OWSNavigationController.h"
+#import "OWSProfileManager.h"
 //#import "ProfileViewController.h"
 #import "PropertyListPreferences.h"
 #import "PushManager.h"
@@ -484,7 +485,7 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+    /*
     if (self.newlyRegisteredUser) {
         [self.editingDbConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
             [self.experienceUpgradeFinder markAllAsSeenWithTransaction:transaction];
@@ -492,10 +493,11 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
         // Start running the disappearing messages job in case the newly registered user
         // enables this feature
         [[OWSDisappearingMessagesJob sharedJob] startIfNecessary];
+        [[OWSProfileManager sharedManager] ensureLocalProfileCached];
     } else if (!self.viewHasEverAppeared) {
         [self displayAnyUnseenUpgradeExperience];
     }
-
+    */
     self.viewHasEverAppeared = YES;
 }
 

@@ -440,36 +440,60 @@ NS_ASSUME_NONNULL_BEGIN
     // Group settings section.
 
     if (self.isGroupThread) {
-        NSArray *groupItems = @[
-            [OWSTableItem itemWithCustomCellBlock:^{
-                return [weakSelf disclosureCellWithName:NSLocalizedString(@"EDIT_GROUP_ACTION",
-                                                            @"table cell label in conversation settings")
-                                               iconName:@"table_ic_group_edit"];
-            }
-                actionBlock:^{
-                    [weakSelf showUpdateGroupView:UpdateGroupMode_Default];
-                }],
-            [OWSTableItem itemWithCustomCellBlock:^{
-                return [weakSelf disclosureCellWithName:NSLocalizedString(@"LIST_GROUP_MEMBERS_ACTION",
-                                                            @"table cell label in conversation settings")
-                                               iconName:@"table_ic_group_members"];
-            }
-                actionBlock:^{
-                    [weakSelf showGroupMembersView];
-                }],
-            [OWSTableItem itemWithCustomCellBlock:^{
-                return [weakSelf disclosureCellWithName:NSLocalizedString(@"LEAVE_GROUP_ACTION",
-                                                            @"table cell label in conversation settings")
-                                               iconName:@"table_ic_group_leave"];
-            }
-                actionBlock:^{
-                    [weakSelf didTapLeaveGroup];
-                }],
-        ];
-
-        [contents addSection:[OWSTableSection sectionWithTitle:NSLocalizedString(@"GROUP_MANAGEMENT_SECTION",
-                                                                   @"Conversation settings table section title")
-                                                         items:groupItems]];
+        if ([self isOwnerSelf] || [self isAdminSelf]) {
+            NSArray *groupItem = @[
+               [OWSTableItem itemWithCustomCellBlock:^{
+                   return [weakSelf disclosureCellWithName:NSLocalizedString(@"EDIT_GROUP_ACTION",
+                                                                             @"table cell label in conversation settings")
+                                                  iconName:@"table_ic_group_edit"];
+               }
+                     actionBlock:^{
+                         [weakSelf showUpdateGroupView:UpdateGroupMode_Default];
+                     }],
+               [OWSTableItem itemWithCustomCellBlock:^{
+                   return [weakSelf disclosureCellWithName:NSLocalizedString(@"LIST_GROUP_MEMBERS_ACTION",
+                                                                             @"table cell label in conversation settings")
+                                                  iconName:@"table_ic_group_members"];
+               }
+                     actionBlock:^{
+                         [weakSelf showGroupMembersView];
+                     }],
+               [OWSTableItem itemWithCustomCellBlock:^{
+                   return [weakSelf disclosureCellWithName:NSLocalizedString(@"LEAVE_GROUP_ACTION",
+                                                                             @"table cell label in conversation settings")
+                                                  iconName:@"table_ic_group_leave"];
+               }
+                     actionBlock:^{
+                         [weakSelf didTapLeaveGroup];
+                     }],
+               ];
+            [contents addSection:[OWSTableSection sectionWithTitle:NSLocalizedString(@"GROUP_MANAGEMENT_SECTION",
+                                                                                     @"Conversation settings table section title")
+                                                             items:groupItem]];
+        } else {
+            NSArray *groupItems = @[
+                [OWSTableItem itemWithCustomCellBlock:^{
+                    return [weakSelf disclosureCellWithName:NSLocalizedString(@"LIST_GROUP_MEMBERS_ACTION",
+                                                                              @"table cell label in conversation settings")
+                                                   iconName:@"table_ic_group_members"];
+                }
+                      actionBlock:^{
+                          [weakSelf showGroupMembersView];
+                      }],
+                [OWSTableItem itemWithCustomCellBlock:^{
+                    return [weakSelf disclosureCellWithName:NSLocalizedString(@"LEAVE_GROUP_ACTION",
+                                                                              @"table cell label in conversation settings")
+                                                   iconName:@"table_ic_group_leave"];
+                }
+                      actionBlock:^{
+                          [weakSelf didTapLeaveGroup];
+                      }],
+                ];
+            
+            [contents addSection:[OWSTableSection sectionWithTitle:NSLocalizedString(@"GROUP_MANAGEMENT_SECTION",
+                                                                       @"Conversation settings table section title")
+                                                             items:groupItems]];
+        }
     }
 
     // Mute thread section.
@@ -1106,6 +1130,16 @@ NS_ASSUME_NONNULL_BEGIN
 {
     [self.thread updateWithMutedUntilDate:value];
     [self updateTableContents];
+}
+
+- (BOOL)isOwnerSelf
+{
+    return [((TSGroupThread *)self.thread).groupModel.groupOwnerId isEqualToString:[TSAccountManager localNumber]];
+}
+
+- (BOOL)isAdminSelf
+{
+    return [((TSGroupThread *)self.thread).groupModel.groupAdminIds containsObject:[TSAccountManager localNumber]];
 }
 
 #pragma mark - Notifications

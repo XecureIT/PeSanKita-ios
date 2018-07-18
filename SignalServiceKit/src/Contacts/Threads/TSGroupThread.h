@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSGroupThread : TSThread
 
 @property (nonatomic, strong) TSGroupModel *groupModel;
+@property (nonatomic, strong) NSMutableArray *customRecipients;
 
 + (instancetype)getOrCreateThreadWithGroupModel:(TSGroupModel *)groupModel;
 + (instancetype)getOrCreateThreadWithGroupModel:(TSGroupModel *)groupModel
