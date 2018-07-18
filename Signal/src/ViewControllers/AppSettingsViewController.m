@@ -65,11 +65,6 @@
     [self.navigationItem setHidesBackButton:YES];
 
     [self.navigationController.navigationBar setTranslucent:NO];
-    self.navigationItem.leftBarButtonItem =
-        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
-                                                      target:self
-                                                      action:@selector(dismissWasPressed:)];
-
     [self observeNotifications];
 
     self.title = NSLocalizedString(@"SETTINGS_NAV_BAR_TITLE", @"Title for settings activity");
@@ -332,11 +327,6 @@
 - (void)showDebugUI
 {
     [DebugUITableViewController presentDebugUIFromViewController:self];
-}
-
-- (void)dismissWasPressed:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source

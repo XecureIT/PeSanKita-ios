@@ -523,7 +523,6 @@ static NSString *const kURLHostVerifyPrefix             = @"verify";
                     // If app has not re-entered active, show screen protection if necessary.
                     [self showScreenProtection];
                 }
-                [[[Environment getCurrent] signalsViewController] updateInboxCountLabel];
                 [application endBackgroundTask:bgTask];
             });
         }
@@ -802,10 +801,8 @@ static NSString *const kURLHostVerifyPrefix             = @"verify";
     DDLogInfo(@"Presenting initial root view controller");
 
     if ([TSAccountManager isRegistered]) {
-        SignalsViewController *homeView = [SignalsViewController new];
-        SignalsNavigationController *navigationController =
-            [[SignalsNavigationController alloc] initWithRootViewController:homeView];
-        self.window.rootViewController = navigationController;
+        MainTabBarController *tabbarController = [MainTabBarController new];
+        self.window.rootViewController = tabbarController;
     } else {
         RegistrationViewController *viewController = [RegistrationViewController new];
         OWSNavigationController *navigationController =

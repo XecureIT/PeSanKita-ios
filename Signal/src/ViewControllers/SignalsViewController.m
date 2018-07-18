@@ -4,15 +4,12 @@
 
 #import "SignalsViewController.h"
 #import "AppDelegate.h"
-#import "AppSettingsViewController.h"
 #import "InboxTableViewCell.h"
 #import "MessageComposeTableViewController.h"
 #import "MessagesViewController.h"
 #import "NSDate+millisecondTimeStamp.h"
 #import "OWSContactsManager.h"
-#import "OWSNavigationController.h"
 #import "OWSProfileManager.h"
-//#import "ProfileViewController.h"
 #import "PropertyListPreferences.h"
 #import "PushManager.h"
 #import "PeSankita-Swift.h"
@@ -33,8 +30,6 @@
 #import <YapDatabase/YapDatabaseViewChange.h>
 #import <YapDatabase/YapDatabaseViewConnection.h>
 
-typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
-
 @interface SignalsViewController () <UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate>
 
 @property (nonatomic) UITableView *tableView;
@@ -45,7 +40,6 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
 @property (nonatomic) YapDatabaseViewMappings *threadMappings;
 @property (nonatomic) CellState viewingThreadsIn;
 @property (nonatomic) long inboxCount;
-@property (nonatomic) UISegmentedControl *segmentedControl;
 @property (nonatomic) id previewingContext;
 @property (nonatomic) NSSet<NSString *> *blockedPhoneNumberSet;
 @property (nonatomic) BOOL viewHasEverAppeared;
@@ -85,9 +79,19 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
     if (!self) {
         return self;
     }
-
+    _viewingThreadsIn = kInboxState;
     [self commonInit];
 
+    return self;
+}
+
+- (instancetype)initWithCellType:(CellState)cellState {
+    self = [super init];
+    if (!self) {
+        return self;
+    }
+    _viewingThreadsIn = cellState;
+    [self commonInit];
     return self;
 }
 
@@ -169,9 +173,6 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
 
     self.view.backgroundColor = [UIColor whiteColor];
 
-    // TODO: Remove this.
-    [[Environment getCurrent] setSignalsViewController:self];
-
     self.navigationItem.rightBarButtonItem =
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                       target:self
@@ -182,7 +183,7 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
         @"INBOX_VIEW_ARCHIVE_MODE_REMINDER", @"Label reminding the user that they are in archive mode.");
     __weak SignalsViewController *weakSelf = self;
     archiveReminderView.tapAction = ^{
-        [weakSelf showInboxGrouping];
+        [NSNotificationCenter.defaultCenter postNotificationName:@"showInbox" object:nil];
     };
     [self.view addSubview:archiveReminderView];
     [archiveReminderView autoPinWidthToSuperview];
@@ -246,74 +247,23 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
     // Create the database connection.
     [self uiDatabaseConnection];
 
-    [self showInboxGrouping];
+    [self updateMappings];
 
     // because this uses the table data source, `tableViewSetup` must happen
     // after mappings have been set up in `showInboxGrouping`
     [self tableViewSetUp];
 
-
-    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[
-        NSLocalizedString(@"WHISPER_NAV_BAR_TITLE", nil),
-        NSLocalizedString(@"ARCHIVE_NAV_BAR_TITLE", nil)
-    ]];
-
-    [self.segmentedControl addTarget:self
-                              action:@selector(swappedSegmentedControl)
-                    forControlEvents:UIControlEventValueChanged];
-    UINavigationItem *navigationItem = self.navigationItem;
-    navigationItem.titleView = self.segmentedControl;
-    [self.segmentedControl setSelectedSegmentIndex:0];
-    navigationItem.leftBarButtonItem.accessibilityLabel = NSLocalizedString(
-        @"SETTINGS_BUTTON_ACCESSIBILITY", @"Accessibility hint for the settings button");
+    if (_viewingThreadsIn == kInboxState) {
+        self.title = NSLocalizedString(@"WHISPER_NAV_BAR_TITLE", nil);
+    }
+    else {
+        self.title = NSLocalizedString(@"ARCHIVE_NAV_BAR_TITLE", nil);
+    }
 
     if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)] &&
         (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable)) {
         [self registerForPreviewingWithDelegate:self sourceView:self.tableView];
     }
-
-    [self updateBarButtonItems];
-}
-
-- (void)updateBarButtonItems {
-    const CGFloat kBarButtonSize = 44;
-    // We use UIButtons with [UIBarButtonItem initWithCustomView:...] instead of
-    // UIBarButtonItem in order to ensure that these buttons are spaced tightly.
-    // The contents of the navigation bar are cramped in this view.
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *image = [UIImage imageNamed:@"button_settings_white"];
-    [button setImage:image forState:UIControlStateNormal];
-    UIEdgeInsets imageEdgeInsets = UIEdgeInsetsZero;
-    // We normally would want to use left and right insets that ensure the button
-    // is square and the icon is centered.  However UINavigationBar doesn't offer us
-    // control over the margins and spacing of its content, and the buttons end up
-    // too far apart and too far from the edge of the screen. So we use a smaller
-    // leading inset tighten up the layout.
-    CGFloat hInset = round((kBarButtonSize - image.size.width) * 0.5f);
-    if (self.view.isRTL) {
-        imageEdgeInsets.right = hInset;
-        imageEdgeInsets.left = round((kBarButtonSize - (image.size.width + hInset)) * 0.5f);
-    } else {
-        imageEdgeInsets.left = hInset;
-        imageEdgeInsets.right = round((kBarButtonSize - (image.size.width + hInset)) * 0.5f);
-    }
-    imageEdgeInsets.top = round((kBarButtonSize - image.size.height) * 0.5f);
-    imageEdgeInsets.bottom = round(kBarButtonSize - (image.size.height + imageEdgeInsets.top));
-    button.imageEdgeInsets = imageEdgeInsets;
-    button.accessibilityLabel
-        = NSLocalizedString(@"OPEN_SETTINGS_BUTTON", "Label for button which opens the settings UI");
-    [button addTarget:self action:@selector(settingsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    button.frame = CGRectMake(0,
-        0,
-        round(image.size.width + imageEdgeInsets.left + imageEdgeInsets.right),
-        round(image.size.height + imageEdgeInsets.top + imageEdgeInsets.bottom));
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-}
-
-- (void)settingsButtonPressed:(id)sender {
-    AppSettingsViewController *vc = [AppSettingsViewController new];
-    OWSNavigationController *navigationController = [[OWSNavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext
@@ -362,14 +312,6 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
     }];
 }
 
-- (void)swappedSegmentedControl {
-    if (self.segmentedControl.selectedSegmentIndex == 0) {
-        [self showInboxGrouping];
-    } else {
-        [self showArchiveGrouping];
-    }
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if ([TSThread numberOfKeysInCollection] > 0) {
@@ -380,7 +322,6 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
         }];
     }
 
-    [self updateInboxCountLabel];
 
     self.isViewVisible = YES;
 
@@ -463,7 +404,6 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
 
     [[self tableView] reloadData];
     [self checkIfEmptyView];
-    [self updateInboxCountLabel];
 
     // If the user hasn't already granted contact access
     // we don't want to request until they receive a message.
@@ -485,19 +425,14 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    /*
+    
+    // TODO: Remove this.
+    [[Environment getCurrent] setSignalsViewController:self];
+
     if (self.newlyRegisteredUser) {
-        [self.editingDbConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
-            [self.experienceUpgradeFinder markAllAsSeenWithTransaction:transaction];
-        }];
-        // Start running the disappearing messages job in case the newly registered user
-        // enables this feature
-        [[OWSDisappearingMessagesJob sharedJob] startIfNecessary];
         [[OWSProfileManager sharedManager] ensureLocalProfileCached];
-    } else if (!self.viewHasEverAppeared) {
-        [self displayAnyUnseenUpgradeExperience];
     }
-    */
+
     self.viewHasEverAppeared = YES;
 }
 
@@ -706,21 +641,6 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
     [self checkIfEmptyView];
 }
 
-- (void)updateInboxCountLabel
-{
-    NSUInteger numberOfItems = [self.messagesManager unreadMessagesCount];
-    NSString *unreadString   = NSLocalizedString(@"WHISPER_NAV_BAR_TITLE", nil);
-
-    if (numberOfItems > 0) {
-        unreadString =
-            [unreadString stringByAppendingFormat:@" (%@)", [ViewControllerUtils formatInt:(int)numberOfItems]];
-    }
-
-    [_segmentedControl setTitle:unreadString forSegmentAtIndex:0];
-    [_segmentedControl.superview setNeedsLayout];
-    [_segmentedControl reloadInputViews];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TSThread *thread = [self threadForIndexPath:indexPath];
     [self presentThread:thread keyboardOnViewAppearing:NO callOnViewAppearing:NO];
@@ -756,8 +676,9 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
     OWSAssert([NSThread isMainThread]);
     OWSAssert(viewController);
 
+    __weak typeof(self) weakSelf = self;
     [self presentViewControllerWithBlock:^{
-        [self presentViewController:viewController animated:animatePresentation completion:nil];
+        [weakSelf presentViewController:viewController animated:animatePresentation completion:nil];
     }
                         animateDismissal:animateDismissal];
 }
@@ -822,21 +743,10 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
     return _threadMappings;
 }
 
-- (void)showInboxGrouping
-{
-    self.viewingThreadsIn = kInboxState;
-}
-
-- (void)showArchiveGrouping
-{
-    self.viewingThreadsIn = kArchiveState;
-}
-
 - (void)setViewingThreadsIn:(CellState)viewingThreadsIn
 {
     BOOL didChange = _viewingThreadsIn != viewingThreadsIn;
     _viewingThreadsIn = viewingThreadsIn;
-    self.segmentedControl.selectedSegmentIndex = (viewingThreadsIn == kInboxState ? 0 : 1);
     if (didChange || !self.threadMappings) {
         [self updateMappings];
     } else {
@@ -907,7 +817,6 @@ typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
 
     // We want this regardless of if we're currently viewing the archive.
     // So we run it before the early return
-    [self updateInboxCountLabel];
     [self checkIfEmptyView];
 
     if ([sectionChanges count] == 0 && [rowChanges count] == 0) {

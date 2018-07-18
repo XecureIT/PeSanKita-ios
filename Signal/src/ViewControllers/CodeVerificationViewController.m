@@ -6,7 +6,6 @@
 #import "AppDelegate.h"
 //#import "ProfileViewController.h"
 #import "PeSankita-Swift.h"
-#import "SignalsNavigationController.h"
 #import "StringUtil.h"
 #import "UIViewController+OWS.h"
 #import <PromiseKit/AnyPromise.h>
@@ -291,13 +290,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showHomeView
 {
-    SignalsViewController *homeView = [SignalsViewController new];
-    homeView.newlyRegisteredUser = YES;
-    SignalsNavigationController *navigationController =
-    [[SignalsNavigationController alloc] initWithRootViewController:homeView];
+    MainTabBarController *tabbarController = [MainTabBarController new];
+    tabbarController.newlyRegisteredUser = true;
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    appDelegate.window.rootViewController = navigationController;
-    OWSAssert([navigationController.topViewController isKindOfClass:[SignalsViewController class]]);
+    appDelegate.window.rootViewController = tabbarController;
+    OWSAssert([appDelegate.window.rootViewController isKindOfClass:[MainTabBarController class]]);
 }
 
 - (void)presentAlertWithVerificationError:(NSError *)error

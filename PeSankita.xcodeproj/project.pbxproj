@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1551091A20F3CF8A00ACC59A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1551091920F3CF8A00ACC59A /* MainTabBarController.swift */; };
 		3400C7931EAF89CD008A8584 /* SendExternalFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3400C7911EAF89CD008A8584 /* SendExternalFileViewController.m */; };
 		3400C7961EAF99F4008A8584 /* SelectThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3400C7951EAF99F4008A8584 /* SelectThreadViewController.m */; };
 		3400C7991EAFB772008A8584 /* ThreadViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3400C7981EAFB772008A8584 /* ThreadViewHelper.m */; };
@@ -396,6 +397,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1551091920F3CF8A00ACC59A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1B5E7D6C9007F5E5761D79DD /* libPods-PeSankitaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PeSankitaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CE3CD5C23334683BDD3D78C /* Pods-PeSankita.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeSankita.test.xcconfig"; path = "Pods/Target Support Files/Pods-PeSankita/Pods-PeSankita.test.xcconfig"; sourceTree = "<group>"; };
 		34009B651EC4CB11001D95D1 /* OWSMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OWSMath.h; sourceTree = "<group>"; };
@@ -1051,6 +1053,7 @@
 				340CB2261EAC25820001CAA1 /* UpdateGroupViewController.m */,
 				34B3F8A01E8EA6040035BE1A /* ViewControllerUtils.h */,
 				34B3F8A11E8EA6040035BE1A /* ViewControllerUtils.m */,
+				1551091920F3CF8A00ACC59A /* MainTabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2154,6 +2157,7 @@
 				B97940271832BD2400BD66CB /* UIUtil.m in Sources */,
 				34CE88ED1F3237260098030F /* ProfileFetcherJob.swift in Sources */,
 				34B3F8791E8DF1700035BE1A /* CountryCodeViewController.m in Sources */,
+				1551091A20F3CF8A00ACC59A /* MainTabBarController.swift in Sources */,
 				4CE0E3771B954546007210CF /* TSAnimatedAdapter.m in Sources */,
 				4531C9C41DD8E6D800F08304 /* JSQMessagesCollectionViewCell+OWS.m in Sources */,
 				4542F0961EBB9E9A00C7EE92 /* Promise+retainUntilComplete.swift in Sources */,

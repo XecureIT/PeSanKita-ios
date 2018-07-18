@@ -48,6 +48,14 @@ static double const STALLED_PROGRESS = 0.9;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if (self.viewControllers.count > 0) {
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    
+    [super pushViewController:viewController animated:animated];
+}
+
 #pragma mark - Socket Status Notifications
 
 - (void)initializeObserver {

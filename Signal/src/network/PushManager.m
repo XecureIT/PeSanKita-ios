@@ -234,7 +234,6 @@ NSString *const Signal_Message_MarkAsRead_Identifier = @"Signal_Message_MarkAsRe
             [thread markAllAsReadWithTransaction:transaction];
         }
         completionBlock:^{
-            [[[Environment getCurrent] signalsViewController] updateInboxCountLabel];
             [self cancelNotificationsWithThreadId:threadId];
 
             completionHandler();

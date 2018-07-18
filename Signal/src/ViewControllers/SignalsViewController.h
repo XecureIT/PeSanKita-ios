@@ -6,17 +6,18 @@
 #import <UIKit/UIKit.h>
 
 @class TSThread;
+typedef NS_ENUM(NSInteger, CellState) { kArchiveState, kInboxState };
 
 @interface SignalsViewController : OWSViewController
 
 // TODO: Remove this property.
 @property (nonatomic) BOOL newlyRegisteredUser;
 
+- (instancetype)initWithCellType:(CellState)cellState;
+
 - (void)presentThread:(TSThread *)thread
     keyboardOnViewAppearing:(BOOL)keyboardOnViewAppearing
         callOnViewAppearing:(BOOL)callOnViewAppearing;
-
-- (void)updateInboxCountLabel;
 
 - (void)composeNew;
 
