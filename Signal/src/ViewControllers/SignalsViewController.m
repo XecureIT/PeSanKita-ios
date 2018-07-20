@@ -139,6 +139,8 @@
                                              selector:@selector(yapDatabaseModified:)
                                                  name:YapDatabaseModifiedNotification
                                                object:nil];
+    
+    [self updateMappings];
 }
 
 - (void)dealloc
@@ -245,8 +247,6 @@
 
     // Create the database connection.
     [self uiDatabaseConnection];
-
-    [self updateMappings];
 
     // because this uses the table data source, `tableViewSetup` must happen
     // after mappings have been set up in `showInboxGrouping`
@@ -396,8 +396,10 @@
         // We need to `beginLongLivedReadTransaction` before we update our
         // mapping in order to jump to the most recent commit.
         [self.uiDatabaseConnection beginLongLivedReadTransaction];
+        
+        __weak typeof(self) weakSelf = self;
         [self.uiDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-            [self.threadMappings updateWithTransaction:transaction];
+            [weakSelf.threadMappings updateWithTransaction:transaction];
         }];
     }
 
@@ -802,8 +804,10 @@
 
     if (![[self.uiDatabaseConnection ext:TSThreadDatabaseViewExtensionName] hasChangesForGroup:self.currentGrouping
                                                                                inNotifications:notifications]) {
+        
+        __weak typeof(self) weakSelf = self;
         [self.uiDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-            [self.self.threadMappings updateWithTransaction:transaction];
+            [weakSelf.threadMappings updateWithTransaction:transaction];
         }];
         return;
     }
