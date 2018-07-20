@@ -125,29 +125,29 @@ NS_ASSUME_NONNULL_BEGIN
     //   censored.
     // * We continue to show this setting so long as it is set to allow users to disable
     //   it, for example when they leave a censored region.
-    OWSTableSection *censorshipSection = [OWSTableSection new];
-    censorshipSection.headerTitle = NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_HEADER",
-        @"Table header for the 'censorship circumvention' section.");
-    if (OWSSignalService.sharedInstance.hasCensoredPhoneNumber) {
-        censorshipSection.footerTitle
-            = NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER_AUTO_ENABLED",
-                @"Table footer for the 'censorship circumvention' section shown when censorship circumvention has been "
-                @"auto-enabled based on local phone number.");
-    } else if ([TSSocketManager sharedManager].state == SocketManagerStateOpen) {
-        censorshipSection.footerTitle
-            = NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER_WEBSOCKET_CONNECTED",
-                @"Table footer for the 'censorship circumvention' section shown when the app is connected to the "
-                @"Signal service.");
-    } else if (!self.reachability.isReachable) {
-        censorshipSection.footerTitle
-            = NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER_NO_CONNECTION",
-                @"Table footer for the 'censorship circumvention' section shown when the app is not connected to the "
-                @"internet.");
-    } else {
-        censorshipSection.footerTitle = NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER",
-            @"Table footer for the 'censorship circumvention' section when censorship circumvention can be manually "
-            @"enabled.");
-    }
+//    OWSTableSection *censorshipSection = [OWSTableSection new];
+//    censorshipSection.headerTitle = NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_HEADER",
+//        @"Table header for the 'censorship circumvention' section.");
+//    if (OWSSignalService.sharedInstance.hasCensoredPhoneNumber) {
+//        censorshipSection.footerTitle
+//            = NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER_AUTO_ENABLED",
+//                @"Table footer for the 'censorship circumvention' section shown when censorship circumvention has been "
+//                @"auto-enabled based on local phone number.");
+//    } else if ([TSSocketManager sharedManager].state == SocketManagerStateOpen) {
+//        censorshipSection.footerTitle
+//            = NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER_WEBSOCKET_CONNECTED",
+//                @"Table footer for the 'censorship circumvention' section shown when the app is connected to the "
+//                @"Signal service.");
+//    } else if (!self.reachability.isReachable) {
+//        censorshipSection.footerTitle
+//            = NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER_NO_CONNECTION",
+//                @"Table footer for the 'censorship circumvention' section shown when the app is not connected to the "
+//                @"internet.");
+//    } else {
+//        censorshipSection.footerTitle = NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_FOOTER",
+//            @"Table footer for the 'censorship circumvention' section when censorship circumvention can be manually "
+//            @"enabled.");
+//    }
 
     // Do enable if :
     //
@@ -160,40 +160,40 @@ NS_ASSUME_NONNULL_BEGIN
     // * ...The internet is not reachable, since we don't want to let users to activate
     //      censorship circumvention unnecessarily, e.g. if they just don't have a valid
     //      internet connection.
-    BOOL isManualCensorshipCircumventionOnEnabled
-        = (OWSSignalService.sharedInstance.isCensorshipCircumventionManuallyActivated
-            || (!OWSSignalService.sharedInstance.hasCensoredPhoneNumber &&
-                   [TSSocketManager sharedManager].state != SocketManagerStateOpen
-                   && weakSelf.reachability.isReachable));
-    BOOL isCensorshipCircumventionOn = NO;
-    if (OWSSignalService.sharedInstance.hasCensoredPhoneNumber) {
-        isCensorshipCircumventionOn = YES;
-    } else {
-        isCensorshipCircumventionOn = OWSSignalService.sharedInstance.isCensorshipCircumventionManuallyActivated;
-    }
-    [censorshipSection
-        addItem:[OWSTableItem switchItemWithText:NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION",
-                                                     @"Label for the  'manual censorship circumvention' switch.")
-                                            isOn:isCensorshipCircumventionOn
-                                       isEnabled:isManualCensorshipCircumventionOnEnabled
-                                          target:weakSelf
-                                        selector:@selector(didToggleEnableCensorshipCircumventionSwitch:)]];
-
-    if (OWSSignalService.sharedInstance.isCensorshipCircumventionManuallyActivated) {
-        OWSCountryMetadata *manualCensorshipCircumventionCountry =
-            [weakSelf ensureManualCensorshipCircumventionCountry];
-        OWSAssert(manualCensorshipCircumventionCountry);
-        NSString *text = [NSString
-            stringWithFormat:NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_COUNTRY_FORMAT",
-                                 @"Label for the 'manual censorship circumvention' country. Embeds {{the manual "
-                                 @"censorship circumvention country}}."),
-            manualCensorshipCircumventionCountry.localizedCountryName];
-        [censorshipSection addItem:[OWSTableItem disclosureItemWithText:text
-                                                            actionBlock:^{
-                                                                [weakSelf showDomainFrontingCountryView];
-                                                            }]];
-    }
-    [contents addSection:censorshipSection];
+//    BOOL isManualCensorshipCircumventionOnEnabled
+//        = (OWSSignalService.sharedInstance.isCensorshipCircumventionManuallyActivated
+//            || (!OWSSignalService.sharedInstance.hasCensoredPhoneNumber &&
+//                   [TSSocketManager sharedManager].state != SocketManagerStateOpen
+//                   && weakSelf.reachability.isReachable));
+//    BOOL isCensorshipCircumventionOn = NO;
+//    if (OWSSignalService.sharedInstance.hasCensoredPhoneNumber) {
+//        isCensorshipCircumventionOn = YES;
+//    } else {
+//        isCensorshipCircumventionOn = OWSSignalService.sharedInstance.isCensorshipCircumventionManuallyActivated;
+//    }
+//    [censorshipSection
+//        addItem:[OWSTableItem switchItemWithText:NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION",
+//                                                     @"Label for the  'manual censorship circumvention' switch.")
+//                                            isOn:isCensorshipCircumventionOn
+//                                       isEnabled:isManualCensorshipCircumventionOnEnabled
+//                                          target:weakSelf
+//                                        selector:@selector(didToggleEnableCensorshipCircumventionSwitch:)]];
+//
+//    if (OWSSignalService.sharedInstance.isCensorshipCircumventionManuallyActivated) {
+//        OWSCountryMetadata *manualCensorshipCircumventionCountry =
+//            [weakSelf ensureManualCensorshipCircumventionCountry];
+//        OWSAssert(manualCensorshipCircumventionCountry);
+//        NSString *text = [NSString
+//            stringWithFormat:NSLocalizedString(@"SETTINGS_ADVANCED_CENSORSHIP_CIRCUMVENTION_COUNTRY_FORMAT",
+//                                 @"Label for the 'manual censorship circumvention' country. Embeds {{the manual "
+//                                 @"censorship circumvention country}}."),
+//            manualCensorshipCircumventionCountry.localizedCountryName];
+//        [censorshipSection addItem:[OWSTableItem disclosureItemWithText:text
+//                                                            actionBlock:^{
+//                                                                [weakSelf showDomainFrontingCountryView];
+//                                                            }]];
+//    }
+//    [contents addSection:censorshipSection];
 
     self.contents = contents;
 }

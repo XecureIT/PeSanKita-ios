@@ -287,16 +287,16 @@ NS_ASSUME_NONNULL_BEGIN
             [ContactTableViewCell rowHeight]);
 
     // Find Non-Contacts by Phone Number
-    [section addItem:[OWSTableItem
-                         disclosureItemWithText:NSLocalizedString(@"NEW_CONVERSATION_FIND_BY_PHONE_NUMBER",
-                                                    @"A label the cell that lets you add a new member to a group.")
-                                customRowHeight:kActionCellHeight
-                                    actionBlock:^{
-                                        NewNonContactConversationViewController *viewController =
-                                            [NewNonContactConversationViewController new];
-                                        viewController.nonContactConversationDelegate = weakSelf;
-                                        [weakSelf.navigationController pushViewController:viewController animated:YES];
-                                    }]];
+//    [section addItem:[OWSTableItem
+//                         disclosureItemWithText:NSLocalizedString(@"NEW_CONVERSATION_FIND_BY_PHONE_NUMBER",
+//                                                    @"A label the cell that lets you add a new member to a group.")
+//                                customRowHeight:kActionCellHeight
+//                                    actionBlock:^{
+//                                        NewNonContactConversationViewController *viewController =
+//                                            [NewNonContactConversationViewController new];
+//                                        viewController.nonContactConversationDelegate = weakSelf;
+//                                        [weakSelf.navigationController pushViewController:viewController animated:YES];
+//                                    }]];
 
     if (self.contactsViewHelper.contactsManager.isSystemContactsAuthorized) {
         // Invite Contacts

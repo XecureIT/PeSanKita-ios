@@ -55,38 +55,38 @@ NS_ASSUME_NONNULL_BEGIN
     [contents addSection:screenSecuritySection];
 
     // Allow calls to connect directly vs. using TURN exclusively
-    OWSTableSection *callingSection = [OWSTableSection new];
-    callingSection.headerTitle
-        = NSLocalizedString(@"SETTINGS_SECTION_TITLE_CALLING", @"settings topic header for table section");
-    callingSection.footerTitle = NSLocalizedString(@"SETTINGS_CALLING_HIDES_IP_ADDRESS_PREFERENCE_TITLE_DETAIL",
-        @"User settings section footer, a detailed explanation");
-    [callingSection addItem:[OWSTableItem switchItemWithText:NSLocalizedString(
-                                                                 @"SETTINGS_CALLING_HIDES_IP_ADDRESS_PREFERENCE_TITLE",
-                                                                 @"Table cell label")
-                                                        isOn:[Environment.preferences doCallsHideIPAddress]
-                                                      target:weakSelf
-                                                    selector:@selector(didToggleCallsHideIPAddressSwitch:)]];
-    [contents addSection:callingSection];
+//    OWSTableSection *callingSection = [OWSTableSection new];
+//    callingSection.headerTitle
+//        = NSLocalizedString(@"SETTINGS_SECTION_TITLE_CALLING", @"settings topic header for table section");
+//    callingSection.footerTitle = NSLocalizedString(@"SETTINGS_CALLING_HIDES_IP_ADDRESS_PREFERENCE_TITLE_DETAIL",
+//        @"User settings section footer, a detailed explanation");
+//    [callingSection addItem:[OWSTableItem switchItemWithText:NSLocalizedString(
+//                                                                 @"SETTINGS_CALLING_HIDES_IP_ADDRESS_PREFERENCE_TITLE",
+//                                                                 @"Table cell label")
+//                                                        isOn:[Environment.preferences doCallsHideIPAddress]
+//                                                      target:weakSelf
+//                                                    selector:@selector(didToggleCallsHideIPAddressSwitch:)]];
+//    [contents addSection:callingSection];
 
-    if ([UIDevice currentDevice].supportsCallKit) {
-        OWSTableSection *callKitSection = [OWSTableSection new];
-        callKitSection.footerTitle
-            = NSLocalizedString(@"SETTINGS_SECTION_CALL_KIT_DESCRIPTION", @"Settings table section footer.");
-        [callKitSection addItem:[OWSTableItem switchItemWithText:NSLocalizedString(@"SETTINGS_PRIVACY_CALLKIT_TITLE",
-                                                                     @"Short table cell label")
-                                                            isOn:[Environment.preferences isCallKitEnabled]
-                                                          target:weakSelf
-                                                        selector:@selector(didToggleEnableCallKitSwitch:)]];
-        if (Environment.preferences.isCallKitEnabled) {
-            [callKitSection
-                addItem:[OWSTableItem switchItemWithText:NSLocalizedString(@"SETTINGS_PRIVACY_CALLKIT_PRIVACY_TITLE",
-                                                             @"Label for 'CallKit privacy' preference")
-                                                    isOn:![Environment.preferences isCallKitPrivacyEnabled]
-                                                  target:weakSelf
-                                                selector:@selector(didToggleEnableCallKitPrivacySwitch:)]];
-        }
-        [contents addSection:callKitSection];
-    }
+//    if ([UIDevice currentDevice].supportsCallKit) {
+//        OWSTableSection *callKitSection = [OWSTableSection new];
+//        callKitSection.footerTitle
+//            = NSLocalizedString(@"SETTINGS_SECTION_CALL_KIT_DESCRIPTION", @"Settings table section footer.");
+//        [callKitSection addItem:[OWSTableItem switchItemWithText:NSLocalizedString(@"SETTINGS_PRIVACY_CALLKIT_TITLE",
+//                                                                     @"Short table cell label")
+//                                                            isOn:[Environment.preferences isCallKitEnabled]
+//                                                          target:weakSelf
+//                                                        selector:@selector(didToggleEnableCallKitSwitch:)]];
+//        if (Environment.preferences.isCallKitEnabled) {
+//            [callKitSection
+//                addItem:[OWSTableItem switchItemWithText:NSLocalizedString(@"SETTINGS_PRIVACY_CALLKIT_PRIVACY_TITLE",
+//                                                             @"Label for 'CallKit privacy' preference")
+//                                                    isOn:![Environment.preferences isCallKitPrivacyEnabled]
+//                                                  target:weakSelf
+//                                                selector:@selector(didToggleEnableCallKitPrivacySwitch:)]];
+//        }
+//        [contents addSection:callKitSection];
+//    }
 
     OWSTableSection *historyLogsSection = [OWSTableSection new];
     historyLogsSection.headerTitle = NSLocalizedString(@"SETTINGS_HISTORYLOG_TITLE", @"Section header");

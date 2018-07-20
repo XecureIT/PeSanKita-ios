@@ -92,7 +92,7 @@
     OWSTableSection *section = [OWSTableSection new];
 
     __weak AppSettingsViewController *weakSelf = self;
-/*
+
     [section addItem:[OWSTableItem itemWithCustomCellBlock:^{
         return [weakSelf profileHeaderCell];
     }
@@ -100,16 +100,16 @@
                          actionBlock:^{
                              [weakSelf showProfile];
                          }]];
-*/
-    if (OWSSignalService.sharedInstance.isCensorshipCircumventionActive) {
-        [section
-            addItem:[OWSTableItem disclosureItemWithText:
-                                      NSLocalizedString(@"NETWORK_STATUS_CENSORSHIP_CIRCUMVENTION_ACTIVE",
-                                          @"Indicates to the user that censorship circumvention has been activated.")
-                                             actionBlock:^{
-                                                 [weakSelf showAdvanced];
-                                             }]];
-    } else {
+
+//    if (OWSSignalService.sharedInstance.isCensorshipCircumventionActive) {
+//        [section
+//            addItem:[OWSTableItem disclosureItemWithText:
+//                                      NSLocalizedString(@"NETWORK_STATUS_CENSORSHIP_CIRCUMVENTION_ACTIVE",
+//                                          @"Indicates to the user that censorship circumvention has been activated.")
+//                                             actionBlock:^{
+//                                                 [weakSelf showAdvanced];
+//                                             }]];
+//    } else {
         [section addItem:[OWSTableItem itemWithCustomCellBlock:^{
             UITableViewCell *cell = [UITableViewCell new];
             cell.textLabel.text = NSLocalizedString(@"NETWORK_STATUS_HEADER", @"");
@@ -137,7 +137,7 @@
             return cell;
         }
                                                    actionBlock:nil]];
-    }
+//    }
 
     [section addItem:[OWSTableItem disclosureItemWithText:NSLocalizedString(@"SETTINGS_INVITE_TITLE",
                                                               @"Settings table view cell label")
@@ -306,12 +306,12 @@
         [[UIStoryboard main] instantiateViewControllerWithIdentifier:@"OWSLinkedDevicesTableViewController"];
     [self.navigationController pushViewController:vc animated:YES];
 }
-/*
+
 - (void)showProfile
 {
     [ProfileViewController presentForAppSettings:self.navigationController];
 }
-*/
+
 - (void)showAdvanced
 {
     AdvancedSettingsTableViewController *vc = [[AdvancedSettingsTableViewController alloc] init];

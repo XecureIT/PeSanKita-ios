@@ -186,14 +186,14 @@ NSString *const kProfileView_LastPresentedDate = @"kProfileView_LastPresentedDat
                                                         @"Description of the user profile.")
                                          attributes:@{}]];
     [text appendAttributedString:[[NSAttributedString alloc] initWithString:@" " attributes:@{}]];
-    [text appendAttributedString:[[NSAttributedString alloc]
-                                     initWithString:NSLocalizedString(@"PROFILE_VIEW_PROFILE_DESCRIPTION_LINK",
-                                                        @"Link to more information about the user profile.")
-                                         attributes:@{
-                                             NSUnderlineStyleAttributeName :
-                                                 @(NSUnderlineStyleSingle | NSUnderlinePatternSolid),
-                                             NSForegroundColorAttributeName : [UIColor ows_materialRedColor],
-                                         }]];
+//    [text appendAttributedString:[[NSAttributedString alloc]
+//                                     initWithString:NSLocalizedString(@"PROFILE_VIEW_PROFILE_DESCRIPTION_LINK",
+//                                                        @"Link to more information about the user profile.")
+//                                         attributes:@{
+//                                             NSUnderlineStyleAttributeName :
+//                                                 @(NSUnderlineStyleSingle | NSUnderlinePatternSolid),
+//                                             NSForegroundColorAttributeName : [UIColor ows_materialRedColor],
+//                                         }]];
     infoLabel.attributedText = text;
     infoLabel.numberOfLines = 0;
     infoLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -299,7 +299,18 @@ NSString *const kProfileView_LastPresentedDate = @"kProfileView_LastPresentedDat
 
 - (void)avatarTapped
 {
-    [self.avatarViewHelper showChangeAvatarUI];
+//    [self.avatarViewHelper showChangeAvatarUI];
+    
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:NSLocalizedString(@"PROFILE_VIEW_AVATAR_ALERT_TITLE", @"")
+                                          message:NSLocalizedString(@"PROFILE_VIEW_AVATAR_ALERT_DESCRIPTION", @"")
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                                                   style:UIAlertActionStyleDefault
+                                                 handler:^(UIAlertAction *_Nonnull action){
+
+                                                 }]];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)setHasUnsavedChanges:(BOOL)hasUnsavedChanges

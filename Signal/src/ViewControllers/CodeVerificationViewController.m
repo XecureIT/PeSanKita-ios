@@ -4,7 +4,7 @@
 
 #import "CodeVerificationViewController.h"
 #import "AppDelegate.h"
-//#import "ProfileViewController.h"
+#import "ProfileViewController.h"
 #import "PeSankita-Swift.h"
 #import "StringUtil.h"
 #import "UIViewController+OWS.h"
@@ -284,7 +284,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)vericationWasCompleted
 {
-    //[ProfileViewController presentForRegistration:self.navigationController];
+    [ProfileViewController presentForRegistration:self.navigationController];
     [self showHomeView];
 }
 

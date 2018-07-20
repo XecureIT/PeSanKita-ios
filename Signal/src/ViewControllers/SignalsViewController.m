@@ -474,7 +474,7 @@
                              [self markAllUpgradeExperiencesAsSeen];
                          }];
     } else if (!self.hasBeenPresented && [ProfileViewController shouldDisplayProfileViewOnLaunch]) {
-        //[ProfileViewController presentForUpgradeOrNag:self];
+        [ProfileViewController presentForUpgradeOrNag:self];
     }
 
     self.hasBeenPresented = YES;

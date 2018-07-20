@@ -1096,6 +1096,12 @@
 /* Title for the profile view. */
 "PROFILE_VIEW_TITLE" = "Profile";
 
+/* Alert title for profile avatar. */
+"PROFILE_VIEW_AVATAR_ALERT_TITLE" = "Future feature";
+
+/* Alert description for profile avatar. */
+"PROFILE_VIEW_AVATAR_ALERT_DESCRIPTION" = "Sorry, profile picture will be available on next release.";
+
 /* No comment provided by engineer. */
 "PUSH_MANAGER_MARKREAD" = "Mark as Read";
 
@@ -1319,7 +1325,7 @@
 "SETTINGS_CLEAR_HISTORY" = "Bersihkan Riwayat Catatn";
 
 /* No comment provided by engineer. */
-"SETTINGS_COPYRIGHT" = "Hak Cipta Open Whisper Systems\nDibawah Lisensi GPLv3";
+"SETTINGS_COPYRIGHT" = "Hak Cipta Xecure IT\nDibawah Lisensi GPLv3";
 
 /* No comment provided by engineer. */
 "SETTINGS_DELETE_ACCOUNT_BUTTON" = "Hapus Akun";
