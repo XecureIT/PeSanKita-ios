@@ -773,15 +773,21 @@ NSString *NSStringFromOWSSignalServiceProtosGroupContextType(OWSSignalServicePro
 #define DataMessage_group @"group"
 #define DataMessage_flags @"flags"
 #define DataMessage_expireTimer @"expireTimer"
+#define DataMessage_replyBody @"replyBody"
 #define DataMessage_profileKey @"profileKey"
+#define DataMessage_timestamp @"timestamp"
 @interface OWSSignalServiceProtosDataMessage : PBGeneratedMessage<GeneratedMessageProtocol> {
 @private
+  BOOL hasTimestamp_:1;
   BOOL hasBody_:1;
+  BOOL hasReplyBody_:1;
   BOOL hasGroup_:1;
   BOOL hasProfileKey_:1;
   BOOL hasFlags_:1;
   BOOL hasExpireTimer_:1;
+  UInt64 timestamp;
   NSString* body;
+  NSString* replyBody;
   OWSSignalServiceProtosGroupContext* group;
   NSData* profileKey;
   UInt32 flags;
@@ -792,13 +798,17 @@ NSString *NSStringFromOWSSignalServiceProtosGroupContextType(OWSSignalServicePro
 - (BOOL) hasGroup;
 - (BOOL) hasFlags;
 - (BOOL) hasExpireTimer;
+- (BOOL) hasReplyBody;
 - (BOOL) hasProfileKey;
+- (BOOL) hasTimestamp;
 @property (readonly, strong) NSString* body;
 @property (readonly, strong) NSArray<OWSSignalServiceProtosAttachmentPointer*> * attachments;
 @property (readonly, strong) OWSSignalServiceProtosGroupContext* group;
 @property (readonly) UInt32 flags;
 @property (readonly) UInt32 expireTimer;
+@property (readonly, strong) NSString* replyBody;
 @property (readonly, strong) NSData* profileKey;
+@property (readonly) UInt64 timestamp;
 - (OWSSignalServiceProtosAttachmentPointer*)attachmentsAtIndex:(NSUInteger)index;
 
 + (instancetype) defaultInstance;
@@ -864,10 +874,20 @@ NSString *NSStringFromOWSSignalServiceProtosGroupContextType(OWSSignalServicePro
 - (OWSSignalServiceProtosDataMessageBuilder*) setExpireTimer:(UInt32) value;
 - (OWSSignalServiceProtosDataMessageBuilder*) clearExpireTimer;
 
+- (BOOL) hasReplyBody;
+- (NSString*) replyBody;
+- (OWSSignalServiceProtosDataMessageBuilder*) setReplyBody:(NSString*) value;
+- (OWSSignalServiceProtosDataMessageBuilder*) clearReplyBody;
+
 - (BOOL) hasProfileKey;
 - (NSData*) profileKey;
 - (OWSSignalServiceProtosDataMessageBuilder*) setProfileKey:(NSData*) value;
 - (OWSSignalServiceProtosDataMessageBuilder*) clearProfileKey;
+
+- (BOOL) hasTimestamp;
+- (UInt64) timestamp;
+- (OWSSignalServiceProtosDataMessageBuilder*) setTimestamp:(UInt64) value;
+- (OWSSignalServiceProtosDataMessageBuilder*) clearTimestamp;
 @end
 
 #define NullMessage_padding @"padding"

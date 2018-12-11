@@ -2847,7 +2847,9 @@ static OWSSignalServiceProtosCallMessageHangup* defaultOWSSignalServiceProtosCal
 @property (strong) OWSSignalServiceProtosGroupContext* group;
 @property UInt32 flags;
 @property UInt32 expireTimer;
+@property (strong) NSString* replyBody;
 @property (strong) NSData* profileKey;
+@property UInt64 timestamp;
 @end
 
 @implementation OWSSignalServiceProtosDataMessage
@@ -2882,6 +2884,13 @@ static OWSSignalServiceProtosCallMessageHangup* defaultOWSSignalServiceProtosCal
   hasExpireTimer_ = !!_value_;
 }
 @synthesize expireTimer;
+- (BOOL) hasReplyBody {
+  return !!hasReplyBody_;
+}
+- (void) setHasReplyBody:(BOOL) _value_ {
+  hasReplyBody_ = !!_value_;
+}
+@synthesize replyBody;
 - (BOOL) hasProfileKey {
   return !!hasProfileKey_;
 }
@@ -2889,13 +2898,22 @@ static OWSSignalServiceProtosCallMessageHangup* defaultOWSSignalServiceProtosCal
   hasProfileKey_ = !!_value_;
 }
 @synthesize profileKey;
+- (BOOL) hasTimestamp {
+  return !!hasTimestamp_;
+}
+- (void) setHasTimestamp:(BOOL) _value_ {
+  hasTimestamp_ = !!_value_;
+}
+@synthesize timestamp;
 - (instancetype) init {
   if ((self = [super init])) {
     self.body = @"";
     self.group = [OWSSignalServiceProtosGroupContext defaultInstance];
     self.flags = 0;
     self.expireTimer = 0;
+    self.replyBody = @"";
     self.profileKey = [NSData data];
+    self.timestamp = 0L;
   }
   return self;
 }
@@ -2936,8 +2954,14 @@ static OWSSignalServiceProtosDataMessage* defaultOWSSignalServiceProtosDataMessa
   if (self.hasExpireTimer) {
     [output writeUInt32:5 value:self.expireTimer];
   }
+  if (self.hasReplyBody) {
+    [output writeString:6 value:self.replyBody];
+  }
   if (self.hasProfileKey) {
-    [output writeData:6 value:self.profileKey];
+    [output writeData:7 value:self.profileKey];
+  }
+  if (self.hasTimestamp) {
+    [output writeUInt64:8 value:self.timestamp];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -2963,8 +2987,14 @@ static OWSSignalServiceProtosDataMessage* defaultOWSSignalServiceProtosDataMessa
   if (self.hasExpireTimer) {
     size_ += computeUInt32Size(5, self.expireTimer);
   }
+  if (self.hasReplyBody) {
+    size_ += computeStringSize(6, self.replyBody);
+  }
   if (self.hasProfileKey) {
-    size_ += computeDataSize(6, self.profileKey);
+    size_ += computeDataSize(7, self.profileKey);
+  }
+  if (self.hasTimestamp) {
+    size_ += computeUInt64Size(8, self.timestamp);
   }
   size_ += self.unknownFields.serializedSize;
   memoizedSerializedSize = size_;
@@ -3022,8 +3052,14 @@ static OWSSignalServiceProtosDataMessage* defaultOWSSignalServiceProtosDataMessa
   if (self.hasExpireTimer) {
     [output appendFormat:@"%@%@: %@\n", indent, @"expireTimer", [NSNumber numberWithInteger:self.expireTimer]];
   }
+  if (self.hasReplyBody) {
+    [output appendFormat:@"%@%@: %@\n", indent, @"replyBody", self.replyBody];
+  }
   if (self.hasProfileKey) {
     [output appendFormat:@"%@%@: %@\n", indent, @"profileKey", self.profileKey];
+  }
+  if (self.hasTimestamp) {
+    [output appendFormat:@"%@%@: %@\n", indent, @"timestamp", [NSNumber numberWithLongLong:self.timestamp]];
   }
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
 }
@@ -3047,8 +3083,14 @@ static OWSSignalServiceProtosDataMessage* defaultOWSSignalServiceProtosDataMessa
   if (self.hasExpireTimer) {
     [dictionary setObject: [NSNumber numberWithInteger:self.expireTimer] forKey: @"expireTimer"];
   }
+  if (self.hasReplyBody) {
+    [dictionary setObject: self.replyBody forKey: @"replyBody"];
+  }
   if (self.hasProfileKey) {
     [dictionary setObject: self.profileKey forKey: @"profileKey"];
+  }
+  if (self.hasTimestamp) {
+    [dictionary setObject: [NSNumber numberWithLongLong:self.timestamp] forKey: @"timestamp"];
   }
   [self.unknownFields storeInDictionary:dictionary];
 }
@@ -3070,8 +3112,12 @@ static OWSSignalServiceProtosDataMessage* defaultOWSSignalServiceProtosDataMessa
       (!self.hasFlags || self.flags == otherMessage.flags) &&
       self.hasExpireTimer == otherMessage.hasExpireTimer &&
       (!self.hasExpireTimer || self.expireTimer == otherMessage.expireTimer) &&
+      self.hasReplyBody == otherMessage.hasReplyBody &&
+      (!self.hasReplyBody || [self.replyBody isEqual:otherMessage.replyBody]) &&
       self.hasProfileKey == otherMessage.hasProfileKey &&
       (!self.hasProfileKey || [self.profileKey isEqual:otherMessage.profileKey]) &&
+      self.hasTimestamp == otherMessage.hasTimestamp &&
+      (!self.hasTimestamp || self.timestamp == otherMessage.timestamp) &&
       (self.unknownFields == otherMessage.unknownFields || (self.unknownFields != nil && [self.unknownFields isEqual:otherMessage.unknownFields]));
 }
 - (NSUInteger) hash {
@@ -3091,8 +3137,14 @@ static OWSSignalServiceProtosDataMessage* defaultOWSSignalServiceProtosDataMessa
   if (self.hasExpireTimer) {
     hashCode = hashCode * 31 + [[NSNumber numberWithInteger:self.expireTimer] hash];
   }
+  if (self.hasReplyBody) {
+    hashCode = hashCode * 31 + [self.replyBody hash];
+  }
   if (self.hasProfileKey) {
     hashCode = hashCode * 31 + [self.profileKey hash];
+  }
+  if (self.hasTimestamp) {
+    hashCode = hashCode * 31 + [[NSNumber numberWithLongLong:self.timestamp] hash];
   }
   hashCode = hashCode * 31 + [self.unknownFields hash];
   return hashCode;
@@ -3179,8 +3231,14 @@ NSString *NSStringFromOWSSignalServiceProtosDataMessageFlags(OWSSignalServicePro
   if (other.hasExpireTimer) {
     [self setExpireTimer:other.expireTimer];
   }
+  if (other.hasReplyBody) {
+    [self setReplyBody:other.replyBody];
+  }
   if (other.hasProfileKey) {
     [self setProfileKey:other.profileKey];
+  }
+  if (other.hasTimestamp) {
+    [self setTimestamp:other.timestamp];
   }
   [self mergeUnknownFields:other.unknownFields];
   return self;
@@ -3231,7 +3289,15 @@ NSString *NSStringFromOWSSignalServiceProtosDataMessageFlags(OWSSignalServicePro
         break;
       }
       case 50: {
+        [self setReplyBody:[input readString]];
+        break;
+      }
+      case 58: {
         [self setProfileKey:[input readData]];
+        break;
+      }
+      case 64: {
+        [self setTimestamp:[input readUInt64]];
         break;
       }
     }
@@ -3336,6 +3402,22 @@ NSString *NSStringFromOWSSignalServiceProtosDataMessageFlags(OWSSignalServicePro
   resultDataMessage.expireTimer = 0;
   return self;
 }
+- (BOOL) hasReplyBody {
+  return resultDataMessage.hasReplyBody;
+}
+- (NSString*) replyBody {
+  return resultDataMessage.replyBody;
+}
+- (OWSSignalServiceProtosDataMessageBuilder*) setReplyBody:(NSString*) value {
+  resultDataMessage.hasReplyBody = YES;
+  resultDataMessage.replyBody = value;
+  return self;
+}
+- (OWSSignalServiceProtosDataMessageBuilder*) clearReplyBody {
+  resultDataMessage.hasReplyBody = NO;
+  resultDataMessage.replyBody = @"";
+  return self;
+}
 - (BOOL) hasProfileKey {
   return resultDataMessage.hasProfileKey;
 }
@@ -3350,6 +3432,22 @@ NSString *NSStringFromOWSSignalServiceProtosDataMessageFlags(OWSSignalServicePro
 - (OWSSignalServiceProtosDataMessageBuilder*) clearProfileKey {
   resultDataMessage.hasProfileKey = NO;
   resultDataMessage.profileKey = [NSData data];
+  return self;
+}
+- (BOOL) hasTimestamp {
+  return resultDataMessage.hasTimestamp;
+}
+- (UInt64) timestamp {
+  return resultDataMessage.timestamp;
+}
+- (OWSSignalServiceProtosDataMessageBuilder*) setTimestamp:(UInt64) value {
+  resultDataMessage.hasTimestamp = YES;
+  resultDataMessage.timestamp = value;
+  return self;
+}
+- (OWSSignalServiceProtosDataMessageBuilder*) clearTimestamp {
+  resultDataMessage.hasTimestamp = NO;
+  resultDataMessage.timestamp = 0L;
   return self;
 }
 @end
