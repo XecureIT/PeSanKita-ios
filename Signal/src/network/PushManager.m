@@ -273,11 +273,12 @@ NSString *const Signal_Message_MarkAsRead_Identifier = @"Signal_Message_MarkAsRe
 }
 
 - (BOOL)supportsVOIPPush {
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(8, 2)) {
-        return YES;
-    } else {
-        return NO;
-    }
+//    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(8, 2)) {
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+    return NO;
 }
 
 #pragma mark Register device for Push Notification locally

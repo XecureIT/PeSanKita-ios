@@ -260,6 +260,76 @@
 		76EB063E18170B33006006FC /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EB04EF18170B33006006FC /* Operation.m */; };
 		76EB064218170B33006006FC /* StringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EB04F618170B33006006FC /* StringUtil.m */; };
 		76EB068618170B34006006FC /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EB052F18170B33006006FC /* ContactTableViewCell.m */; };
+		8403ACFE2254AFE900C8CF4C /* KawalShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8403ACFC2254AFE900C8CF4C /* KawalShareViewController.m */; };
+		8403ACFF2254AFE900C8CF4C /* KawalShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8403ACFD2254AFE900C8CF4C /* KawalShareViewController.xib */; };
+		841D5714225B80F7005034B8 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841D5712225B80F7005034B8 /* PickerViewController.m */; };
+		841D5715225B80F7005034B8 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841D5713225B80F7005034B8 /* PickerViewController.xib */; };
+		8424E70D224A81040087AF90 /* KSMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8424E70B224A81030087AF90 /* KSMTextField.m */; };
+		8424E70E224A81040087AF90 /* KSMTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8424E70C224A81030087AF90 /* KSMTextField.xib */; };
+		842FAFD1225CF3330081E957 /* Base64.h in Sources */ = {isa = PBXBuildFile; fileRef = 845B9BA7224E5E5100AA46EE /* Base64.h */; };
+		842FAFD2225CF3330081E957 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B9BA6224E5E5000AA46EE /* Base64.m */; };
+		842FAFD3225CF3330081E957 /* UrlModel.h in Sources */ = {isa = PBXBuildFile; fileRef = 845B9BA1224E587C00AA46EE /* UrlModel.h */; };
+		842FAFD4225CF3330081E957 /* UrlModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B9BA0224E587B00AA46EE /* UrlModel.m */; };
+		842FAFD5225CF3330081E957 /* NetworkManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 845B9BA4224E5C7600AA46EE /* NetworkManager.h */; };
+		842FAFD6225CF3330081E957 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B9BA3224E5C7600AA46EE /* NetworkManager.m */; };
+		842FAFD7225CF3330081E957 /* APIManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 845B9B9C224E580200AA46EE /* APIManager.h */; };
+		842FAFD8225CF3330081E957 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B9B9A224E580200AA46EE /* APIManager.m */; };
+		842FAFD9225CF3330081E957 /* DataManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 845B9B9B224E580200AA46EE /* DataManager.h */; };
+		842FAFDA225CF3330081E957 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B9B9D224E580300AA46EE /* DataManager.m */; };
+		842FAFDB225CF3330081E957 /* KawalRegisterViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 844A86462248BA2D00315DF3 /* KawalRegisterViewController.h */; };
+		842FAFDC225CF3330081E957 /* KawalRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A86472248BA2D00315DF3 /* KawalRegisterViewController.m */; };
+		842FAFDD225CF3330081E957 /* KawalRegisterViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 844A86482248BA2D00315DF3 /* KawalRegisterViewController.xib */; };
+		842FAFDE225CF3330081E957 /* KawalLoginViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 844A864B2248BA4300315DF3 /* KawalLoginViewController.h */; };
+		842FAFDF225CF3330081E957 /* KawalLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A864C2248BA4300315DF3 /* KawalLoginViewController.m */; };
+		842FAFE0225CF3330081E957 /* KawalLoginViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 844A864D2248BA4300315DF3 /* KawalLoginViewController.xib */; };
+		842FAFE1225CF3330081E957 /* KawalPilpresViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 849F82702252479300BE36CB /* KawalPilpresViewController.h */; };
+		842FAFE2225CF3330081E957 /* KawalPilpresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849F82712252479300BE36CB /* KawalPilpresViewController.m */; };
+		842FAFE3225CF3330081E957 /* KawalPilpresViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 849F82722252479300BE36CB /* KawalPilpresViewController.xib */; };
+		842FAFE4225CF3330081E957 /* KawalProfileViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 849F827522534D8400BE36CB /* KawalProfileViewController.h */; };
+		842FAFE5225CF3330081E957 /* KawalProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849F827622534D8400BE36CB /* KawalProfileViewController.m */; };
+		842FAFE6225CF3330081E957 /* KawalProfileViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 849F827722534D8400BE36CB /* KawalProfileViewController.xib */; };
+		842FAFE7225CF3330081E957 /* KawalShareViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 8403ACFB2254AFE900C8CF4C /* KawalShareViewController.h */; };
+		842FAFE8225CF3330081E957 /* KawalShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8403ACFC2254AFE900C8CF4C /* KawalShareViewController.m */; };
+		842FAFE9225CF3330081E957 /* KawalShareViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 8403ACFD2254AFE900C8CF4C /* KawalShareViewController.xib */; };
+		842FAFEA225CF3330081E957 /* KawalReportPageViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 8499F4182256611E007840F5 /* KawalReportPageViewController.h */; };
+		842FAFEB225CF3330081E957 /* KawalReportPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499F4192256611E007840F5 /* KawalReportPageViewController.m */; };
+		842FAFEC225CF3330081E957 /* KawalReportPageViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 8499F41A2256611E007840F5 /* KawalReportPageViewController.xib */; };
+		842FAFED225CF3330081E957 /* ReportPageTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 84AA282E2257557200EAE345 /* ReportPageTableViewCell.h */; };
+		842FAFEE225CF3330081E957 /* ReportPageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AA282F2257557200EAE345 /* ReportPageTableViewCell.m */; };
+		842FAFEF225CF3330081E957 /* ReportPageTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 84AA28302257557200EAE345 /* ReportPageTableViewCell.xib */; };
+		842FAFF0225CF3330081E957 /* EmptyTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 84A3AA05225A5EF70027D065 /* EmptyTableViewCell.h */; };
+		842FAFF1225CF3330081E957 /* EmptyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3AA06225A5EF70027D065 /* EmptyTableViewCell.m */; };
+		842FAFF2225CF3330081E957 /* EmptyTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 84A3AA07225A5EF70027D065 /* EmptyTableViewCell.xib */; };
+		842FAFF3225CF3330081E957 /* KawalCreateReportViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 8499F41D22566132007840F5 /* KawalCreateReportViewController.h */; };
+		842FAFF4225CF3330081E957 /* KawalCreateReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499F41E22566132007840F5 /* KawalCreateReportViewController.m */; };
+		842FAFF5225CF3330081E957 /* KawalCreateReportViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 8499F41F22566132007840F5 /* KawalCreateReportViewController.xib */; };
+		842FAFF6225CF3330081E957 /* PickerViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 841D5711225B80F7005034B8 /* PickerViewController.h */; };
+		842FAFF7225CF3330081E957 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841D5712225B80F7005034B8 /* PickerViewController.m */; };
+		842FAFF8225CF3330081E957 /* PickerViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 841D5713225B80F7005034B8 /* PickerViewController.xib */; };
+		842FAFF9225CF3330081E957 /* KSMTextField.h in Sources */ = {isa = PBXBuildFile; fileRef = 8424E70A224A81030087AF90 /* KSMTextField.h */; };
+		842FAFFA225CF3330081E957 /* KSMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8424E70B224A81030087AF90 /* KSMTextField.m */; };
+		842FAFFB225CF3330081E957 /* KSMTextField.xib in Sources */ = {isa = PBXBuildFile; fileRef = 8424E70C224A81030087AF90 /* KSMTextField.xib */; };
+		844A86492248BA2D00315DF3 /* KawalRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A86472248BA2D00315DF3 /* KawalRegisterViewController.m */; };
+		844A864A2248BA2D00315DF3 /* KawalRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844A86482248BA2D00315DF3 /* KawalRegisterViewController.xib */; };
+		844A864E2248BA4300315DF3 /* KawalLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A864C2248BA4300315DF3 /* KawalLoginViewController.m */; };
+		844A864F2248BA4300315DF3 /* KawalLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844A864D2248BA4300315DF3 /* KawalLoginViewController.xib */; };
+		845B9B9E224E580300AA46EE /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B9B9A224E580200AA46EE /* APIManager.m */; };
+		845B9B9F224E580300AA46EE /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B9B9D224E580300AA46EE /* DataManager.m */; };
+		845B9BA2224E587C00AA46EE /* UrlModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B9BA0224E587B00AA46EE /* UrlModel.m */; };
+		845B9BA5224E5C7600AA46EE /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B9BA3224E5C7600AA46EE /* NetworkManager.m */; };
+		845B9BA8224E5E5100AA46EE /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B9BA6224E5E5000AA46EE /* Base64.m */; };
+		8499F41B2256611E007840F5 /* KawalReportPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499F4192256611E007840F5 /* KawalReportPageViewController.m */; };
+		8499F41C2256611E007840F5 /* KawalReportPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499F41A2256611E007840F5 /* KawalReportPageViewController.xib */; };
+		8499F42022566132007840F5 /* KawalCreateReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499F41E22566132007840F5 /* KawalCreateReportViewController.m */; };
+		8499F42122566132007840F5 /* KawalCreateReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499F41F22566132007840F5 /* KawalCreateReportViewController.xib */; };
+		849F82732252479300BE36CB /* KawalPilpresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849F82712252479300BE36CB /* KawalPilpresViewController.m */; };
+		849F82742252479300BE36CB /* KawalPilpresViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849F82722252479300BE36CB /* KawalPilpresViewController.xib */; };
+		849F827822534D8400BE36CB /* KawalProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849F827622534D8400BE36CB /* KawalProfileViewController.m */; };
+		849F827922534D8400BE36CB /* KawalProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849F827722534D8400BE36CB /* KawalProfileViewController.xib */; };
+		84A3AA08225A5EF70027D065 /* EmptyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3AA06225A5EF70027D065 /* EmptyTableViewCell.m */; };
+		84A3AA09225A5EF70027D065 /* EmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A3AA07225A5EF70027D065 /* EmptyTableViewCell.xib */; };
+		84AA28312257557200EAE345 /* ReportPageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AA282F2257557200EAE345 /* ReportPageTableViewCell.m */; };
+		84AA28322257557200EAE345 /* ReportPageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84AA28302257557200EAE345 /* ReportPageTableViewCell.xib */; };
 		954AEE6A1DF33E01002E5410 /* ContactsPickerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954AEE681DF33D32002E5410 /* ContactsPickerTest.swift */; };
 		A10FDF79184FB4BB007FF963 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C87F18181EFCE600C4ACAB /* MediaPlayer.framework */; };
 		A11CD70D17FA230600A2D1B1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A11CD70C17FA230600A2D1B1 /* QuartzCore.framework */; };
@@ -728,6 +798,49 @@
 		76EB052E18170B33006006FC /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
 		76EB052F18170B33006006FC /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
 		7DB8EE72F8522189E3E2CB45 /* libPods-PeSankita.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PeSankita.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8403ACFB2254AFE900C8CF4C /* KawalShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KawalShareViewController.h; sourceTree = "<group>"; };
+		8403ACFC2254AFE900C8CF4C /* KawalShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KawalShareViewController.m; sourceTree = "<group>"; };
+		8403ACFD2254AFE900C8CF4C /* KawalShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KawalShareViewController.xib; sourceTree = "<group>"; };
+		841D5711225B80F7005034B8 /* PickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
+		841D5712225B80F7005034B8 /* PickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
+		841D5713225B80F7005034B8 /* PickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerViewController.xib; sourceTree = "<group>"; };
+		8424E70A224A81030087AF90 /* KSMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMTextField.h; sourceTree = "<group>"; };
+		8424E70B224A81030087AF90 /* KSMTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMTextField.m; sourceTree = "<group>"; };
+		8424E70C224A81030087AF90 /* KSMTextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSMTextField.xib; sourceTree = "<group>"; };
+		844A86462248BA2D00315DF3 /* KawalRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KawalRegisterViewController.h; sourceTree = "<group>"; };
+		844A86472248BA2D00315DF3 /* KawalRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KawalRegisterViewController.m; sourceTree = "<group>"; };
+		844A86482248BA2D00315DF3 /* KawalRegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KawalRegisterViewController.xib; sourceTree = "<group>"; };
+		844A864B2248BA4300315DF3 /* KawalLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KawalLoginViewController.h; sourceTree = "<group>"; };
+		844A864C2248BA4300315DF3 /* KawalLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KawalLoginViewController.m; sourceTree = "<group>"; };
+		844A864D2248BA4300315DF3 /* KawalLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KawalLoginViewController.xib; sourceTree = "<group>"; };
+		845B9B9A224E580200AA46EE /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		845B9B9B224E580200AA46EE /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		845B9B9C224E580200AA46EE /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		845B9B9D224E580300AA46EE /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		845B9BA0224E587B00AA46EE /* UrlModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlModel.m; sourceTree = "<group>"; };
+		845B9BA1224E587C00AA46EE /* UrlModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlModel.h; sourceTree = "<group>"; };
+		845B9BA3224E5C7600AA46EE /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
+		845B9BA4224E5C7600AA46EE /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		845B9BA6224E5E5000AA46EE /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		845B9BA7224E5E5100AA46EE /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		8499F4182256611E007840F5 /* KawalReportPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KawalReportPageViewController.h; sourceTree = "<group>"; };
+		8499F4192256611E007840F5 /* KawalReportPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KawalReportPageViewController.m; sourceTree = "<group>"; };
+		8499F41A2256611E007840F5 /* KawalReportPageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KawalReportPageViewController.xib; sourceTree = "<group>"; };
+		8499F41D22566132007840F5 /* KawalCreateReportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KawalCreateReportViewController.h; sourceTree = "<group>"; };
+		8499F41E22566132007840F5 /* KawalCreateReportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KawalCreateReportViewController.m; sourceTree = "<group>"; };
+		8499F41F22566132007840F5 /* KawalCreateReportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KawalCreateReportViewController.xib; sourceTree = "<group>"; };
+		849F82702252479300BE36CB /* KawalPilpresViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KawalPilpresViewController.h; sourceTree = "<group>"; };
+		849F82712252479300BE36CB /* KawalPilpresViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KawalPilpresViewController.m; sourceTree = "<group>"; };
+		849F82722252479300BE36CB /* KawalPilpresViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KawalPilpresViewController.xib; sourceTree = "<group>"; };
+		849F827522534D8400BE36CB /* KawalProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KawalProfileViewController.h; sourceTree = "<group>"; };
+		849F827622534D8400BE36CB /* KawalProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KawalProfileViewController.m; sourceTree = "<group>"; };
+		849F827722534D8400BE36CB /* KawalProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KawalProfileViewController.xib; sourceTree = "<group>"; };
+		84A3AA05225A5EF70027D065 /* EmptyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptyTableViewCell.h; sourceTree = "<group>"; };
+		84A3AA06225A5EF70027D065 /* EmptyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptyTableViewCell.m; sourceTree = "<group>"; };
+		84A3AA07225A5EF70027D065 /* EmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyTableViewCell.xib; sourceTree = "<group>"; };
+		84AA282E2257557200EAE345 /* ReportPageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportPageTableViewCell.h; sourceTree = "<group>"; };
+		84AA282F2257557200EAE345 /* ReportPageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReportPageTableViewCell.m; sourceTree = "<group>"; };
+		84AA28302257557200EAE345 /* ReportPageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportPageTableViewCell.xib; sourceTree = "<group>"; };
 		8981C8F64D94D3C52EB67A2C /* Pods-PeSankitaTests.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeSankitaTests.test.xcconfig"; path = "Pods/Target Support Files/Pods-PeSankitaTests/Pods-PeSankitaTests.test.xcconfig"; sourceTree = "<group>"; };
 		954AEE681DF33D32002E5410 /* ContactsPickerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsPickerTest.swift; sourceTree = "<group>"; };
 		A11CD70C17FA230600A2D1B1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1054,6 +1167,7 @@
 				34B3F8A01E8EA6040035BE1A /* ViewControllerUtils.h */,
 				34B3F8A11E8EA6040035BE1A /* ViewControllerUtils.m */,
 				1551091920F3CF8A00ACC59A /* MainTabBarController.swift */,
+				84B4F3DB22476CE0005EA65C /* KawalPilpres2019 */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1482,6 +1596,57 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		84B4F3DB22476CE0005EA65C /* KawalPilpres2019 */ = {
+			isa = PBXGroup;
+			children = (
+				845B9BA7224E5E5100AA46EE /* Base64.h */,
+				845B9BA6224E5E5000AA46EE /* Base64.m */,
+				845B9BA1224E587C00AA46EE /* UrlModel.h */,
+				845B9BA0224E587B00AA46EE /* UrlModel.m */,
+				845B9BA4224E5C7600AA46EE /* NetworkManager.h */,
+				845B9BA3224E5C7600AA46EE /* NetworkManager.m */,
+				845B9B9C224E580200AA46EE /* APIManager.h */,
+				845B9B9A224E580200AA46EE /* APIManager.m */,
+				845B9B9B224E580200AA46EE /* DataManager.h */,
+				845B9B9D224E580300AA46EE /* DataManager.m */,
+				844A86462248BA2D00315DF3 /* KawalRegisterViewController.h */,
+				844A86472248BA2D00315DF3 /* KawalRegisterViewController.m */,
+				844A86482248BA2D00315DF3 /* KawalRegisterViewController.xib */,
+				844A864B2248BA4300315DF3 /* KawalLoginViewController.h */,
+				844A864C2248BA4300315DF3 /* KawalLoginViewController.m */,
+				844A864D2248BA4300315DF3 /* KawalLoginViewController.xib */,
+				849F82702252479300BE36CB /* KawalPilpresViewController.h */,
+				849F82712252479300BE36CB /* KawalPilpresViewController.m */,
+				849F82722252479300BE36CB /* KawalPilpresViewController.xib */,
+				849F827522534D8400BE36CB /* KawalProfileViewController.h */,
+				849F827622534D8400BE36CB /* KawalProfileViewController.m */,
+				849F827722534D8400BE36CB /* KawalProfileViewController.xib */,
+				8403ACFB2254AFE900C8CF4C /* KawalShareViewController.h */,
+				8403ACFC2254AFE900C8CF4C /* KawalShareViewController.m */,
+				8403ACFD2254AFE900C8CF4C /* KawalShareViewController.xib */,
+				8499F4182256611E007840F5 /* KawalReportPageViewController.h */,
+				8499F4192256611E007840F5 /* KawalReportPageViewController.m */,
+				8499F41A2256611E007840F5 /* KawalReportPageViewController.xib */,
+				84AA282E2257557200EAE345 /* ReportPageTableViewCell.h */,
+				84AA282F2257557200EAE345 /* ReportPageTableViewCell.m */,
+				84AA28302257557200EAE345 /* ReportPageTableViewCell.xib */,
+				84A3AA05225A5EF70027D065 /* EmptyTableViewCell.h */,
+				84A3AA06225A5EF70027D065 /* EmptyTableViewCell.m */,
+				84A3AA07225A5EF70027D065 /* EmptyTableViewCell.xib */,
+				8499F41D22566132007840F5 /* KawalCreateReportViewController.h */,
+				8499F41E22566132007840F5 /* KawalCreateReportViewController.m */,
+				8499F41F22566132007840F5 /* KawalCreateReportViewController.xib */,
+				841D5711225B80F7005034B8 /* PickerViewController.h */,
+				841D5712225B80F7005034B8 /* PickerViewController.m */,
+				841D5713225B80F7005034B8 /* PickerViewController.xib */,
+				8424E70A224A81030087AF90 /* KSMTextField.h */,
+				8424E70B224A81030087AF90 /* KSMTextField.m */,
+				8424E70C224A81030087AF90 /* KSMTextField.xib */,
+			);
+			name = KawalPilpres2019;
+			path = ../../..;
+			sourceTree = "<group>";
+		};
 		9404664EC513585B05DF1350 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1805,6 +1970,7 @@
 				D221A087169C9E5E00537ABF /* Resources */,
 				3465F381B1856CC06933B3A8 /* [CP] Copy Pods Resources */,
 				451DE9EE1DC1546A00810E42 /* [Carthage] Copy Frameworks */,
+				C11BD48F82998F1F19A62C00 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1872,7 +2038,7 @@
 						};
 					};
 					D221A0A9169C9E5F00537ABF = {
-						DevelopmentTeam = U68MSDN6DR;
+						DevelopmentTeam = S3YB4X8AZM;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						TestTargetID = D221A088169C9E5E00537ABF;
@@ -1950,22 +2116,28 @@
 				A5509ECA1A69AB8B00ABA4BC /* Main.storyboard in Resources */,
 				45F2B1971D9CA207000D2C69 /* OWSIncomingMessageCollectionViewCell.xib in Resources */,
 				AD83FF421A73426500B5C81A /* audio_play_button.png in Resources */,
+				849F827922534D8400BE36CB /* KawalProfileViewController.xib in Resources */,
 				45F2B1981D9CA207000D2C69 /* OWSOutgoingMessageCollectionViewCell.xib in Resources */,
 				34330A5C1E787A9800DF2FB9 /* dripicons-v2.ttf in Resources */,
 				B633C5C41A1D190B0059AC12 /* mute_on@2x.png in Resources */,
 				B633C5CE1A1D190B0059AC12 /* quit@2x.png in Resources */,
 				AD83FF441A73426500B5C81A /* audio_pause_button.png in Resources */,
 				B6F509971AA53F760068F56A /* Localizable.strings in Resources */,
+				8403ACFF2254AFE900C8CF4C /* KawalShareViewController.xib in Resources */,
+				8499F41C2256611E007840F5 /* KawalReportPageViewController.xib in Resources */,
 				AD41D7B51A6F6F0600241130 /* play_button.png in Resources */,
 				B633C59D1A1D190B0059AC12 /* endcall@2x.png in Resources */,
 				FC5CDF391A3393DD00B47253 /* error_white@2x.png in Resources */,
 				B633C5D21A1D190B0059AC12 /* savephoto@2x.png in Resources */,
+				84A3AA09225A5EF70027D065 /* EmptyTableViewCell.xib in Resources */,
+				8499F42122566132007840F5 /* KawalCreateReportViewController.xib in Resources */,
 				3448BFD11EDF0EA7005B2D69 /* MessagesViewController.xib in Resources */,
 				B10C9B611A7049EC00ECA2BF /* play_icon.png in Resources */,
 				AD83FF401A73426500B5C81A /* audio_pause_button_blue@2x.png in Resources */,
 				B66DBF4A19D5BBC8006EA940 /* Images.xcassets in Resources */,
 				70B8FEE21909FE360042E3F0 /* 171756__nenadsimic__picked-coin-echo-2.wav in Resources */,
 				4517642A1DE939FD00EDB8B9 /* ContactCell.xib in Resources */,
+				84AA28322257557200EAE345 /* ReportPageTableViewCell.xib in Resources */,
 				AD83FF431A73426500B5C81A /* audio_play_button@2x.png in Resources */,
 				45CB2FA81CB7146C00E1B343 /* Launch Screen.storyboard in Resources */,
 				34B3F8781E8DF1700035BE1A /* ContactsPicker.xib in Resources */,
@@ -1981,15 +2153,20 @@
 				B10C9B621A7049EC00ECA2BF /* play_icon@2x.png in Resources */,
 				B633C5861A1D190B0059AC12 /* call@2x.png in Resources */,
 				B67EBF5D19194AC60084CCFD /* Settings.bundle in Resources */,
+				841D5715225B80F7005034B8 /* PickerViewController.xib in Resources */,
 				E1370BE418A0686C00826894 /* outring.mp3 in Resources */,
+				844A864A2248BA2D00315DF3 /* KawalRegisterViewController.xib in Resources */,
 				B10C9B601A7049EC00ECA2BF /* pause_icon@2x.png in Resources */,
 				34B3F88C1E8DF1700035BE1A /* OWSMessagesToolbarContentView.xib in Resources */,
+				849F82742252479300BE36CB /* KawalPilpresViewController.xib in Resources */,
 				B6C6AE551A305ED1006BAF8F /* redphone.cer in Resources */,
 				E1370BE518A0686C00826894 /* r.caf in Resources */,
 				FC9120411A39EFB70074545C /* qr@2x.png in Resources */,
 				E1370BE618A0686C00826894 /* sonarping.mp3 in Resources */,
+				844A864F2248BA4300315DF3 /* KawalLoginViewController.xib in Resources */,
 				B10C9B5F1A7049EC00ECA2BF /* pause_icon.png in Resources */,
 				AD83FF471A73428300B5C81A /* audio_play_button_blue.png in Resources */,
+				8424E70E224A81040087AF90 /* KSMTextField.xib in Resources */,
 				34330A5E1E787BD800DF2FB9 /* ElegantIcons.ttf in Resources */,
 				AD83FF451A73426500B5C81A /* audio_pause_button@2x.png in Resources */,
 			);
@@ -2126,6 +2303,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C11BD48F82998F1F19A62C00 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PeSankita/Pods-PeSankita-frameworks.sh",
+				"${PODS_ROOT}/GRKOpenSSLFramework/OpenSSL-iOS/bin/openssl.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PeSankita/Pods-PeSankita-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2135,6 +2334,7 @@
 			files = (
 				34B3F8761E8DF1700035BE1A /* CodeVerificationViewController.m in Sources */,
 				76EB063E18170B33006006FC /* Operation.m in Sources */,
+				8499F42022566132007840F5 /* KawalCreateReportViewController.m in Sources */,
 				34B3F8741E8DF1700035BE1A /* AttachmentSharing.m in Sources */,
 				34D8C02B1ED3685800188D7C /* DebugUIContacts.m in Sources */,
 				45C9DEB81DF4E35A0065CA84 /* WebRTCCallMessageHandler.swift in Sources */,
@@ -2142,10 +2342,12 @@
 				34B3F88E1E8DF1700035BE1A /* PrivacySettingsTableViewController.m in Sources */,
 				4505C2C21E648F7A00CEBF41 /* ExperienceUpgradeFinder.swift in Sources */,
 				341F2C0F1F2B8AE700D07D6B /* DebugUIMisc.m in Sources */,
+				845B9BA2224E587C00AA46EE /* UrlModel.m in Sources */,
 				34E3EF0D1EFC235B007F6822 /* DebugUIDiskUsage.m in Sources */,
 				344F2F671E57A932000D9322 /* UIViewController+OWS.m in Sources */,
 				B6DA6B071B8A2F9A00CA6F98 /* AppStoreRating.m in Sources */,
 				455AC69B1F4F79E500134004 /* ImageCache.swift in Sources */,
+				845B9BA8224E5E5100AA46EE /* Base64.m in Sources */,
 				451A13B11E13DED2000A50FD /* CallNotificationsAdapter.swift in Sources */,
 				3456710A1E8A9F5D006EE662 /* TSGenericAttachmentAdapter.m in Sources */,
 				450DF2091E0DD2C6003D14BE /* UserNotificationsAdaptee.swift in Sources */,
@@ -2170,6 +2372,7 @@
 				45794E861E00620000066731 /* CallUIAdapter.swift in Sources */,
 				4585C4681ED8F8D200896AEA /* SafetyNumberConfirmationAlert.swift in Sources */,
 				FCFA64B71A24F6730007FB87 /* UIFont+OWS.m in Sources */,
+				849F82732252479300BE36CB /* KawalPilpresViewController.m in Sources */,
 				B6B9ECFC198B31BA00C620D3 /* PushManager.m in Sources */,
 				45DF5DF21DDB843F00C936C7 /* CompareSafetyNumbersActivity.swift in Sources */,
 				458DE9D91DEE7B360071BB03 /* OWSWebRTCDataProtos.pb.m in Sources */,
@@ -2201,6 +2404,7 @@
 				45BFFFA81D898AF0004A12A7 /* OWSStaleNotificationObserver.m in Sources */,
 				45C681B71D305A580050903A /* OWSCall.m in Sources */,
 				76EB062618170B33006006FC /* Queue.m in Sources */,
+				84A3AA08225A5EF70027D065 /* EmptyTableViewCell.m in Sources */,
 				D221A09A169C9E5E00537ABF /* main.m in Sources */,
 				345671011E89A5F1006EE662 /* ThreadUtil.m in Sources */,
 				4585C4601ED4FD0400896AEA /* OWS104CreateRecipientIdentities.m in Sources */,
@@ -2210,7 +2414,9 @@
 				34B3F87B1E8DF1700035BE1A /* ExperienceUpgradesPageViewController.swift in Sources */,
 				34533F181EA8D2070006114F /* OWSAudioAttachmentPlayer.m in Sources */,
 				452EA09E1EA7ABE00078744B /* AttachmentPointerView.swift in Sources */,
+				841D5714225B80F7005034B8 /* PickerViewController.m in Sources */,
 				45666EC91D994C0D008FE134 /* OWSGroupAvatarBuilder.m in Sources */,
+				845B9BA5224E5C7600AA46EE /* NetworkManager.m in Sources */,
 				3471B1DA1EB7C63600F6AEC8 /* NewNonContactConversationViewController.m in Sources */,
 				34B3F87C1E8DF1700035BE1A /* FingerprintViewController.m in Sources */,
 				45638BDC1F3DD0D400128435 /* DebugUICalling.swift in Sources */,
@@ -2230,6 +2436,7 @@
 				4556FA681F54AA9500AF40DD /* DebugUIProfile.swift in Sources */,
 				452EA0971EA662330078744B /* AttachmentPointerAdapter.swift in Sources */,
 				34DFCB851E8E04B500053165 /* AddToBlockListViewController.m in Sources */,
+				844A864E2248BA4300315DF3 /* KawalLoginViewController.m in Sources */,
 				45855F371D9498A40084F340 /* OWSContactAvatarBuilder.m in Sources */,
 				45A6DAD61EBBF85500893231 /* ReminderView.swift in Sources */,
 				45666EC61D99483D008FE134 /* OWSAvatarBuilder.m in Sources */,
@@ -2242,16 +2449,21 @@
 				34330AA31E79686200DF2FB9 /* OWSProgressView.m in Sources */,
 				34B3F8A21E8EA6040035BE1A /* ViewControllerUtils.m in Sources */,
 				34D5CCA91EAE3D30005515DB /* AvatarViewHelper.m in Sources */,
+				8424E70D224A81040087AF90 /* KSMTextField.m in Sources */,
+				844A86492248BA2D00315DF3 /* KawalRegisterViewController.m in Sources */,
 				453D28BA1D332DB100D523F0 /* OWSMessagesBubblesSizeCalculator.m in Sources */,
 				45F170AC1E2F0351003FC1F2 /* CallAudioSession.swift in Sources */,
+				8403ACFE2254AFE900C8CF4C /* KawalShareViewController.m in Sources */,
 				34B3F8801E8DF1700035BE1A /* InviteFlow.swift in Sources */,
 				B68EF9BB1C0B1EBD009C3DCD /* FLAnimatedImageView.m in Sources */,
 				45F170CC1E310E22003FC1F2 /* WeakTimer.swift in Sources */,
 				34B3F8871E8DF1700035BE1A /* NotificationSettingsViewController.m in Sources */,
+				845B9B9F224E580300AA46EE /* DataManager.m in Sources */,
 				A5E9D4BB1A65FAD800E4481C /* TSVideoAttachmentAdapter.m in Sources */,
 				458E38371D668EBF0094BD24 /* OWSDeviceProvisioningURLParser.m in Sources */,
 				FCFA64B41A24F3880007FB87 /* UIColor+OWS.m in Sources */,
 				4517642B1DE939FD00EDB8B9 /* ContactCell.swift in Sources */,
+				8499F41B2256611E007840F5 /* KawalReportPageViewController.m in Sources */,
 				450573FE1E78A06D00615BB4 /* OWS103EnableVideoCalling.m in Sources */,
 				34B3F8751E8DF1700035BE1A /* CallViewController.swift in Sources */,
 				34D8C0281ED3673300188D7C /* DebugUITableViewController.m in Sources */,
@@ -2276,6 +2488,7 @@
 				45F170BB1E2FC5D3003FC1F2 /* CallAudioService.swift in Sources */,
 				34B3F8711E8DF1700035BE1A /* AboutTableViewController.m in Sources */,
 				34B3F88D1E8DF1700035BE1A /* OWSQRCodeScanningViewController.m in Sources */,
+				849F827822534D8400BE36CB /* KawalProfileViewController.m in Sources */,
 				34B3F8811E8DF1700035BE1A /* LockInteractionController.m in Sources */,
 				3448BFCC1EDF0EA7005B2D69 /* OWSMessagesToolbarContentView.m in Sources */,
 				3448BFD01EDF0EA7005B2D69 /* MessagesViewController.m in Sources */,
@@ -2294,8 +2507,10 @@
 				76EB054018170B33006006FC /* AppDelegate.m in Sources */,
 				341207271EE19F6A00463194 /* OWSSystemMessageCell.m in Sources */,
 				341BB7491DB727EE001E2975 /* JSQMediaItem+OWS.m in Sources */,
+				845B9B9E224E580300AA46EE /* APIManager.m in Sources */,
 				34B3F89C1E8DF3270035BE1A /* BlockListViewController.m in Sources */,
 				45F2B1941D9C9F48000D2C69 /* OWSOutgoingMessageCollectionViewCell.m in Sources */,
+				84AA28312257557200EAE345 /* ReportPageTableViewCell.m in Sources */,
 				34C42D5B1F45F7A80072EC04 /* OWSNavigationController.m in Sources */,
 				BFB074C919A5611000F2947C /* ObservableValue.m in Sources */,
 				B68EF9BA1C0B1EBD009C3DCD /* FLAnimatedImage.m in Sources */,
@@ -2334,6 +2549,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842FAFD1225CF3330081E957 /* Base64.h in Sources */,
+				842FAFD2225CF3330081E957 /* Base64.m in Sources */,
+				842FAFD3225CF3330081E957 /* UrlModel.h in Sources */,
+				842FAFD4225CF3330081E957 /* UrlModel.m in Sources */,
+				842FAFD5225CF3330081E957 /* NetworkManager.h in Sources */,
+				842FAFD6225CF3330081E957 /* NetworkManager.m in Sources */,
+				842FAFD7225CF3330081E957 /* APIManager.h in Sources */,
+				842FAFD8225CF3330081E957 /* APIManager.m in Sources */,
+				842FAFD9225CF3330081E957 /* DataManager.h in Sources */,
+				842FAFDA225CF3330081E957 /* DataManager.m in Sources */,
+				842FAFDB225CF3330081E957 /* KawalRegisterViewController.h in Sources */,
+				842FAFDC225CF3330081E957 /* KawalRegisterViewController.m in Sources */,
+				842FAFDD225CF3330081E957 /* KawalRegisterViewController.xib in Sources */,
+				842FAFDE225CF3330081E957 /* KawalLoginViewController.h in Sources */,
+				842FAFDF225CF3330081E957 /* KawalLoginViewController.m in Sources */,
+				842FAFE0225CF3330081E957 /* KawalLoginViewController.xib in Sources */,
+				842FAFE1225CF3330081E957 /* KawalPilpresViewController.h in Sources */,
+				842FAFE2225CF3330081E957 /* KawalPilpresViewController.m in Sources */,
+				842FAFE3225CF3330081E957 /* KawalPilpresViewController.xib in Sources */,
+				842FAFE4225CF3330081E957 /* KawalProfileViewController.h in Sources */,
+				842FAFE5225CF3330081E957 /* KawalProfileViewController.m in Sources */,
+				842FAFE6225CF3330081E957 /* KawalProfileViewController.xib in Sources */,
+				842FAFE7225CF3330081E957 /* KawalShareViewController.h in Sources */,
+				842FAFE8225CF3330081E957 /* KawalShareViewController.m in Sources */,
+				842FAFE9225CF3330081E957 /* KawalShareViewController.xib in Sources */,
+				842FAFEA225CF3330081E957 /* KawalReportPageViewController.h in Sources */,
+				842FAFEB225CF3330081E957 /* KawalReportPageViewController.m in Sources */,
+				842FAFEC225CF3330081E957 /* KawalReportPageViewController.xib in Sources */,
+				842FAFED225CF3330081E957 /* ReportPageTableViewCell.h in Sources */,
+				842FAFEE225CF3330081E957 /* ReportPageTableViewCell.m in Sources */,
+				842FAFEF225CF3330081E957 /* ReportPageTableViewCell.xib in Sources */,
+				842FAFF0225CF3330081E957 /* EmptyTableViewCell.h in Sources */,
+				842FAFF1225CF3330081E957 /* EmptyTableViewCell.m in Sources */,
+				842FAFF2225CF3330081E957 /* EmptyTableViewCell.xib in Sources */,
+				842FAFF3225CF3330081E957 /* KawalCreateReportViewController.h in Sources */,
+				842FAFF4225CF3330081E957 /* KawalCreateReportViewController.m in Sources */,
+				842FAFF5225CF3330081E957 /* KawalCreateReportViewController.xib in Sources */,
+				842FAFF6225CF3330081E957 /* PickerViewController.h in Sources */,
+				842FAFF7225CF3330081E957 /* PickerViewController.m in Sources */,
+				842FAFF8225CF3330081E957 /* PickerViewController.xib in Sources */,
+				842FAFF9225CF3330081E957 /* KSMTextField.h in Sources */,
+				842FAFFA225CF3330081E957 /* KSMTextField.m in Sources */,
+				842FAFFB225CF3330081E957 /* KSMTextField.xib in Sources */,
 				4505C2C31E648F7A00CEBF41 /* ExperienceUpgradeFinder.swift in Sources */,
 				456F6E241E24133E00FD2210 /* CallKitCallUIAdaptee.swift in Sources */,
 				451DA3C81F14898E008E2423 /* Strings.swift in Sources */,
@@ -2481,11 +2739,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"DEBUG=1",
-					"$(inherited)",
-					"SSK_BUILDING_FOR_TESTS=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "DEBUG=1 $(inherited) SSK_BUILDING_FOR_TESTS=1";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2530,6 +2784,7 @@
 				CODE_SIGN_ENTITLEMENTS = Signal/PeSankita.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R38884825U;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2592,6 +2847,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S3YB4X8AZM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2778,6 +3034,7 @@
 				CODE_SIGN_ENTITLEMENTS = Signal/PeSankita.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R38884825U;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2838,6 +3095,7 @@
 				CODE_SIGN_ENTITLEMENTS = Signal/PeSankita.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R38884825U;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2878,6 +3136,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = id.kita.pesan.secure;
 				PRODUCT_NAME = PeSankita;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Signal/src/Signal-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -2898,6 +3157,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S3YB4X8AZM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2957,6 +3217,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S3YB4X8AZM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",

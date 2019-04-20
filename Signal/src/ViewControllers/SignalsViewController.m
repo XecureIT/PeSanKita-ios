@@ -30,7 +30,12 @@
 #import <YapDatabase/YapDatabaseViewChange.h>
 #import <YapDatabase/YapDatabaseViewConnection.h>
 
-@interface SignalsViewController () <UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate>
+#import "KawalRegisterViewController.h"
+#import "KawalLoginViewController.h"
+#import "KawalPilpresViewController.h"
+//#import <SecureNSUserDefaults/NSUserDefaults+SecureAdditions.h>
+
+@interface SignalsViewController () <UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate, KawalLoginViewControllerDelegate>
 
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UILabel *emptyBoxLabel;
@@ -64,6 +69,11 @@
 @property (nonatomic) NSLayoutConstraint *hideMissingContactsPermissionViewConstraint;
 
 @property (nonatomic) TSThread *lastThread;
+
+// Kawal Pilpres Views
+@property (strong, nonatomic) UIImageView *floatingButtonImageView;
+@property (strong, nonatomic) UIButton *floatingButton;
+
 
 @end
 
@@ -154,16 +164,16 @@
 - (void)blockedPhoneNumbersDidChange:(id)notification
 {
     OWSAssert([NSThread isMainThread]);
-
+    
     _blockedPhoneNumberSet = [NSSet setWithArray:[_blockingManager blockedPhoneNumbers]];
-
+    
     [self.tableView reloadData];
 }
 
 - (void)signalAccountsDidChange:(id)notification
 {
     OWSAssert([NSThread isMainThread]);
-
+    
     [self.tableView reloadData];
 }
 
@@ -172,17 +182,17 @@
 - (void)loadView
 {
     [super loadView];
-
+    
     self.view.backgroundColor = [UIColor whiteColor];
-
+    
     self.navigationItem.rightBarButtonItem =
-        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
-                                                      target:self
-                                                      action:@selector(composeNew)];
-
+    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                  target:self
+                                                  action:@selector(composeNew)];
+    
     ReminderView *archiveReminderView = [ReminderView new];
     archiveReminderView.text = NSLocalizedString(
-        @"INBOX_VIEW_ARCHIVE_MODE_REMINDER", @"Label reminding the user that they are in archive mode.");
+                                                 @"INBOX_VIEW_ARCHIVE_MODE_REMINDER", @"Label reminding the user that they are in archive mode.");
     __weak SignalsViewController *weakSelf = self;
     archiveReminderView.tapAction = ^{
         [NSNotificationCenter.defaultCenter postNotificationName:@"showInbox" object:nil];
@@ -192,10 +202,10 @@
     [archiveReminderView autoPinToTopLayoutGuideOfViewController:self withInset:0];
     self.hideArchiveReminderViewConstraint = [archiveReminderView autoSetDimension:ALDimensionHeight toSize:0];
     self.hideArchiveReminderViewConstraint.priority = UILayoutPriorityRequired;
-
+    
     ReminderView *missingContactsPermissionView = [ReminderView new];
     missingContactsPermissionView.text = NSLocalizedString(@"INBOX_VIEW_MISSING_CONTACTS_PERMISSION",
-        @"Multiline label explaining how to show names instead of phone numbers in your inbox");
+                                                           @"Multiline label explaining how to show names instead of phone numbers in your inbox");
     missingContactsPermissionView.tapAction = ^{
         [[UIApplication sharedApplication] openSystemSettings];
     };
@@ -203,9 +213,9 @@
     [missingContactsPermissionView autoPinWidthToSuperview];
     [missingContactsPermissionView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:archiveReminderView];
     self.hideMissingContactsPermissionViewConstraint =
-        [missingContactsPermissionView autoSetDimension:ALDimensionHeight toSize:0];
+    [missingContactsPermissionView autoSetDimension:ALDimensionHeight toSize:0];
     self.hideMissingContactsPermissionViewConstraint.priority = UILayoutPriorityRequired;
-
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -215,14 +225,15 @@
     [self.tableView autoPinWidthToSuperview];
     [self.tableView autoPinToBottomLayoutGuideOfViewController:self withInset:0];
     [self.tableView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:missingContactsPermissionView];
-
+    
     UILabel *emptyBoxLabel = [UILabel new];
     self.emptyBoxLabel = emptyBoxLabel;
     [self.view addSubview:emptyBoxLabel];
     [emptyBoxLabel autoPinWidthToSuperview];
     [emptyBoxLabel autoPinToTopLayoutGuideOfViewController:self withInset:0];
     [emptyBoxLabel autoPinToBottomLayoutGuideOfViewController:self withInset:0];
-
+    
+    
     [self updateReminderViews];
 }
 
@@ -243,42 +254,98 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController.navigationBar setTranslucent:NO];
-
+    
     self.editingDbConnection = TSStorageManager.sharedManager.newDatabaseConnection;
-
+    
     // Create the database connection.
     [self uiDatabaseConnection];
-
+    
     // because this uses the table data source, `tableViewSetup` must happen
     // after mappings have been set up in `showInboxGrouping`
     [self tableViewSetUp];
-
+    
     if (_viewingThreadsIn == kInboxState) {
         self.title = NSLocalizedString(@"WHISPER_NAV_BAR_TITLE", nil);
+        
+        _floatingButtonImageView = [[UIImageView alloc] init];
+        [self.view addSubview:self.floatingButtonImageView];
+        [self.floatingButtonImageView addConstraint:[NSLayoutConstraint constraintWithItem:self.floatingButtonImageView
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:nil
+                                                          attribute: NSLayoutAttributeNotAnAttribute
+                                                         multiplier:1
+                                                           constant:50]];
+        
+        [self.floatingButtonImageView addConstraint:[NSLayoutConstraint constraintWithItem:self.floatingButtonImageView
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:nil
+                                                          attribute: NSLayoutAttributeNotAnAttribute
+                                                         multiplier:1
+                                                           constant:50]];
+
+        [self.floatingButtonImageView autoPinTrailingToView:self.view margin:-8.0f];
+        [self.floatingButtonImageView autoPinToBottomLayoutGuideOfViewController:self withInset:16.0f];
+        UIImage *image = [UIImage imageNamed:@"ic_kawal_pilpres"];
+        self.floatingButtonImageView.tintColor = [UIColor whiteColor];
+        self.floatingButtonImageView.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.floatingButtonImageView.layer.cornerRadius = 25.0f;
+        self.floatingButtonImageView.clipsToBounds = YES;
+        self.floatingButtonImageView.backgroundColor = [UIColor redColor];
+        self.floatingButtonImageView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        
+        _floatingButton= [[UIButton alloc] init];
+        [self.view addSubview:self.floatingButton];
+        [self.floatingButton addConstraint:[NSLayoutConstraint constraintWithItem:self.floatingButton
+                                                                                 attribute:NSLayoutAttributeWidth
+                                                                                 relatedBy:NSLayoutRelationEqual
+                                                                                    toItem:nil
+                                                                                 attribute: NSLayoutAttributeNotAnAttribute
+                                                                                multiplier:1
+                                                                                  constant:50]];
+        
+        [self.floatingButton addConstraint:[NSLayoutConstraint constraintWithItem:self.floatingButton
+                                                                                 attribute:NSLayoutAttributeHeight
+                                                                                 relatedBy:NSLayoutRelationEqual
+                                                                                    toItem:nil
+                                                                                 attribute: NSLayoutAttributeNotAnAttribute
+                                                                                multiplier:1
+                                                                                  constant:50]];
+        
+        [self.floatingButton autoPinTrailingToView:self.view margin:-8.0f];
+        [self.floatingButton autoPinToBottomLayoutGuideOfViewController:self withInset:16.0f];
+        [self.floatingButton addTarget:self action:@selector(kawalPilpresButtonDidTapped) forControlEvents:UIControlEventTouchUpInside];
+        self.floatingButtonImageView.alpha = 1.0;
+        self.floatingButton.alpha = 1.0;
     }
     else {
         self.title = NSLocalizedString(@"ARCHIVE_NAV_BAR_TITLE", nil);
+        self.floatingButtonImageView.alpha = 0.0;
+        self.floatingButton.alpha = 0.0;
     }
-
+    
     if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)] &&
         (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable)) {
         [self registerForPreviewingWithDelegate:self sourceView:self.tableView];
     }
+    
 }
 
 - (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext
               viewControllerForLocation:(CGPoint)location {
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
-
+    
     if (indexPath) {
         [previewingContext setSourceRect:[self.tableView rectForRowAtIndexPath:indexPath]];
-
+        
         MessagesViewController *vc = [MessagesViewController new];
         TSThread *thread           = [self threadForIndexPath:indexPath];
         self.lastThread = thread;
         [vc configureForThread:thread keyboardOnViewAppearing:NO callOnViewAppearing:NO];
         [vc peekSetup];
-
+        
         return vc;
     } else {
         return nil;
@@ -289,14 +356,14 @@
      commitViewController:(UIViewController *)viewControllerToCommit {
     MessagesViewController *vc = (MessagesViewController *)viewControllerToCommit;
     [vc popped];
-
+    
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)composeNew
 {
     MessageComposeTableViewController *viewController = [MessageComposeTableViewController new];
-
+    
     [self.contactsManager requestSystemContactsOnceWithCompletion:^(NSError *_Nullable error) {
         if (error) {
             DDLogError(@"%@ Error when requesting contacts: %@", self.tag, error);
@@ -307,7 +374,7 @@
         // We just want to make sure contact access is *complete* before showing the compose
         // screen to avoid flicker.
         OWSNavigationController *navigationController =
-            [[OWSNavigationController alloc] initWithRootViewController:viewController];
+        [[OWSNavigationController alloc] initWithRootViewController:viewController];
         [self presentTopLevelModalViewController:navigationController animateDismissal:YES animatePresentation:YES];
     }];
 }
@@ -321,10 +388,10 @@
             });
         }];
     }
-
-
+    
+//    [[NSUserDefaults standardUserDefaults] setSecret:@"kawal_pilpres"];
     self.isViewVisible = YES;
-
+    
     // When returning to home view, try to ensure that the "last" thread is still
     // visible.  The threads often change ordering while in conversation view due
     // to incoming & outgoing messages.
@@ -332,39 +399,40 @@
         __block NSIndexPath *indexPathOfLastThread = nil;
         [self.uiDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
             indexPathOfLastThread =
-                [[transaction extension:TSThreadDatabaseViewExtensionName] indexPathForKey:self.lastThread.uniqueId
-                                                                              inCollection:[TSThread collection]
-                                                                              withMappings:self.threadMappings];
+            [[transaction extension:TSThreadDatabaseViewExtensionName] indexPathForKey:self.lastThread.uniqueId
+                                                                          inCollection:[TSThread collection]
+                                                                          withMappings:self.threadMappings];
         }];
-
+        
         if (indexPathOfLastThread) {
             [self.tableView scrollToRowAtIndexPath:indexPathOfLastThread
                                   atScrollPosition:UITableViewScrollPositionNone
                                           animated:NO];
         }
     }
-
+    
     [self checkIfEmptyView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-
+//    self.floatingButtonImageView.frame = CGRectMake(CGRectGetMinX(self.floatingButtonImageView.frame), CGRectGetMinY(self.floatingButtonImageView.frame) - 50 , CGRectGetWidth(self.floatingButtonImageView.frame), CGRectGetHeight(self.floatingButtonImageView.frame));
+    self.floatingButton.frame = self.floatingButtonImageView.frame;
     self.isViewVisible = NO;
 }
 
 - (void)setIsViewVisible:(BOOL)isViewVisible
 {
     _isViewVisible = isViewVisible;
-
+    
     [self updateShouldObserveDBModifications];
 }
 
 - (void)setIsAppInBackground:(BOOL)isAppInBackground
 {
     _isAppInBackground = isAppInBackground;
-
+    
     [self updateShouldObserveDBModifications];
 }
 
@@ -378,9 +446,9 @@
     if (_shouldObserveDBModifications == shouldObserveDBModifications) {
         return;
     }
-
+    
     _shouldObserveDBModifications = shouldObserveDBModifications;
-
+    
     if (self.shouldObserveDBModifications) {
         [self resetMappings];
     }
@@ -403,10 +471,10 @@
             [weakSelf.threadMappings updateWithTransaction:transaction];
         }];
     }
-
+    
     [[self tableView] reloadData];
     [self checkIfEmptyView];
-
+    
     // If the user hasn't already granted contact access
     // we don't want to request until they receive a message.
     if ([TSThread numberOfKeysInCollection] > 0) {
@@ -430,11 +498,11 @@
     
     // TODO: Remove this.
     [[Environment getCurrent] setSignalsViewController:self];
-
+    
     if (self.newlyRegisteredUser) {
         [[OWSProfileManager sharedManager] ensureLocalProfileCached];
     }
-
+    
     self.viewHasEverAppeared = YES;
 }
 
@@ -443,7 +511,7 @@
 - (NSArray<ExperienceUpgrade *> *)unseenUpgradeExperiences
 {
     AssertIsOnMainThread();
-
+    
     __block NSArray<ExperienceUpgrade *> *unseenUpgrades;
     [self.editingDbConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
         unseenUpgrades = [self.experienceUpgradeFinder allUnseenWithTransaction:transaction];
@@ -454,7 +522,7 @@
 - (void)markAllUpgradeExperiencesAsSeen
 {
     AssertIsOnMainThread();
-
+    
     [self.editingDbConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *_Nonnull transaction) {
         [self.experienceUpgradeFinder markAllAsSeenWithTransaction:transaction];
     }];
@@ -463,9 +531,9 @@
 - (void)displayAnyUnseenUpgradeExperience
 {
     AssertIsOnMainThread();
-
+    
     NSArray<ExperienceUpgrade *> *unseenUpgrades = [self unseenUpgradeExperiences];
-
+    
     if (unseenUpgrades.count > 0) {
         ExperienceUpgradesPageViewController *experienceUpgradeViewController = [[ExperienceUpgradesPageViewController alloc] initWithExperienceUpgrades:unseenUpgrades];
         [self presentViewController:experienceUpgradeViewController
@@ -476,7 +544,7 @@
     } else if (!self.hasBeenPresented && [ProfileViewController shouldDisplayProfileViewOnLaunch]) {
         [ProfileViewController presentForUpgradeOrNag:self];
     }
-
+    
     self.hasBeenPresented = YES;
 }
 
@@ -489,7 +557,7 @@
     if ([TSContactThread numberOfKeysInCollection] == 0) {
         return NO;
     }
-
+    
     return !self.contactsManager.isSystemContactsAuthorized;
 }
 
@@ -507,27 +575,27 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     InboxTableViewCell *cell =
-        [self.tableView dequeueReusableCellWithIdentifier:InboxTableViewCell.cellReuseIdentifier];
+    [self.tableView dequeueReusableCellWithIdentifier:InboxTableViewCell.cellReuseIdentifier];
     OWSAssert(cell);
-
+    
     TSThread *thread = [self threadForIndexPath:indexPath];
-
+    
     [cell configureWithThread:thread contactsManager:self.contactsManager blockedPhoneNumberSet:_blockedPhoneNumberSet];
-
+    
     if ((unsigned long)indexPath.row == [self.threadMappings numberOfItemsInSection:0] - 1) {
         cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
     }
-
+    
     return cell;
 }
 
 - (TSThread *)threadForIndexPath:(NSIndexPath *)indexPath {
     __block TSThread *thread = nil;
     [self.uiDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-      thread = [[transaction extension:TSThreadDatabaseViewExtensionName] objectAtIndexPath:indexPath
-                                                                               withMappings:self.threadMappings];
+        thread = [[transaction extension:TSThreadDatabaseViewExtensionName] objectAtIndexPath:indexPath
+                                                                                 withMappings:self.threadMappings];
     }];
-
+    
     return thread;
 }
 
@@ -538,40 +606,40 @@
 #pragma mark Table Swipe to Delete
 
 - (void)tableView:(UITableView *)tableView
-    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-     forRowAtIndexPath:(NSIndexPath *)indexPath {
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath {
     return;
 }
 
 
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewRowAction *deleteAction =
-        [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
-                                           title:NSLocalizedString(@"TXT_DELETE_TITLE", nil)
-                                         handler:^(UITableViewRowAction *action, NSIndexPath *swipedIndexPath) {
-                                           [self tableViewCellTappedDelete:swipedIndexPath];
-                                         }];
-
+    [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
+                                       title:NSLocalizedString(@"TXT_DELETE_TITLE", nil)
+                                     handler:^(UITableViewRowAction *action, NSIndexPath *swipedIndexPath) {
+                                         [self tableViewCellTappedDelete:swipedIndexPath];
+                                     }];
+    
     UITableViewRowAction *archiveAction;
     if (self.viewingThreadsIn == kInboxState) {
         archiveAction = [UITableViewRowAction
-            rowActionWithStyle:UITableViewRowActionStyleNormal
+                         rowActionWithStyle:UITableViewRowActionStyleNormal
                          title:NSLocalizedString(@"ARCHIVE_ACTION", @"Pressing this button moves a thread from the inbox to the archive")
-                       handler:^(UITableViewRowAction *_Nonnull action, NSIndexPath *_Nonnull tappedIndexPath) {
-                         [self archiveIndexPath:tappedIndexPath];
-                         [Environment.preferences setHasArchivedAMessage:YES];
-                       }];
-
+                         handler:^(UITableViewRowAction *_Nonnull action, NSIndexPath *_Nonnull tappedIndexPath) {
+                             [self archiveIndexPath:tappedIndexPath];
+                             [Environment.preferences setHasArchivedAMessage:YES];
+                         }];
+        
     } else {
         archiveAction = [UITableViewRowAction
-            rowActionWithStyle:UITableViewRowActionStyleNormal
+                         rowActionWithStyle:UITableViewRowActionStyleNormal
                          title:NSLocalizedString(@"UNARCHIVE_ACTION", @"Pressing this button moves an archived thread from the archive back to the inbox")
-                       handler:^(UITableViewRowAction *_Nonnull action, NSIndexPath *_Nonnull tappedIndexPath) {
-                         [self archiveIndexPath:tappedIndexPath];
-                       }];
+                         handler:^(UITableViewRowAction *_Nonnull action, NSIndexPath *_Nonnull tappedIndexPath) {
+                             [self archiveIndexPath:tappedIndexPath];
+                         }];
     }
-
-
+    
+    
     return @[ deleteAction, archiveAction ];
 }
 
@@ -584,7 +652,7 @@
 - (void)tableViewCellTappedDelete:(NSIndexPath *)indexPath {
     TSThread *thread = [self threadForIndexPath:indexPath];
     if ([thread isKindOfClass:[TSGroupThread class]]) {
-
+        
         TSGroupThread *gThread = (TSGroupThread *)thread;
         if ([gThread.groupModel.groupMemberIds containsObject:[TSAccountManager localNumber]]) {
             UIAlertController *removingFromGroup = [UIAlertController
@@ -593,27 +661,27 @@
                                                     message:nil
                                                     preferredStyle:UIAlertControllerStyleAlert];
             [self presentViewController:removingFromGroup animated:YES completion:nil];
-
+            
             TSOutgoingMessage *message = [[TSOutgoingMessage alloc] initWithTimestamp:[NSDate ows_millisecondTimeStamp]
                                                                              inThread:thread
                                                                      groupMetaMessage:TSGroupMessageQuit];
             [self.messageSender sendMessage:message
-                success:^{
-                    [self dismissViewControllerAnimated:YES
-                                             completion:^{
-                                                 [self deleteThread:thread];
-                                             }];
-                }
-                failure:^(NSError *error) {
-                    [self dismissViewControllerAnimated:YES
-                                             completion:^{
-                                                 [OWSAlerts
-                                                     showAlertWithTitle:
-                                                         NSLocalizedString(@"GROUP_REMOVING_FAILED",
-                                                             @"Title of alert indicating that group deletion failed.")
-                                                                message:error.localizedRecoverySuggestion];
-                                             }];
-                }];
+                                    success:^{
+                                        [self dismissViewControllerAnimated:YES
+                                                                 completion:^{
+                                                                     [self deleteThread:thread];
+                                                                 }];
+                                    }
+                                    failure:^(NSError *error) {
+                                        [self dismissViewControllerAnimated:YES
+                                                                 completion:^{
+                                                                     [OWSAlerts
+                                                                      showAlertWithTitle:
+                                                                      NSLocalizedString(@"GROUP_REMOVING_FAILED",
+                                                                                        @"Title of alert indicating that group deletion failed.")
+                                                                      message:error.localizedRecoverySuggestion];
+                                                                 }];
+                                    }];
         } else {
             [self deleteThread:thread];
         }
@@ -624,21 +692,21 @@
 
 - (void)deleteThread:(TSThread *)thread {
     [self.editingDbConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-      [thread removeWithTransaction:transaction];
+        [thread removeWithTransaction:transaction];
     }];
-
+    
     _inboxCount -= (self.viewingThreadsIn == kArchiveState) ? 1 : 0;
     [self checkIfEmptyView];
 }
 
 - (void)archiveIndexPath:(NSIndexPath *)indexPath {
     TSThread *thread = [self threadForIndexPath:indexPath];
-
+    
     BOOL viewingThreadsIn = self.viewingThreadsIn;
     [self.editingDbConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-      viewingThreadsIn == kInboxState ? [thread archiveThreadWithTransaction:transaction]
-                                      : [thread unarchiveThreadWithTransaction:transaction];
-
+        viewingThreadsIn == kInboxState ? [thread archiveThreadWithTransaction:transaction]
+        : [thread unarchiveThreadWithTransaction:transaction];
+        
     }];
     [self checkIfEmptyView];
 }
@@ -650,23 +718,23 @@
 }
 
 - (void)presentThread:(TSThread *)thread
-    keyboardOnViewAppearing:(BOOL)keyboardOnViewAppearing
-        callOnViewAppearing:(BOOL)callOnViewAppearing
+keyboardOnViewAppearing:(BOOL)keyboardOnViewAppearing
+  callOnViewAppearing:(BOOL)callOnViewAppearing
 {
     if (thread == nil) {
         OWSFail(@"Thread unexpectedly nil");
         return;
     }
-
+    
     // We do this synchronously if we're already on the main thread.
     DispatchMainThreadSafe(^{
         MessagesViewController *mvc = [[MessagesViewController alloc] initWithNibName:@"MessagesViewController"
                                                                                bundle:nil];
         [mvc configureForThread:thread
-            keyboardOnViewAppearing:keyboardOnViewAppearing
-                callOnViewAppearing:callOnViewAppearing];
+        keyboardOnViewAppearing:keyboardOnViewAppearing
+            callOnViewAppearing:callOnViewAppearing];
         self.lastThread = thread;
-
+        
         [self pushTopLevelViewController:mvc animateDismissal:YES animatePresentation:YES];
     });
 }
@@ -677,7 +745,7 @@
 {
     OWSAssert([NSThread isMainThread]);
     OWSAssert(viewController);
-
+    
     __weak typeof(self) weakSelf = self;
     [self presentViewControllerWithBlock:^{
         [weakSelf presentViewController:viewController animated:animatePresentation completion:nil];
@@ -691,7 +759,7 @@
 {
     OWSAssert([NSThread isMainThread]);
     OWSAssert(viewController);
-
+    
     [self presentViewControllerWithBlock:^{
         [self.navigationController pushViewController:viewController animated:animatePresentation];
     }
@@ -702,13 +770,13 @@
 {
     OWSAssert([NSThread isMainThread]);
     OWSAssert(presentationBlock);
-
+    
     // Presenting a "top level" view controller has three steps:
     //
     // First, dismiss any presented modal.
     // Second, pop to the root view controller if necessary.
     // Third present the new view controller using presentationBlock.
-
+    
     // Define a block to perform the second step.
     void (^dismissNavigationBlock)() = ^{
         if (self.navigationController.viewControllers.lastObject != self) {
@@ -716,15 +784,15 @@
             [CATransaction setCompletionBlock:^{
                 presentationBlock();
             }];
-
+            
             [self.navigationController popToViewController:self animated:animateDismissal];
-
+            
             [CATransaction commit];
         } else {
             presentationBlock();
         }
     };
-
+    
     // Perform the first step.
     if (self.presentedViewController) {
         if ([self.presentedViewController isKindOfClass:[CallViewController class]]) {
@@ -765,13 +833,13 @@
 - (void)updateMappings
 {
     OWSAssert([NSThread isMainThread]);
-
+    
     self.threadMappings = [[YapDatabaseViewMappings alloc] initWithGroups:@[ self.currentGrouping ]
                                                                      view:TSThreadDatabaseViewExtensionName];
     [self.threadMappings setIsReversed:YES forGroup:self.currentGrouping];
-
+    
     [self resetMappings];
-
+    
     [[self tableView] reloadData];
     [self checkIfEmptyView];
     [self updateReminderViews];
@@ -793,9 +861,9 @@
     if (!self.shouldObserveDBModifications) {
         return;
     }
-
+    
     NSArray *notifications  = [self.uiDatabaseConnection beginLongLivedReadTransaction];
-
+    
     if (![[self.uiDatabaseConnection ext:TSThreadDatabaseViewExtensionName] hasChangesForGroup:self.currentGrouping
                                                                                inNotifications:notifications]) {
         
@@ -805,30 +873,30 @@
         }];
         return;
     }
-
+    
     // If the user hasn't already granted contact access
     // we don't want to request until they receive a message.
     if ([TSThread numberOfKeysInCollection] > 0) {
         [self.contactsManager requestSystemContactsOnce];
     }
-
+    
     NSArray *sectionChanges = nil;
     NSArray *rowChanges = nil;
     [[self.uiDatabaseConnection ext:TSThreadDatabaseViewExtensionName] getSectionChanges:&sectionChanges
                                                                               rowChanges:&rowChanges
                                                                         forNotifications:notifications
                                                                             withMappings:self.threadMappings];
-
+    
     // We want this regardless of if we're currently viewing the archive.
     // So we run it before the early return
     [self checkIfEmptyView];
-
+    
     if ([sectionChanges count] == 0 && [rowChanges count] == 0) {
         return;
     }
-
+    
     [self.tableView beginUpdates];
-
+    
     for (YapDatabaseViewSectionChange *sectionChange in sectionChanges) {
         switch (sectionChange.type) {
             case YapDatabaseViewChangeDelete: {
@@ -846,7 +914,7 @@
                 break;
         }
     }
-
+    
     for (YapDatabaseViewRowChange *rowChange in rowChanges) {
         switch (rowChange.type) {
             case YapDatabaseViewChangeDelete: {
@@ -875,7 +943,7 @@
             }
         }
     }
-
+    
     [self.tableView endUpdates];
 }
 
@@ -950,6 +1018,34 @@
 - (NSString *)tag
 {
     return self.class.tag;
+}
+
+#pragma mark - Kawal Pilpres
+
+- (void) kawalPilpresButtonDidTapped {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isloggedin"]) {
+//        NSDictionary *userData = [[NSUserDefaults standardUserDefaults] secretDictionaryForKey:@"userdata"];
+        NSDictionary *userData = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"userdata"];
+        KawalPilpresViewController *kawalPilpresViewController = [[KawalPilpresViewController alloc]init];
+        kawalPilpresViewController.userDictionary = userData;
+        UINavigationController *kawalPilpresNavigationController = [[UINavigationController alloc] initWithRootViewController:kawalPilpresViewController];
+        [self presentViewController:kawalPilpresNavigationController animated:YES completion:nil];
+    }
+    else {
+        KawalLoginViewController *kawalLoginViewController = [[KawalLoginViewController alloc]init];
+        kawalLoginViewController.delegate = self;
+        UINavigationController *kawalLoginNavigationController = [[UINavigationController alloc] initWithRootViewController:kawalLoginViewController];
+        [self presentViewController:kawalLoginNavigationController animated:YES completion:nil];
+        
+    }
+
+}
+
+- (void)successLoginKawalLoginViewControllerDelegate:(NSDictionary *)responseDictionary {
+    KawalPilpresViewController *kawalPilpresViewController = [[KawalPilpresViewController alloc]init];
+    kawalPilpresViewController.userDictionary = responseDictionary;
+    UINavigationController *kawalPilpresNavigationController = [[UINavigationController alloc] initWithRootViewController:kawalPilpresViewController];
+    [self presentViewController:kawalPilpresNavigationController animated:YES completion:nil];
 }
 
 @end

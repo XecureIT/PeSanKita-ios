@@ -3,15 +3,17 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'PeSankita' do
     pod 'ATAppUpdater'
-    pod 'AxolotlKit',                 git: 'https://github.com/WhisperSystems/SignalProtocolKit.git'
+    pod 'AxolotlKit',                 git: 'https://github.com/WhisperSystems/SignalProtocolKit.git', :commit => '7179db4653787873856daa1f1dbfad168b81dad0'
     #pod 'AxolotlKit',                 path: '../SignalProtocolKit'
     pod 'JSQMessagesViewController',  git: 'https://github.com/WhisperSystems/JSQMessagesViewController.git', branch: 'signal-master'
     #pod 'JSQMessagesViewController',   path: '../JSQMessagesViewController'
     pod 'PureLayout'
-    pod 'OpenSSL',                    git: 'https://github.com/WhisperSystems/OpenSSL-Pod'
+    pod 'GRKOpenSSLFramework',        git: 'https://github.com/WhisperSystems/GRKOpenSSLFramework'
     pod 'Reachability'
     pod 'SignalServiceKit',           path: '.'
+    pod 'SQLCipher',                  '3.4.1'
     pod 'SocketRocket',               :git => 'https://github.com/facebook/SocketRocket.git'
+#    pod 'SecureNSUserDefaults', '~> 1.0.1'
     target 'PeSankitaTests' do
       inherit! :search_paths
     end
